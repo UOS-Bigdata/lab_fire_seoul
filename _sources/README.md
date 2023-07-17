@@ -4,3 +4,5 @@
 
 온라인 교과서는 [https://uos-bigdata.github.io/lab_fire_seoul](https://uos-bigdata.github.io/lab_fire_seoul)으로 접속할 수 있습니다.
 
+온라인 교과서의 강의 노트북은 Google Colaboratory 서비스를 이용해서 실행할 수 있습니다. Google Colaboratory 서비스에 대한 사용 방법은 [동영상 강의](https://youtu.be/gxqjDnO-6VA)를 통해서 배울 수 있습니다.
+
