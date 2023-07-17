@@ -15,6 +15,13 @@
 
 - Google 개인 계정 만들기
 - [Google Colaboratory](https://colab.research.google.com/) 을 이용할 수 있는 환경
+
+필요한 환경을 준비하는 과정은 다음 [동영상 교재](https://youtu.be/gxqjDnO-6VA)를 참조하세요.
 :::
+
+## 교재
+
+- [온라인 교재](https://uos-bigdata.github.io/lab_fire_seoul)
+- [강의에서 사용한 데이터 화일](https://uos-bigdata.github.io/lab_data/docs/seoul_fire.html)
 
 
