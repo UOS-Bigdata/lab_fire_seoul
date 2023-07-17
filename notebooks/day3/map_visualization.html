@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3.2. 공간자료 시각화 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day3/map_visualization';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="3.1. 시각화 분석의 기초" href="visualization_basic.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">파이썬 프로그래밍의 기초와 데이터 활용 방법</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    개요
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="map_visual.html">3. 공간 분석과 시각화</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2. 공간자료 시각화</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notebooks/day3/map_visualization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/UOS-Bigdata/bigdatabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/day3/map_visualization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>공간자료 시각화</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">공간데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">사용할 패키지 불러오기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">좌표계가 포함된 데이터 읽기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">전국 법정동 좌표 정보 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">지도에 화재 사고 표시</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">3.2. </span>공간자료 시각화<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>공간데이터<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>공간 자료(공간 데이터)란 각 곽측치마다 공간에 대한 정보를 가지고 있는 데이터 이며, 공간 정보(위치 정보)는 위도(lattitude)와 경도(longitude)로 표현한다.</p></li>
+<li><p>위경도는 지리 좌표계(Geographic coordinate system)을 기반으로 생성된다. Ex) TM 좌표계(EPSG:2097), WGS84좌표계(EPSG:4326), UTM-K좌표계(EPSG:5179)등 이 존재한다.</p></li>
+</ol>
+<p><img alt="위경도" src="../../_images/long_lat_image.jpeg" /></p>
+<ol class="arabic simple" start="3">
+<li><p>같은 위경도 좌표더라도, 각 좌표계에 따라 다른 값을 가진다. 그러므로, 공간데이터를 다루는데 있어 가장 중요한 것이 이 좌표계이다.</p></li>
+<li><p>예를들어, 서울 롯데타워의 위치의 좌표는 각 좌표계에 따라 다음과 같이 나타난다.</p>
+<ol class="arabic simple">
+<li><p>위도 : 37.67777777777778 N, 경도 : 127.09805555555555 E</p></li>
+<li><p>TM좌표계 : (565937.9846, 32211.3849)</p></li>
+<li><p>UTM-K좌표계 : (1964325.7452, 964556.428)</p></li>
+</ol>
+</li>
+<li><p>공간 정보는 지도에 위치를 표현할때, 기본적으로 점(point)로 표현을 한다. 또한, 이 점들을 연결하여 선(line), 이 선들을 연결한 다각형(polygon)형태로 저장된다. 이 개념은 다음의 그림으로 표현할 수 있다.</p></li>
+</ol>
+<p><img alt="기본" src="../../_images/basic_element.png" /></p>
+<p>파이썬에서는 이런 공간데이터를 다루기 위해 geopandas 패키지가 구현되어 있고, 좌표계를 다루기 위해 pyproj 패키지가 구현되어 있다.</p>
+</section>
+<section id="id3">
+<h2>사용할 패키지 불러오기<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">pyproj</span>
+<span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">crs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h2>좌표계가 포함된 데이터 읽기<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>화재출동 현황 데이터를 이용하여 좌표를 입력하고, 이를 지도에 표현해 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">crs</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/core/generic.py:5902,</span> in <span class="ni">NDFrame.__getattr__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5895</span> <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5896</span>     <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_internal_names_set</span>
+<span class="g g-Whitespace">   </span><span class="mi">5897</span>     <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span>
+<span class="g g-Whitespace">   </span><span class="mi">5898</span>     <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accessors</span>
+<span class="g g-Whitespace">   </span><span class="mi">5899</span>     <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5900</span> <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5901</span>     <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5902</span> <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;DataFrame&#39; object has no attribute &#39;crs&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터를 읽었을때, 데이터에 좌표계가 존재하지 않기 때문에 crs(Coordinate Reference System)함수가 에러를 나타낸다. 하지만, 좌표계가 있는데 왜 이런 에러를 발생시킬까??</p>
+<p>데이터에 저장되있는 좌표는 컴퓨터 기준에서 단순 숫자에 지나지 않는다. 즉, <code class="docutils literal notranslate"><span class="pre">fire_dat</span></code>데이터 프레임에 저장된 <code class="docutils literal notranslate"><span class="pre">la</span></code>변수에 저장된 값 37.552875는 그냥 숫자일 뿐 좌표가 아니다. 그러므로, 이 숫자가 좌표라는 것을 입력해줘야 한다.</p>
+<p>화재출동 현황 데이터에 있는 변수 <code class="docutils literal notranslate"><span class="pre">longitude</span></code>와 <code class="docutils literal notranslate"><span class="pre">la</span></code>는 EPSG:4326 좌표계를 의미한다.. 그러므로 변수들 <code class="docutils literal notranslate"><span class="pre">la</span></code>(위도), <code class="docutils literal notranslate"><span class="pre">longitude</span></code>(경도)를 좌표계로 지정해 준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">fire_dat</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">fire_dat</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> <span class="n">fire_dat</span><span class="p">[</span><span class="s1">&#39;la&#39;</span><span class="p">]),</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Geographic 2D CRS: EPSG:4326&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">geopandas</span></code> 패키지에 <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>함수를 이용하여 geometry 정보를 입력하는 방법이다. 위 데이터에서는 위도는 <code class="docutils literal notranslate"><span class="pre">la</span></code>, 경도는 <code class="docutils literal notranslate"><span class="pre">longitude</span></code>으로 입력하고, crs함수를 이용해 확인하였다.</p>
+<p>이제 위경도를 입력한 데이터에 전국 법정동 좌표를 가져와 데이터를 합쳐서 그림을 표현하자.</p>
+</section>
+<section id="id5">
+<h2>전국 법정동 좌표 정보 데이터<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>예시로 사용하기위한 전국 법정동 좌표 데이터는 shp파일과 xlsx파일로 구분되어 있다.</p>
+<ul class="simple">
+<li><p>shp 파일 : csv, xlsx과 다르게 위치 정보(geometry)를 포함하고 있는 파일로, 확장자가 dbf, prj, shp, shx 4가지 파일이 모두 있어야 사용 가능하다. (prj는 없어도 가능)</p></li>
+<li><p>xlsx 파일 : 한국어를 값으로 가지고 있는 변수들을 xlsx이다.</p></li>
+<li><p>이때, shp와 xlsx를 연결시켜주는 key 변수는 법정동코드 이다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bjd_dat</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../../data/bjd_shp_file.shp&quot;</span><span class="p">)</span>
+<span class="n">loc_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../data/bjd_file.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">bjd_dat</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../../data/bjd_shp_file.shp&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">loc_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;data/bjd_file.xlsx&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/util/_decorators.py:211,</span> in <span class="ni">deprecate_kwarg.&lt;locals&gt;._deprecate_kwarg.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>         <span class="n">kwargs</span><span class="p">[</span><span class="n">new_arg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_arg_value</span>
+<span class="ne">--&gt; </span><span class="mi">211</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/util/_decorators.py:331,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">_format_argument_list</span><span class="p">(</span><span class="n">allow_args</span><span class="p">)),</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">331</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/excel/_base.py:482,</span> in <span class="ni">read_excel</span><span class="nt">(io, sheet_name, header, names, index_col, usecols, squeeze, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, thousands, decimal, comment, skipfooter, convert_float, mangle_dupe_cols, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">ExcelFile</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="n">should_close</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="ne">--&gt; </span><span class="mi">482</span>     <span class="n">io</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span> <span class="k">elif</span> <span class="n">engine</span> <span class="ow">and</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">484</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="s2">&quot;Engine should not be specified when passing &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">486</span>         <span class="s2">&quot;an ExcelFile - ExcelFile already has the engine set&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">487</span>     <span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/excel/_base.py:1652,</span> in <span class="ni">ExcelFile.__init__</span><span class="nt">(self, path_or_buffer, engine, storage_options)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1650</span>     <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;xls&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1651</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1652</span>     <span class="n">ext</span> <span class="o">=</span> <span class="n">inspect_excel_format</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1653</span>         <span class="n">content_or_path</span><span class="o">=</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span>
+<span class="g g-Whitespace">   </span><span class="mi">1654</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1655</span>     <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1656</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1657</span>             <span class="s2">&quot;Excel file format cannot be determined, you must specify &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1658</span>             <span class="s2">&quot;an engine manually.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1659</span>         <span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/excel/_base.py:1525,</span> in <span class="ni">inspect_excel_format</span><span class="nt">(content_or_path, storage_options)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1523</span>     <span class="n">content_or_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1525</span> <span class="k">with</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1526</span>     <span class="n">content_or_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">is_text</span><span class="o">=</span><span class="kc">False</span>
+<span class="g g-Whitespace">   </span><span class="mi">1527</span> <span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1528</span>     <span class="n">stream</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">handle</span>
+<span class="g g-Whitespace">   </span><span class="mi">1529</span>     <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/common.py:865,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">863</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">864</span>         <span class="c1"># Binary mode</span>
+<span class="ne">--&gt; </span><span class="mi">865</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="c1"># Convert BytesIO or file objects passed with an encoding</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/bjd_file.xlsx&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>각 데이터의 정보는 각각 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bjd_dat</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bjd_dat</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">bjd_dat</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 20316 entries, 0 to 20315
+Data columns (total 3 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   bjd_code    20316 non-null  float64 
+ 1   shape_area  20272 non-null  float64 
+ 2   geometry    20272 non-null  geometry
+dtypes: float64(2), geometry(1)
+memory usage: 476.3 KB
+EPSG:5179
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bjd_code</th>
+      <th>shape_area</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.111010e+09</td>
+      <td>792617.902967</td>
+      <td>POLYGON ((953700.022 1954605.065, 953693.871 1...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.111010e+09</td>
+      <td>98821.715201</td>
+      <td>POLYGON ((953233.465 1953996.984, 953235.183 1...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.111010e+09</td>
+      <td>73271.654659</td>
+      <td>POLYGON ((953560.228 1954257.466, 953561.190 1...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.111010e+09</td>
+      <td>59403.652076</td>
+      <td>POLYGON ((953519.843 1953890.785, 953518.489 1...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.111010e+09</td>
+      <td>59399.285366</td>
+      <td>POLYGON ((953516.123 1953734.362, 953516.526 1...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc_dat</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">loc_dat</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20316 entries, 0 to 20315
+Data columns (total 5 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   sido      20316 non-null  object
+ 1   si        20316 non-null  object
+ 2   sgg       20316 non-null  object
+ 3   bjd       20316 non-null  object
+ 4   bjd_code  20316 non-null  int64 
+dtypes: int64(1), object(4)
+memory usage: 793.7+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sido</th>
+      <th>si</th>
+      <th>sgg</th>
+      <th>bjd</th>
+      <th>bjd_code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>서울특별시</td>
+      <td>종로구</td>
+      <td>종로구</td>
+      <td>청운동</td>
+      <td>1111010100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>서울특별시</td>
+      <td>종로구</td>
+      <td>종로구</td>
+      <td>신교동</td>
+      <td>1111010200</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>서울특별시</td>
+      <td>종로구</td>
+      <td>종로구</td>
+      <td>궁정동</td>
+      <td>1111010300</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>서울특별시</td>
+      <td>종로구</td>
+      <td>종로구</td>
+      <td>효자동</td>
+      <td>1111010400</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>서울특별시</td>
+      <td>종로구</td>
+      <td>종로구</td>
+      <td>창성동</td>
+      <td>1111010500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>두 데이터셋에서 bjd_code를 기준으로 inner join을 시키고 저장하고, 서울특별시에 대해서만 가져오자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">join_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">bjd_dat</span><span class="p">,</span> <span class="n">loc_dat</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;bjd_code&quot;</span><span class="p">)</span>
+
+<span class="n">tmp_ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">join_dat</span><span class="p">[</span><span class="s2">&quot;sido&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;서울특별시&quot;</span><span class="p">)</span>
+<span class="n">seoul_dat</span> <span class="o">=</span> <span class="n">join_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>생성한 seoul_dat의 데이터 셋의 정보 및 그래프는 다음과 같이 나타난다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seoul_dat</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">seoul_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+Int64Index: 467 entries, 0 to 466
+Data columns (total 7 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   bjd_code    467 non-null    float64 
+ 1   shape_area  467 non-null    float64 
+ 2   geometry    467 non-null    geometry
+ 3   sido        467 non-null    object  
+ 4   si          467 non-null    object  
+ 5   sgg         467 non-null    object  
+ 6   bjd         467 non-null    object  
+dtypes: float64(2), geometry(1), object(4)
+memory usage: 29.2+ KB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/11d9797b0026cd2b841c1439fc464c38ce0d0395a54bbc2cc20d00d772acf930.png" src="../../_images/11d9797b0026cd2b841c1439fc464c38ce0d0395a54bbc2cc20d00d772acf930.png" />
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>지도에 화재 사고 표시<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>이제, 화재출동 현황데이터를 법정동 지도 위에 나타내보자. 우선 서울 전체가 아닌 중구에 대해서만 추출하여 표현해보자.</p>
+<p>법정동 지도 데이터 및 화재출동 현황자료에서 중구만 뽑는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="p">[</span><span class="s2">&quot;sigungu_nm&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;은평구&quot;</span>
+<span class="n">jg_fire_dat</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">jg_fire_dat</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Geographic 2D CRS: EPSG:4326&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">seoul_dat</span><span class="p">[</span><span class="s2">&quot;sgg&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;은평구&quot;</span>
+<span class="n">jg_map_dat</span> <span class="o">=</span> <span class="n">seoul_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">jg_map_dat</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Projected CRS: EPSG:5179&gt;
+Name: Korea 2000 / Unified CS
+Axis Info [cartesian]:
+- X[north]: Northing (metre)
+- Y[east]: Easting (metre)
+Area of Use:
+- name: Republic of Korea (South Korea) - onshore and offshore.
+- bounds: (122.71, 28.6, 134.28, 40.27)
+Coordinate Operation:
+- name: Korea Unified Belt
+- method: Transverse Mercator
+Datum: Geocentric datum of Korea
+- Ellipsoid: GRS 1980
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<p>하지만, 두 데이터의 좌표계는 서로 다름을 확인 할 수 있다. 이는 맨 처음 설명했듯이, 위치는 같은 곳을 의미하지만, 다른 지도에서의 좌표를 의미한다. 그러므로 이 둘의 좌표계를 맞춘다.</p>
+<p>이를 위해 jg_fire_dat의 좌표계를 “EPSG:5179”좌표계로 맞춘다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jg_fire_dat</span> <span class="o">=</span> <span class="n">jg_fire_dat</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">5179</span><span class="p">)</span>
+
+<span class="n">jg_fire_dat</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Projected CRS: EPSG:5179&gt;
+Name: Korea 2000 / Unified CS
+Axis Info [cartesian]:
+- X[north]: Northing (metre)
+- Y[east]: Easting (metre)
+Area of Use:
+- name: Republic of Korea (South Korea) - onshore and offshore.
+- bounds: (122.71, 28.6, 134.28, 40.27)
+Coordinate Operation:
+- name: Korea Unified Belt
+- method: Transverse Mercator
+Datum: Geocentric datum of Korea
+- Ellipsoid: GRS 1980
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<p>좌표가 “EPSG:5179”로 맞춰진것을 알 수 있다. 따라서, 이를 그림으로 그리면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">jg_map_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">jg_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/715f97020e08fa02359ee501e8da93d9263e49af26ad4ce00023291b119559b5.png" src="../../_images/715f97020e08fa02359ee501e8da93d9263e49af26ad4ce00023291b119559b5.png" />
+</div>
+</div>
+<p>즉, 위 그림은 서울특별시 은평구에 법정동 단위로 2017년부터 2021년까지 화재가 발생한 위치를 나타낸 지도이다. 이를 2021년에 대해 서울 전역으로 살펴보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">5179</span><span class="p">)</span>
+
+<span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="p">[</span><span class="s2">&quot;fire_ocrn_yr&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2021</span>
+<span class="n">sub_fire_dat</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">seoul_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">sub_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/b6171d191ac39eb5eb51bd581b7ccdb07cc827943229d4569bb063404c508c41.png" src="../../_images/b6171d191ac39eb5eb51bd581b7ccdb07cc827943229d4569bb063404c508c41.png" />
+</div>
+</div>
+<p>이 중, 여름과 겨울을 구분하여 점으로 표현하면 다음 그래프로 나타난다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sum_ind</span> <span class="o">=</span> <span class="n">sub_fire_dat</span><span class="p">[</span><span class="s2">&quot;season_se_nm&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;여름&quot;</span>
+<span class="n">sum_fire_dat</span> <span class="o">=</span> <span class="n">sub_fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sum_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">win_ind</span> <span class="o">=</span> <span class="n">sub_fire_dat</span><span class="p">[</span><span class="s2">&quot;season_se_nm&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;겨울&quot;</span>
+<span class="n">win_fire_dat</span> <span class="o">=</span> <span class="n">sub_fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">win_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">seoul_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">win_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">sum_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/ac73abe83a8186da82561f2a12dfde5adf3857907ea8c5156c69e2faf21a1305.png" src="../../_images/ac73abe83a8186da82561f2a12dfde5adf3857907ea8c5156c69e2faf21a1305.png" />
+</div>
+</div>
+<p>다음으로, 점 그래프가 아닌 그 값에 따른 값을 지도에 채우는 것을 그려보자. 이번 예제는 2021년에 총 출동횟수를 각 법정동별로 나타내보자. 출동한 연도를 나타낸 변수는 <code class="docutils literal notranslate"><span class="pre">fire_ocrn_yr</span></code>이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year_ind</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="p">[</span><span class="s1">&#39;fire_ocrn_yr&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2021</span>
+<span class="n">year_dat</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">year_ind</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code>함수와 <code class="docutils literal notranslate"><span class="pre">agg</span></code>함수, <code class="docutils literal notranslate"><span class="pre">sum</span></code>함수를 이용하여 2021년에 법정동에 대해 총 출동횟수를 계산한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_dat</span> <span class="o">=</span> <span class="n">year_dat</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;sido_nm&quot;</span><span class="p">,</span> <span class="s1">&#39;sigungu_nm&#39;</span><span class="p">,</span> <span class="s2">&quot;emd_nm&quot;</span><span class="p">])[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<span class="n">count_dat</span> <span class="o">=</span> <span class="n">count_dat</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_dat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sido_nm</th>
+      <th>sigungu_nm</th>
+      <th>emd_nm</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>서울특별시</td>
+      <td>강남구</td>
+      <td>개포동</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>서울특별시</td>
+      <td>강남구</td>
+      <td>논현동</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>서울특별시</td>
+      <td>강남구</td>
+      <td>대치동</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>서울특별시</td>
+      <td>강남구</td>
+      <td>도곡동</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>서울특별시</td>
+      <td>강남구</td>
+      <td>삼성동</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>389</th>
+      <td>서울특별시</td>
+      <td>중랑구</td>
+      <td>면목동</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>390</th>
+      <td>서울특별시</td>
+      <td>중랑구</td>
+      <td>묵동</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>391</th>
+      <td>서울특별시</td>
+      <td>중랑구</td>
+      <td>상봉동</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>392</th>
+      <td>서울특별시</td>
+      <td>중랑구</td>
+      <td>신내동</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>393</th>
+      <td>서울특별시</td>
+      <td>중랑구</td>
+      <td>중화동</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<p>394 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">merge</span></code>함수를 이용하여 두 데이터(법정동 지도 데이터, 법정동별 출동건수 데이터)를 merge하는데, 기준이 되는 변수는 각각 <code class="docutils literal notranslate"><span class="pre">sido,</span> <span class="pre">sgg,</span> <span class="pre">bjd</span></code>, <code class="docutils literal notranslate"><span class="pre">sido_nm</span></code>, <code class="docutils literal notranslate"><span class="pre">sigungu_nm</span></code>, <code class="docutils literal notranslate"><span class="pre">emd_nm</span></code>이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merge_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">seoul_dat</span><span class="p">,</span> <span class="n">count_dat</span><span class="p">,</span> <span class="n">left_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sido&quot;</span><span class="p">,</span> <span class="s2">&quot;sgg&quot;</span><span class="p">,</span> <span class="s2">&quot;bjd&quot;</span><span class="p">],</span> <span class="n">right_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sido_nm&quot;</span><span class="p">,</span> <span class="s2">&quot;sigungu_nm&quot;</span><span class="p">,</span> <span class="s2">&quot;emd_nm&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>마지막으로 출동횟수에 대한 변수에 대해 그래프를 생성한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">merge_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/94c4eacb894ab06580c78294a115ffcb9c83a6a8a22a73adaa4bf5b47b602aa5.png" src="../../_images/94c4eacb894ab06580c78294a115ffcb9c83a6a8a22a73adaa4bf5b47b602aa5.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/day3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="visualization_basic.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>시각화 분석의 기초</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">공간데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">사용할 패키지 불러오기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">좌표계가 포함된 데이터 읽기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">전국 법정동 좌표 정보 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">지도에 화재 사고 표시</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

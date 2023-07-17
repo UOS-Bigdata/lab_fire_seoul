@@ -1,0 +1,1500 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3.1. 시각화 분석의 기초 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day3/visualization_basic';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. 공간자료 시각화" href="map_visualization.html" />
+    <link rel="prev" title="3. 공간 분석과 시각화" href="map_visual.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">파이썬 프로그래밍의 기초와 데이터 활용 방법</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    개요
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="map_visual.html">3. 공간 분석과 시각화</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.1. 시각화 분석의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="map_visualization.html">3.2. 공간자료 시각화</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notebooks/day3/visualization_basic.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/UOS-Bigdata/bigdatabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/day3/visualization_basic.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>시각화 분석의 기초</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">화재데이터를 이용한 기초그래프</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">데이터 읽기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2021년 시군구별 화재 현황 막대 그래프</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">서울시 총 출동횟수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">연도별 여름, 겨울 출동횟수 현황 선 그래프</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">3.1. </span>시각화 분석의 기초<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>화재데이터를 이용한 기초그래프<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>앞에서 연도, 시군구별, 사망자수, 부상자수에 대해 가장 높은 지역, 혹은 여름, 겨울의 출동횟수 차이를 비교를 하였다. 또한 이를 수치로 비교하였기에 하나의 값, 혹은 관측값에 대해서만 확인을 하였다.</p>
+<p>이러한 내용을 한꺼번에 비교를 하고 싶을때도 있다. 이럴때 가장 많이 사용하는 방법이 시각화이다. 즉, 시각화는 많은 정보를 그림으로 나타내어 한번에 그 정보들을 확인할 수 있게 만들어준다.</p>
+<p>파이썬에서는 그래프를 그리기 위해 <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>패키지를 이용한다. 하지만 기본적으로 한국어를 지원하지 않기 때문에, 나눔글꼴, 본고딕, 은 폰트 등 폰트를 설치를 해줘야 한다. 이를 설치하기 위해 <code class="docutils literal notranslate"><span class="pre">plt.rcParams</span></code>를 이용한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Malgun Gothic&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2>데이터 읽기<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span></code>패키지를 이용하여 <code class="docutils literal notranslate"><span class="pre">practice_dat</span></code> 엑셀파일을 읽는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;data/practice_dat.xlsx&quot;</span><span class="p">)</span>
+<span class="n">final_dat</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>총출동횟수</th>
+      <th>출동횟수_여름</th>
+      <th>출동횟수_겨울</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>120</th>
+      <td>2021</td>
+      <td>용산구</td>
+      <td>0</td>
+      <td>5</td>
+      <td>296793</td>
+      <td>176</td>
+      <td>36</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>3</td>
+      <td>8</td>
+      <td>875722</td>
+      <td>160</td>
+      <td>42</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>0</td>
+      <td>12</td>
+      <td>465499</td>
+      <td>192</td>
+      <td>54</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>0</td>
+      <td>16</td>
+      <td>2780374</td>
+      <td>171</td>
+      <td>49</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>1</td>
+      <td>12</td>
+      <td>345257</td>
+      <td>213</td>
+      <td>59</td>
+      <td>63</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이 데이터를 이용하여 기본 그래프의 기본인 막대 그래프, 선 그래프, 파이 차트 3가지를 소개한다.</p>
+</section>
+<section id="id4">
+<h2>2021년 시군구별 화재 현황 막대 그래프<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>앞에서 2021년에 사망자수, 부상자수, 재산피해금액, 총출동횟수가 가장 높은 지역은 강북구, 성북구, 중구, 강남구임을 확인했었는데, 이를 막대그래프로 확인해보자.</p>
+<p>위 데이터는 이미 연도별, 시군구별로 변수들의 총 합을 계산해놓은 데이터이다. 그러므로 2021년의 데이터만 추출해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">final_dat</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2021</span>
+<span class="n">sub_dat</span> <span class="o">=</span> <span class="n">final_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">sub_dat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>총출동횟수</th>
+      <th>출동횟수_여름</th>
+      <th>출동횟수_겨울</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2</td>
+      <td>15</td>
+      <td>1354949</td>
+      <td>391</td>
+      <td>91</td>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1</td>
+      <td>12</td>
+      <td>346741</td>
+      <td>211</td>
+      <td>45</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5</td>
+      <td>14</td>
+      <td>410205</td>
+      <td>146</td>
+      <td>38</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2</td>
+      <td>12</td>
+      <td>559614</td>
+      <td>223</td>
+      <td>50</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2</td>
+      <td>17</td>
+      <td>562294</td>
+      <td>259</td>
+      <td>54</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>2021</td>
+      <td>광진구</td>
+      <td>2</td>
+      <td>10</td>
+      <td>889681</td>
+      <td>205</td>
+      <td>56</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>2021</td>
+      <td>구로구</td>
+      <td>1</td>
+      <td>7</td>
+      <td>1765589</td>
+      <td>173</td>
+      <td>33</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>2021</td>
+      <td>금천구</td>
+      <td>2</td>
+      <td>8</td>
+      <td>825255</td>
+      <td>118</td>
+      <td>28</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>2021</td>
+      <td>노원구</td>
+      <td>1</td>
+      <td>12</td>
+      <td>432605</td>
+      <td>173</td>
+      <td>49</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>2021</td>
+      <td>도봉구</td>
+      <td>0</td>
+      <td>6</td>
+      <td>219916</td>
+      <td>140</td>
+      <td>34</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>2021</td>
+      <td>동대문구</td>
+      <td>3</td>
+      <td>15</td>
+      <td>1209541</td>
+      <td>155</td>
+      <td>40</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>2021</td>
+      <td>동작구</td>
+      <td>3</td>
+      <td>9</td>
+      <td>307365</td>
+      <td>129</td>
+      <td>27</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>2021</td>
+      <td>마포구</td>
+      <td>2</td>
+      <td>7</td>
+      <td>591687</td>
+      <td>242</td>
+      <td>53</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>2021</td>
+      <td>서대문구</td>
+      <td>0</td>
+      <td>7</td>
+      <td>249728</td>
+      <td>262</td>
+      <td>52</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>2021</td>
+      <td>서초구</td>
+      <td>0</td>
+      <td>9</td>
+      <td>549807</td>
+      <td>231</td>
+      <td>51</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>2021</td>
+      <td>성동구</td>
+      <td>0</td>
+      <td>5</td>
+      <td>458412</td>
+      <td>191</td>
+      <td>54</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>2021</td>
+      <td>성북구</td>
+      <td>4</td>
+      <td>46</td>
+      <td>493231</td>
+      <td>168</td>
+      <td>37</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>2021</td>
+      <td>송파구</td>
+      <td>1</td>
+      <td>5</td>
+      <td>788289</td>
+      <td>263</td>
+      <td>59</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>2021</td>
+      <td>양천구</td>
+      <td>2</td>
+      <td>3</td>
+      <td>576094</td>
+      <td>151</td>
+      <td>42</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>2021</td>
+      <td>영등포구</td>
+      <td>0</td>
+      <td>8</td>
+      <td>913698</td>
+      <td>208</td>
+      <td>53</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>2021</td>
+      <td>용산구</td>
+      <td>0</td>
+      <td>5</td>
+      <td>296793</td>
+      <td>176</td>
+      <td>36</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>3</td>
+      <td>8</td>
+      <td>875722</td>
+      <td>160</td>
+      <td>42</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>0</td>
+      <td>12</td>
+      <td>465499</td>
+      <td>192</td>
+      <td>54</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>0</td>
+      <td>16</td>
+      <td>2780374</td>
+      <td>171</td>
+      <td>49</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>1</td>
+      <td>12</td>
+      <td>345257</td>
+      <td>213</td>
+      <td>59</td>
+      <td>63</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>그래프를 그리기위해, <code class="docutils literal notranslate"><span class="pre">figure</span></code>함수를 이용하여 그래프의 크기를 정합니다. 이후, <code class="docutils literal notranslate"><span class="pre">bar</span></code>함수를 이용해 x축에는 <code class="docutils literal notranslate"><span class="pre">시군구</span></code> 변수, y축에는 <code class="docutils literal notranslate"><span class="pre">사망자수</span></code>변수를 넣고 그래프를 생성합니다.</p>
+<ul class="simple">
+<li><p>plt.title : 그래프에서 제목을 결정하는 함수</p></li>
+<li><p>plt.xlabel : x축의 이름을 결정하는 함수</p></li>
+<li><p>plt.ylabel : y축의 이름을 결정하는 함수</p></li>
+<li><p>plt.show() : 그림을 출력해주는 함수</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;시군구&quot;</span><span class="p">,</span> <span class="s2">&quot;사망자수&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sub_dat</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2021년 시군구별 사망자 수&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;시군구&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;사망자 수&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/99eacfc07eff31f1bf4ffafeb8baf4f9f459f821f0a78a6171a892b4c8e0376d.png" src="../../_images/99eacfc07eff31f1bf4ffafeb8baf4f9f459f821f0a78a6171a892b4c8e0376d.png" />
+</div>
+</div>
+<p>앞서 확인한 결과처럼 강북구에서 가장 사망자수가 가장 높다는 것을 알수 있다. 추가적으로 성북구가 4명으로 두 번째, 은평구, 동대문구, 동작구들이 3명으로 3번째로 높다는 것을 확인 할 수 있다.</p>
+<p>같은 방법으로 부상자수, 재산피해금액, 총 출동횟수를 각각 막대그래프로 시각화한 결과는 아래와 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;시군구&quot;</span><span class="p">,</span> <span class="s2">&quot;부상자수&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sub_dat</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2021년 시군구별 부상자 수&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1">## 타이틀 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;시군구&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;부상자 수&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1ca32a2f2c69a35da4ab3388431f510dcf5777541b69226cef00eb8c80b3ef2b.png" src="../../_images/1ca32a2f2c69a35da4ab3388431f510dcf5777541b69226cef00eb8c80b3ef2b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;시군구&quot;</span><span class="p">,</span> <span class="s2">&quot;재산피해금액&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sub_dat</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2021년 시군구별 총 재산피해금액&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;시군구&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;재산피해금액&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a1be42219caaf4b6e3868890ecaffc9b1a38a5254f99fe5fa18d35bb3805cbb7.png" src="../../_images/a1be42219caaf4b6e3868890ecaffc9b1a38a5254f99fe5fa18d35bb3805cbb7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;시군구&quot;</span><span class="p">,</span> <span class="s2">&quot;총출동횟수&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sub_dat</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2021년 시군구별 총 출동횟수&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1">## 타이틀 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;시군구&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;출동횟수&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/990e6a952180d90143cd32905341bb76546e6e5d2f23da2cea70ab92b2bab683.png" src="../../_images/990e6a952180d90143cd32905341bb76546e6e5d2f23da2cea70ab92b2bab683.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>서울시 총 출동횟수<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>선 그래프는 시간의 흐름 혹은 여러 색상을 이용하여 표현 할 때, 많이 이용되는 그래프이다. 이 선 그래프의 예시로 연도별 서울시 총 출동횟수를 그려보자.</p>
+<p>이를 위해, 처음 읽었던 데이터를 연도별로 총 출동 횟수를 계산해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sum_dat</span> <span class="o">=</span> <span class="n">final_dat</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">)[</span><span class="s2">&quot;총출동횟수&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<span class="n">sum_dat</span> <span class="o">=</span> <span class="n">sum_dat</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">sum_dat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>총출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>5978</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>6368</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>5881</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020</td>
+      <td>5088</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>4951</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sum_dat</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">],</span> <span class="n">sum_dat</span><span class="p">[</span><span class="s2">&quot;총출동횟수&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;서울시 총출동횟수&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;연도&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;출동횟수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/261fe60f22f40113d62498b3aaf2a35f623c7c16c461184df226160a4c391160.png" src="../../_images/261fe60f22f40113d62498b3aaf2a35f623c7c16c461184df226160a4c391160.png" />
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>연도별 여름, 겨울 출동횟수 현황 선 그래프<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>앞의 예시에서는 연도별로 총 출동횟수를 나타내었다. 이번 예시에서는 시군구별로 선 그래프에 색상을 적용하여 여름, 겨울의 출동 횟수를 연도별로 비교해보자. 가장 먼저 2017년의 선 그래프이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">final_dat</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2017</span>
+<span class="n">sub_dat</span> <span class="o">=</span> <span class="n">final_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">sub_dat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>총출동횟수</th>
+      <th>출동횟수_여름</th>
+      <th>출동횟수_겨울</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0</td>
+      <td>11</td>
+      <td>1565258</td>
+      <td>502</td>
+      <td>120</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0</td>
+      <td>12</td>
+      <td>418593</td>
+      <td>269</td>
+      <td>73</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0</td>
+      <td>6</td>
+      <td>339146</td>
+      <td>186</td>
+      <td>41</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3</td>
+      <td>22</td>
+      <td>706871</td>
+      <td>364</td>
+      <td>81</td>
+      <td>89</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3</td>
+      <td>20</td>
+      <td>654690</td>
+      <td>286</td>
+      <td>69</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2017</td>
+      <td>광진구</td>
+      <td>1</td>
+      <td>6</td>
+      <td>433742</td>
+      <td>200</td>
+      <td>44</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2017</td>
+      <td>구로구</td>
+      <td>1</td>
+      <td>5</td>
+      <td>460568</td>
+      <td>260</td>
+      <td>71</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2017</td>
+      <td>금천구</td>
+      <td>2</td>
+      <td>7</td>
+      <td>605549</td>
+      <td>174</td>
+      <td>49</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2017</td>
+      <td>노원구</td>
+      <td>3</td>
+      <td>18</td>
+      <td>566821</td>
+      <td>279</td>
+      <td>75</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2017</td>
+      <td>도봉구</td>
+      <td>2</td>
+      <td>6</td>
+      <td>288836</td>
+      <td>192</td>
+      <td>59</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2017</td>
+      <td>동대문구</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1122454</td>
+      <td>200</td>
+      <td>48</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2017</td>
+      <td>동작구</td>
+      <td>3</td>
+      <td>10</td>
+      <td>277144</td>
+      <td>222</td>
+      <td>64</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2017</td>
+      <td>마포구</td>
+      <td>1</td>
+      <td>7</td>
+      <td>1359029</td>
+      <td>235</td>
+      <td>59</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2017</td>
+      <td>서대문구</td>
+      <td>1</td>
+      <td>15</td>
+      <td>397573</td>
+      <td>232</td>
+      <td>69</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2017</td>
+      <td>서초구</td>
+      <td>2</td>
+      <td>13</td>
+      <td>695667</td>
+      <td>242</td>
+      <td>51</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2017</td>
+      <td>성동구</td>
+      <td>1</td>
+      <td>11</td>
+      <td>621324</td>
+      <td>197</td>
+      <td>48</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2017</td>
+      <td>성북구</td>
+      <td>1</td>
+      <td>8</td>
+      <td>400640</td>
+      <td>183</td>
+      <td>39</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2017</td>
+      <td>송파구</td>
+      <td>3</td>
+      <td>13</td>
+      <td>639227</td>
+      <td>318</td>
+      <td>74</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2017</td>
+      <td>양천구</td>
+      <td>0</td>
+      <td>7</td>
+      <td>300631</td>
+      <td>244</td>
+      <td>67</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2017</td>
+      <td>영등포구</td>
+      <td>1</td>
+      <td>16</td>
+      <td>1093594</td>
+      <td>239</td>
+      <td>64</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2017</td>
+      <td>용산구</td>
+      <td>0</td>
+      <td>6</td>
+      <td>262910</td>
+      <td>167</td>
+      <td>45</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2017</td>
+      <td>은평구</td>
+      <td>0</td>
+      <td>3</td>
+      <td>218200</td>
+      <td>159</td>
+      <td>32</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2017</td>
+      <td>종로구</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1077665</td>
+      <td>234</td>
+      <td>69</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2017</td>
+      <td>중구</td>
+      <td>5</td>
+      <td>14</td>
+      <td>485392</td>
+      <td>198</td>
+      <td>47</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2017</td>
+      <td>중랑구</td>
+      <td>2</td>
+      <td>5</td>
+      <td>332366</td>
+      <td>196</td>
+      <td>38</td>
+      <td>53</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">],</span> <span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;출동횟수_여름&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">],</span> <span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;출동횟수_겨울&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span> <span class="s2">&quot;여름&quot;</span> <span class="p">,</span> <span class="s2">&quot;겨울&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2017년 지역별 출동횟수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;지역&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;사망자 수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1bba36c1b2636bb01073c8af499b7db3dc113157b711af959f3d97dcc1c081a1.png" src="../../_images/1bba36c1b2636bb01073c8af499b7db3dc113157b711af959f3d97dcc1c081a1.png" />
+</div>
+</div>
+<p>같은 방법으로 2019년, 2021년 그래프의 결과는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">final_dat</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2019</span>
+<span class="n">sub_dat</span> <span class="o">=</span> <span class="n">final_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">],</span> <span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;출동횟수_여름&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">],</span> <span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;출동횟수_겨울&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span> <span class="s2">&quot;여름&quot;</span> <span class="p">,</span> <span class="s2">&quot;겨울&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2019년 지역별 출동횟수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;지역&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;사망자 수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e4f96bbf1766d02160da0c95a1fa26886c2da58bf205ac2a78498eecc885cb83.png" src="../../_images/e4f96bbf1766d02160da0c95a1fa26886c2da58bf205ac2a78498eecc885cb83.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">final_dat</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2021</span>
+<span class="n">sub_dat</span> <span class="o">=</span> <span class="n">final_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">],</span> <span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;출동횟수_여름&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">],</span> <span class="n">sub_dat</span><span class="p">[</span><span class="s2">&quot;출동횟수_겨울&quot;</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span> <span class="s2">&quot;여름&quot;</span> <span class="p">,</span> <span class="s2">&quot;겨울&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2021년 지역별 출동횟수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;지역&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;사망자 수&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/40628d81386e842f5cf68b042815d7695321bffcd237e6292e4deb9a58755107.png" src="../../_images/40628d81386e842f5cf68b042815d7695321bffcd237e6292e4deb9a58755107.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/day3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="map_visual.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>공간 분석과 시각화</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="map_visualization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.2. </span>공간자료 시각화</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">화재데이터를 이용한 기초그래프</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">데이터 읽기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2021년 시군구별 화재 현황 막대 그래프</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">서울시 총 출동횟수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">연도별 여름, 겨울 출동횟수 현황 선 그래프</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,3869 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2.5. 데이터프레임의 그룹별 요약 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day2/dataframe-group';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.6. 데이터프레임의 결합" href="dataframe-merge.html" />
+    <link rel="prev" title="2.4. 데이터프레임 실습 1: 정리와 요약" href="day1_summary.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">파이썬 프로그래밍의 기초와 데이터 활용 방법</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    개요
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.5. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notebooks/day2/dataframe-group.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/UOS-Bigdata/bigdatabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/day2/dataframe-group.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>데이터프레임의 그룹별 요약</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">그룹별 요약</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">새로운 정보</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">여러 개의 그룹</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">다양한 집계들</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">요약</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2.5. </span>데이터프레임의 그룹별 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>앞서 <strong>데이터프레임의 요약</strong>에서는 전체 데이터를 요약(count, mean, 분위수 등)했었다. 예를 들어, 2017년의 강남구 데이터의 데이터를 요약하려면 전체 데이터에서 해당 데이터를 추출하여 사용했다. 이 절에서는 그룹별로 한번에 요약하는 방법에 대해 알아보고자 한다.</p>
+<p>데이터프레임을 그룹으로 나눌 때 여러 개의 기준을 조합해서 나눌 수도 있다.</p>
+<section id="id2">
+<h2>간단한 예제<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>먼저 예제 데이터로 실습해보자.</p>
+<p>다음과 같은 간단한 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 을 고려해 보자. 열 <code class="docutils literal notranslate"><span class="pre">school</span></code> 은 학교, <code class="docutils literal notranslate"><span class="pre">sex</span></code>는 성, <code class="docutils literal notranslate"><span class="pre">score</span></code> 는  점수를 나타낸다고 하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span> 
+    <span class="s2">&quot;school&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> 
+    <span class="s2">&quot;sex&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;score&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">65</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>school</th>
+      <th>sex</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>M</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A</td>
+      <td>M</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A</td>
+      <td>F</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>F</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>B</td>
+      <td>M</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>B</td>
+      <td>F</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>B</td>
+      <td>F</td>
+      <td>65</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 에서 학교별, 성별로 성적의 평균을 구해보자.</p>
+<p>먼저 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 을 학교별, 성별로 나누어 그룹회된 데이터프레임을 만들고 각 그룹에 대한 성적의 평균을 구해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;school&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>score</th>
+    </tr>
+    <tr>
+      <th>school</th>
+      <th>sex</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">A</th>
+      <th>F</th>
+      <td>58.5</td>
+    </tr>
+    <tr>
+      <th>M</th>
+      <td>99.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B</th>
+      <th>F</th>
+      <td>77.5</td>
+    </tr>
+    <tr>
+      <th>M</th>
+      <td>56.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이렇게 데이터프레임은 <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 메소드를 이용하여 여러 개의 그룹으로 나누어 요약할 수 있다.</p>
+<p>만약 그룹으로 나누는데 사용하는 열의 자료형식이 숫자면 어떤 일이 벌어질까. 자료의 범주가 숫자로 나타나는 경우가 많은데 이 경우 그룹화에 대하여 알아보자.</p>
+<p>먼저 위에서 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 과 동일한 자료를 가지지만 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 는 여자는 1, 남자는 0 으로 자료가 저장되어 있다고 하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span> 
+    <span class="s2">&quot;school&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> 
+    <span class="s2">&quot;sex&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s2">&quot;score&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">65</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">test2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>school</th>
+      <th>sex</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>0</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A</td>
+      <td>0</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A</td>
+      <td>1</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>1</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>B</td>
+      <td>0</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>B</td>
+      <td>0</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>B</td>
+      <td>1</td>
+      <td>65</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>메소드 <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 는 숫자로 구성된 열도 나타난 숫자에 따라서 그룹화를 해준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;school&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>score</th>
+    </tr>
+    <tr>
+      <th>school</th>
+      <th>sex</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">A</th>
+      <th>0</th>
+      <td>99.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>58.5</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B</th>
+      <th>0</th>
+      <td>73.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>65.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>그룹화에 사용된 열들을 인덱스에서 다시 열로 바꾸고 싶으면 <code class="docutils literal notranslate"><span class="pre">reset_index()</span></code>를 적용하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;school&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>school</th>
+      <th>sex</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>0</td>
+      <td>99.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A</td>
+      <td>1</td>
+      <td>58.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>B</td>
+      <td>0</td>
+      <td>73.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>B</td>
+      <td>1</td>
+      <td>65.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id3">
+<h2>화재출동 데이터<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>화재출동 데이터(<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)을 이용해 간단한 화재출동 현황을 요약하려 한다.
+2017년부터 2021년의 5년간 서울시 모든 구의 화재출동 데이터입니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>NaN</td>
+      <td>11</td>
+      <td>1565258</td>
+      <td>502</td>
+      <td>129</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>NaN</td>
+      <td>12</td>
+      <td>418593</td>
+      <td>269</td>
+      <td>63</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>NaN</td>
+      <td>6</td>
+      <td>339146</td>
+      <td>186</td>
+      <td>51</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>22</td>
+      <td>706871</td>
+      <td>364</td>
+      <td>89</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>20</td>
+      <td>654690</td>
+      <td>286</td>
+      <td>82</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>2021</td>
+      <td>용산구</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>296793</td>
+      <td>176</td>
+      <td>47</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>3.0</td>
+      <td>8</td>
+      <td>875722</td>
+      <td>160</td>
+      <td>57</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>NaN</td>
+      <td>12</td>
+      <td>465499</td>
+      <td>192</td>
+      <td>48</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>NaN</td>
+      <td>16</td>
+      <td>2780374</td>
+      <td>171</td>
+      <td>41</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>1.0</td>
+      <td>12</td>
+      <td>345257</td>
+      <td>213</td>
+      <td>63</td>
+      <td>59</td>
+    </tr>
+  </tbody>
+</table>
+<p>125 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>먼저 <code class="docutils literal notranslate"><span class="pre">Nan</span></code>값을 0으로 대체해준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>11</td>
+      <td>1565258</td>
+      <td>502</td>
+      <td>129</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>12</td>
+      <td>418593</td>
+      <td>269</td>
+      <td>63</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>6</td>
+      <td>339146</td>
+      <td>186</td>
+      <td>51</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>22</td>
+      <td>706871</td>
+      <td>364</td>
+      <td>89</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>20</td>
+      <td>654690</td>
+      <td>286</td>
+      <td>82</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>2021</td>
+      <td>용산구</td>
+      <td>0.0</td>
+      <td>5</td>
+      <td>296793</td>
+      <td>176</td>
+      <td>47</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>3.0</td>
+      <td>8</td>
+      <td>875722</td>
+      <td>160</td>
+      <td>57</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>0.0</td>
+      <td>12</td>
+      <td>465499</td>
+      <td>192</td>
+      <td>48</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>16</td>
+      <td>2780374</td>
+      <td>171</td>
+      <td>41</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>1.0</td>
+      <td>12</td>
+      <td>345257</td>
+      <td>213</td>
+      <td>63</td>
+      <td>59</td>
+    </tr>
+  </tbody>
+</table>
+<p>125 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>먼저 연도별 5개 의 화재로 인한 출동횟수를 계산해 보자.</p>
+<p>연도별 출동횟수를 계산하려면</p>
+<ol class="arabic simple">
+<li><p>전체 자료를 연도별로 나누고</p></li>
+<li><p>각 연도에서 모든 시군구의 출동횟수를 더해야한다.</p></li>
+</ol>
+<p>즉, 데이터프레임을 지정된 열(화재발생연도)의 값(2017, 2018, ..)에 따라서 그룹으로 나누어 전국 가구수를 계산해야 한다.</p>
+<p>메소드 <code class="docutils literal notranslate"><span class="pre">groupby(</span> <span class="pre">by=...)</span></code>는  지정된 열의 값으로 데이터프레임을 그룹(group)으로 나누어 준다. 메소드 <code class="docutils literal notranslate"><span class="pre">groupby(</span> <span class="pre">by=...)</span></code>는  <strong>데이터프레임을  물리적으로 그룹을 나누어 주는 것은 아니고 메소드에서 지정된 그룹을 데이터프레임에 적용하는 기능을 한다.</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">by=</span></code> 는 그룹을 나눌 때 사용되는 열을 리스트 형식으로 지정한다.</p></li>
+<li><p>메소드 <code class="docutils literal notranslate"><span class="pre">groupby(</span> <span class="pre">by=...)</span></code> 로 만들어진 데이터프레임의 자료 형식은 <code class="docutils literal notranslate"><span class="pre">DataFrameGroupBy</span></code>이다. 따라서 보통 데이터프레임에 적용되는 메소드들을 사용할 수 없는 경우가 있다.</p></li>
+</ul>
+<p>이제 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 를 연도 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>를 이용하여 그룹화된 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df_grp</span></code>을 만들어 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_grp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>그룹화된 데이터프레임 <code class="docutils literal notranslate"><span class="pre">fire_grp</span></code> 은 보통 데이터프레임과 다르게 출력해주는 내용이 없다. 그 이유는 그룹화된 데이터프레임은 그룹에 대한 정보만 가진 특별한 자료의 형식을 가진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_grp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7ff6293389d0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df_grp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.groupby.generic.DataFrameGroupBy
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id4">
+<h3>그룹별 요약<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>이제 아래의 코드가 어떤 결과를 내는지 보자.</p>
+<p>결과는 그룹으로 지정된 연도별로 모든 출동횟수를 더해서 연도별 출동횟수를 계산해준다.</p>
+<ul class="simple">
+<li><p>주의할 점은 메소드 <code class="docutils literal notranslate"><span class="pre">sum()</span></code> 에 <code class="docutils literal notranslate"><span class="pre">axis=</span></code> 선택문이 없다. 그 이유는 그룹화된 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">sum()</span></code> 메소드는 언제나 그룹에 속한 모든 자료를 더해준다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_grp</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3k/d8g2lfdn57b665jktbg_sglm0000gn/T/ipykernel_13278/3701876493.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.sum is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  df_grp.sum()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>화재발생연도</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017</th>
+      <td>37.0</td>
+      <td>246</td>
+      <td>15323890</td>
+      <td>5978</td>
+      <td>1465</td>
+      <td>1496</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>53.0</td>
+      <td>307</td>
+      <td>21239984</td>
+      <td>6368</td>
+      <td>1748</td>
+      <td>1657</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>37.0</td>
+      <td>361</td>
+      <td>92409010</td>
+      <td>5881</td>
+      <td>1476</td>
+      <td>1478</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>37.0</td>
+      <td>236</td>
+      <td>17438606</td>
+      <td>5088</td>
+      <td>1244</td>
+      <td>1274</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>37.0</td>
+      <td>280</td>
+      <td>18268346</td>
+      <td>4951</td>
+      <td>1367</td>
+      <td>1186</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>위의 결과를 보면 만들어진 데이터 프레임에서 다음과 같은 특성이 보인다.</p>
+<ul class="simple">
+<li><p>열이름이  한 칸 위로 올라가 있다. 이는 문자로 된 열이름(column name)이 비어있다는 것이다.</p></li>
+<li><p>행인덱스가 화재발생연도로 되어있으며 숫자로 된 행인덱스가 없는 것을 알 수 있다.</p></li>
+</ul>
+<p>우리가 사용할 수 있는 유용한 데이터프레임을 만들기 위해서는 인덱스의 재구성이 필요하다. 메소드 <code class="docutils literal notranslate"><span class="pre">reset_index()</span></code>를 사용해 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_grp</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3k/d8g2lfdn57b665jktbg_sglm0000gn/T/ipykernel_13278/2650935280.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.sum is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  df_grp.sum().reset_index()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>37.0</td>
+      <td>246</td>
+      <td>15323890</td>
+      <td>5978</td>
+      <td>1465</td>
+      <td>1496</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>53.0</td>
+      <td>307</td>
+      <td>21239984</td>
+      <td>6368</td>
+      <td>1748</td>
+      <td>1657</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>37.0</td>
+      <td>361</td>
+      <td>92409010</td>
+      <td>5881</td>
+      <td>1476</td>
+      <td>1478</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020</td>
+      <td>37.0</td>
+      <td>236</td>
+      <td>17438606</td>
+      <td>5088</td>
+      <td>1244</td>
+      <td>1274</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>37.0</td>
+      <td>280</td>
+      <td>18268346</td>
+      <td>4951</td>
+      <td>1367</td>
+      <td>1186</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 연도별로 출동횟수 정보를 가진 새로운 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df_year</span></code>를 만들어 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_year</span> <span class="o">=</span> <span class="n">df_grp</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_year</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3k/d8g2lfdn57b665jktbg_sglm0000gn/T/ipykernel_13278/3188372753.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.sum is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  df_year = df_grp.sum().reset_index()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>37.0</td>
+      <td>246</td>
+      <td>15323890</td>
+      <td>5978</td>
+      <td>1465</td>
+      <td>1496</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>53.0</td>
+      <td>307</td>
+      <td>21239984</td>
+      <td>6368</td>
+      <td>1748</td>
+      <td>1657</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>37.0</td>
+      <td>361</td>
+      <td>92409010</td>
+      <td>5881</td>
+      <td>1476</td>
+      <td>1478</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020</td>
+      <td>37.0</td>
+      <td>236</td>
+      <td>17438606</td>
+      <td>5088</td>
+      <td>1244</td>
+      <td>1274</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>37.0</td>
+      <td>280</td>
+      <td>18268346</td>
+      <td>4951</td>
+      <td>1367</td>
+      <td>1186</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h3>새로운 정보<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>이제 연도별로 나타난 정보에 대한 모든 열을 더하면 전체 값이 나온다. 전체 값을 새로운 변수 <code class="docutils literal notranslate"><span class="pre">total</span></code> 로 데이터프레임 <code class="docutils literal notranslate"><span class="pre">fire_year</span></code>에 추가하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_year</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_year</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_year</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+      <th>total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>37.0</td>
+      <td>246</td>
+      <td>15323890</td>
+      <td>5978</td>
+      <td>1465</td>
+      <td>1496</td>
+      <td>15335129.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>53.0</td>
+      <td>307</td>
+      <td>21239984</td>
+      <td>6368</td>
+      <td>1748</td>
+      <td>1657</td>
+      <td>21252135.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>37.0</td>
+      <td>361</td>
+      <td>92409010</td>
+      <td>5881</td>
+      <td>1476</td>
+      <td>1478</td>
+      <td>92420262.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020</td>
+      <td>37.0</td>
+      <td>236</td>
+      <td>17438606</td>
+      <td>5088</td>
+      <td>1244</td>
+      <td>1274</td>
+      <td>17448505.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>37.0</td>
+      <td>280</td>
+      <td>18268346</td>
+      <td>4951</td>
+      <td>1367</td>
+      <td>1186</td>
+      <td>18278188.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>잠깐!</strong></p>
+<p>위에서 사용한 메소드 <code class="docutils literal notranslate"><span class="pre">sum(axis=1)</span></code> 는 모든 열 들을 더해주는 작업을 수행하는데 년도를 나타내는 열 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code> 도 같이 결과에 더해졌다.
+그리고 필요하지 않은 데이터까지 더해진 것을 볼 수 있다.</p>
+<p>앞에서 본 것 처럼 <code class="docutils literal notranslate"><span class="pre">sum(axis=1)</span></code> 는 자동적으로 문자열을 포함한 열을 제외해주는데 이러한 자동 기능을 자주 이용하면 위와 같은 실수를 범할 수 있다.
+왜냐하면 오류가 나오지 않기 떄문이다.</p>
+<p><strong>안전한 프로그래밍</strong>을 위하여 합을 구할 모든 열의 이름을 가진 리스트로 슬라이싱을 먼저 하고 메소드 <code class="docutils literal notranslate"><span class="pre">sum(axis=1)</span></code> 를 적용하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_year</span><span class="p">[</span><span class="s2">&quot;여름겨울출동횟수&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_year</span><span class="p">[</span> <span class="p">[</span><span class="s2">&quot;출동횟수_겨울&quot;</span><span class="p">,</span> <span class="s2">&quot;출동횟수_여름&quot;</span><span class="p">]</span> <span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_year</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+      <th>total</th>
+      <th>여름겨울출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>37.0</td>
+      <td>246</td>
+      <td>15323890</td>
+      <td>5978</td>
+      <td>1465</td>
+      <td>1496</td>
+      <td>15335129.0</td>
+      <td>2961</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>53.0</td>
+      <td>307</td>
+      <td>21239984</td>
+      <td>6368</td>
+      <td>1748</td>
+      <td>1657</td>
+      <td>21252135.0</td>
+      <td>3405</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>37.0</td>
+      <td>361</td>
+      <td>92409010</td>
+      <td>5881</td>
+      <td>1476</td>
+      <td>1478</td>
+      <td>92420262.0</td>
+      <td>2954</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020</td>
+      <td>37.0</td>
+      <td>236</td>
+      <td>17438606</td>
+      <td>5088</td>
+      <td>1244</td>
+      <td>1274</td>
+      <td>17448505.0</td>
+      <td>2518</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>37.0</td>
+      <td>280</td>
+      <td>18268346</td>
+      <td>4951</td>
+      <td>1367</td>
+      <td>1186</td>
+      <td>18278188.0</td>
+      <td>2553</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 출동횟수에 대한 백분율(percentage)를 새롭게 만들어 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_year</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_year</span><span class="p">[</span><span class="s1">&#39;여름겨울출동횟수&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_year</span><span class="p">[</span><span class="s1">&#39;출동횟수&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">100</span>
+<span class="n">df_year</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+      <th>total</th>
+      <th>여름겨울출동횟수</th>
+      <th>percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>37.0</td>
+      <td>246</td>
+      <td>15323890</td>
+      <td>5978</td>
+      <td>1465</td>
+      <td>1496</td>
+      <td>15335129.0</td>
+      <td>2961</td>
+      <td>49.531616</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>53.0</td>
+      <td>307</td>
+      <td>21239984</td>
+      <td>6368</td>
+      <td>1748</td>
+      <td>1657</td>
+      <td>21252135.0</td>
+      <td>3405</td>
+      <td>53.470477</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>37.0</td>
+      <td>361</td>
+      <td>92409010</td>
+      <td>5881</td>
+      <td>1476</td>
+      <td>1478</td>
+      <td>92420262.0</td>
+      <td>2954</td>
+      <td>50.229553</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020</td>
+      <td>37.0</td>
+      <td>236</td>
+      <td>17438606</td>
+      <td>5088</td>
+      <td>1244</td>
+      <td>1274</td>
+      <td>17448505.0</td>
+      <td>2518</td>
+      <td>49.488994</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>37.0</td>
+      <td>280</td>
+      <td>18268346</td>
+      <td>4951</td>
+      <td>1367</td>
+      <td>1186</td>
+      <td>18278188.0</td>
+      <td>2553</td>
+      <td>51.565340</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>편의상 <code class="docutils literal notranslate"><span class="pre">percent</span></code> 열을 소수점 2째 자리에서 반올림해보자 (실습)</p>
+<details>
+<summary>접기/펼치기</summary>
+<p><code class="docutils literal notranslate"><span class="pre">df_year['percent']</span> <span class="pre">=</span> <span class="pre">df_year['percent'].round(2)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">df_year</span></code></p>
+</details>
+</section>
+<section id="id6">
+<h3>여러 개의 그룹<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>화재출동 데이터의 그룹화 기준을 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>, <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>로 적용해보자.</p>
+<p>먼저 데이터를 나누어보자. 그룹화에 사용할 5개 구를 선택해서 <code class="docutils literal notranslate"><span class="pre">df5</span></code>으로 저장한다. 이 경우 은평구를 기준으로 나머지 구들을 추출하였다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;시군구&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;은평구&#39;</span><span class="p">]</span>
+<span class="n">df5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>21</th>
+      <td>2017</td>
+      <td>은평구</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>218200</td>
+      <td>159</td>
+      <td>51</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2017</td>
+      <td>종로구</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>1077665</td>
+      <td>234</td>
+      <td>55</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2017</td>
+      <td>중구</td>
+      <td>5.0</td>
+      <td>14</td>
+      <td>485392</td>
+      <td>198</td>
+      <td>48</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2017</td>
+      <td>중랑구</td>
+      <td>2.0</td>
+      <td>5</td>
+      <td>332366</td>
+      <td>196</td>
+      <td>53</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>2018</td>
+      <td>은평구</td>
+      <td>5.0</td>
+      <td>10</td>
+      <td>419503</td>
+      <td>214</td>
+      <td>58</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>2018</td>
+      <td>종로구</td>
+      <td>14.0</td>
+      <td>22</td>
+      <td>574300</td>
+      <td>254</td>
+      <td>71</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>2018</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>23</td>
+      <td>1257005</td>
+      <td>275</td>
+      <td>76</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>2018</td>
+      <td>중랑구</td>
+      <td>2.0</td>
+      <td>8</td>
+      <td>201421</td>
+      <td>254</td>
+      <td>72</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>2019</td>
+      <td>은평구</td>
+      <td>3.0</td>
+      <td>20</td>
+      <td>2412769</td>
+      <td>196</td>
+      <td>62</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>2019</td>
+      <td>종로구</td>
+      <td>4.0</td>
+      <td>16</td>
+      <td>801094</td>
+      <td>232</td>
+      <td>60</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>2019</td>
+      <td>중구</td>
+      <td>3.0</td>
+      <td>17</td>
+      <td>74077097</td>
+      <td>213</td>
+      <td>51</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>2019</td>
+      <td>중랑구</td>
+      <td>1.0</td>
+      <td>9</td>
+      <td>322650</td>
+      <td>210</td>
+      <td>54</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>2020</td>
+      <td>은평구</td>
+      <td>2.0</td>
+      <td>6</td>
+      <td>504788</td>
+      <td>192</td>
+      <td>48</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>2020</td>
+      <td>종로구</td>
+      <td>2.0</td>
+      <td>5</td>
+      <td>639751</td>
+      <td>217</td>
+      <td>50</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>2020</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>10</td>
+      <td>1284422</td>
+      <td>185</td>
+      <td>41</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>2020</td>
+      <td>중랑구</td>
+      <td>2.0</td>
+      <td>12</td>
+      <td>229566</td>
+      <td>225</td>
+      <td>54</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>3.0</td>
+      <td>8</td>
+      <td>875722</td>
+      <td>160</td>
+      <td>57</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>0.0</td>
+      <td>12</td>
+      <td>465499</td>
+      <td>192</td>
+      <td>48</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>16</td>
+      <td>2780374</td>
+      <td>171</td>
+      <td>41</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>1.0</td>
+      <td>12</td>
+      <td>345257</td>
+      <td>213</td>
+      <td>63</td>
+      <td>59</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>인덱스를 초기화해준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>은평구</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>218200</td>
+      <td>159</td>
+      <td>51</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>종로구</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>1077665</td>
+      <td>234</td>
+      <td>55</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>중구</td>
+      <td>5.0</td>
+      <td>14</td>
+      <td>485392</td>
+      <td>198</td>
+      <td>48</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>중랑구</td>
+      <td>2.0</td>
+      <td>5</td>
+      <td>332366</td>
+      <td>196</td>
+      <td>53</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>은평구</td>
+      <td>5.0</td>
+      <td>10</td>
+      <td>419503</td>
+      <td>214</td>
+      <td>58</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>종로구</td>
+      <td>14.0</td>
+      <td>22</td>
+      <td>574300</td>
+      <td>254</td>
+      <td>71</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>23</td>
+      <td>1257005</td>
+      <td>275</td>
+      <td>76</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>중랑구</td>
+      <td>2.0</td>
+      <td>8</td>
+      <td>201421</td>
+      <td>254</td>
+      <td>72</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>은평구</td>
+      <td>3.0</td>
+      <td>20</td>
+      <td>2412769</td>
+      <td>196</td>
+      <td>62</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>종로구</td>
+      <td>4.0</td>
+      <td>16</td>
+      <td>801094</td>
+      <td>232</td>
+      <td>60</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>중구</td>
+      <td>3.0</td>
+      <td>17</td>
+      <td>74077097</td>
+      <td>213</td>
+      <td>51</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>중랑구</td>
+      <td>1.0</td>
+      <td>9</td>
+      <td>322650</td>
+      <td>210</td>
+      <td>54</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>은평구</td>
+      <td>2.0</td>
+      <td>6</td>
+      <td>504788</td>
+      <td>192</td>
+      <td>48</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>종로구</td>
+      <td>2.0</td>
+      <td>5</td>
+      <td>639751</td>
+      <td>217</td>
+      <td>50</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>10</td>
+      <td>1284422</td>
+      <td>185</td>
+      <td>41</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>중랑구</td>
+      <td>2.0</td>
+      <td>12</td>
+      <td>229566</td>
+      <td>225</td>
+      <td>54</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>3.0</td>
+      <td>8</td>
+      <td>875722</td>
+      <td>160</td>
+      <td>57</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>0.0</td>
+      <td>12</td>
+      <td>465499</td>
+      <td>192</td>
+      <td>48</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>0.0</td>
+      <td>16</td>
+      <td>2780374</td>
+      <td>171</td>
+      <td>41</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>1.0</td>
+      <td>12</td>
+      <td>345257</td>
+      <td>213</td>
+      <td>63</td>
+      <td>59</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">시군구</span></code>를 기준으로 각 열의 평균 (mean)과 합계 (sum)를 구해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>은평구</th>
+      <td>2019.0</td>
+      <td>2.6</td>
+      <td>9.4</td>
+      <td>886196.4</td>
+      <td>184.2</td>
+      <td>55.2</td>
+      <td>40.2</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>2019.0</td>
+      <td>4.2</td>
+      <td>11.6</td>
+      <td>711661.8</td>
+      <td>225.8</td>
+      <td>56.8</td>
+      <td>61.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>2019.0</td>
+      <td>1.6</td>
+      <td>16.0</td>
+      <td>15976858.0</td>
+      <td>208.4</td>
+      <td>51.4</td>
+      <td>52.6</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>2019.0</td>
+      <td>1.6</td>
+      <td>9.2</td>
+      <td>286252.0</td>
+      <td>219.6</td>
+      <td>59.2</td>
+      <td>51.6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>은평구</th>
+      <td>10095</td>
+      <td>13.0</td>
+      <td>47</td>
+      <td>4430982</td>
+      <td>921</td>
+      <td>276</td>
+      <td>201</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>10095</td>
+      <td>21.0</td>
+      <td>58</td>
+      <td>3558309</td>
+      <td>1129</td>
+      <td>284</td>
+      <td>305</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>10095</td>
+      <td>8.0</td>
+      <td>80</td>
+      <td>79884290</td>
+      <td>1042</td>
+      <td>257</td>
+      <td>263</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>10095</td>
+      <td>8.0</td>
+      <td>46</td>
+      <td>1431260</td>
+      <td>1098</td>
+      <td>296</td>
+      <td>258</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>를 기준으로 각 열의 평균 (mean)과 합계 (sum)를 구해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3k/d8g2lfdn57b665jktbg_sglm0000gn/T/ipykernel_13278/890159447.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.mean is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  df5.groupby( by =[&quot;화재발생연도&quot;]).mean()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>화재발생연도</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017</th>
+      <td>2.00</td>
+      <td>6.25</td>
+      <td>528405.75</td>
+      <td>196.75</td>
+      <td>51.75</td>
+      <td>46.50</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>5.25</td>
+      <td>15.75</td>
+      <td>613057.25</td>
+      <td>249.25</td>
+      <td>69.25</td>
+      <td>61.50</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>2.75</td>
+      <td>15.50</td>
+      <td>19403402.50</td>
+      <td>212.75</td>
+      <td>56.75</td>
+      <td>46.25</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>1.50</td>
+      <td>8.25</td>
+      <td>664631.75</td>
+      <td>204.75</td>
+      <td>48.25</td>
+      <td>51.50</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>1.00</td>
+      <td>12.00</td>
+      <td>1116713.00</td>
+      <td>184.00</td>
+      <td>52.25</td>
+      <td>51.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3k/d8g2lfdn57b665jktbg_sglm0000gn/T/ipykernel_13278/2243519833.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.sum is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  df5.groupby( by =[&quot;화재발생연도&quot;]).sum()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>화재발생연도</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017</th>
+      <td>8.0</td>
+      <td>25</td>
+      <td>2113623</td>
+      <td>787</td>
+      <td>207</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>21.0</td>
+      <td>63</td>
+      <td>2452229</td>
+      <td>997</td>
+      <td>277</td>
+      <td>246</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>11.0</td>
+      <td>62</td>
+      <td>77613610</td>
+      <td>851</td>
+      <td>227</td>
+      <td>185</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>6.0</td>
+      <td>33</td>
+      <td>2658527</td>
+      <td>819</td>
+      <td>193</td>
+      <td>206</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>4.0</td>
+      <td>48</td>
+      <td>4466852</td>
+      <td>736</td>
+      <td>209</td>
+      <td>204</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>그룹화 기준을 2개 이상으로 줄 수도 있다. 이 경우 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>와 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>로 해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">,</span> <span class="s2">&quot;화재발생연도&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>시군구</th>
+      <th>화재발생연도</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">은평구</th>
+      <th>2017</th>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>218200.0</td>
+      <td>159.0</td>
+      <td>51.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>5.0</td>
+      <td>10.0</td>
+      <td>419503.0</td>
+      <td>214.0</td>
+      <td>58.0</td>
+      <td>47.0</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>3.0</td>
+      <td>20.0</td>
+      <td>2412769.0</td>
+      <td>196.0</td>
+      <td>62.0</td>
+      <td>34.0</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>2.0</td>
+      <td>6.0</td>
+      <td>504788.0</td>
+      <td>192.0</td>
+      <td>48.0</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>3.0</td>
+      <td>8.0</td>
+      <td>875722.0</td>
+      <td>160.0</td>
+      <td>57.0</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">종로구</th>
+      <th>2017</th>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1077665.0</td>
+      <td>234.0</td>
+      <td>55.0</td>
+      <td>69.0</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>14.0</td>
+      <td>22.0</td>
+      <td>574300.0</td>
+      <td>254.0</td>
+      <td>71.0</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>4.0</td>
+      <td>16.0</td>
+      <td>801094.0</td>
+      <td>232.0</td>
+      <td>60.0</td>
+      <td>63.0</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>639751.0</td>
+      <td>217.0</td>
+      <td>50.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>0.0</td>
+      <td>12.0</td>
+      <td>465499.0</td>
+      <td>192.0</td>
+      <td>48.0</td>
+      <td>54.0</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">중구</th>
+      <th>2017</th>
+      <td>5.0</td>
+      <td>14.0</td>
+      <td>485392.0</td>
+      <td>198.0</td>
+      <td>48.0</td>
+      <td>47.0</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>0.0</td>
+      <td>23.0</td>
+      <td>1257005.0</td>
+      <td>275.0</td>
+      <td>76.0</td>
+      <td>74.0</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>3.0</td>
+      <td>17.0</td>
+      <td>74077097.0</td>
+      <td>213.0</td>
+      <td>51.0</td>
+      <td>39.0</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>1284422.0</td>
+      <td>185.0</td>
+      <td>41.0</td>
+      <td>54.0</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>2780374.0</td>
+      <td>171.0</td>
+      <td>41.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">중랑구</th>
+      <th>2017</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>332366.0</td>
+      <td>196.0</td>
+      <td>53.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>2.0</td>
+      <td>8.0</td>
+      <td>201421.0</td>
+      <td>254.0</td>
+      <td>72.0</td>
+      <td>55.0</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>1.0</td>
+      <td>9.0</td>
+      <td>322650.0</td>
+      <td>210.0</td>
+      <td>54.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>229566.0</td>
+      <td>225.0</td>
+      <td>54.0</td>
+      <td>57.0</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>1.0</td>
+      <td>12.0</td>
+      <td>345257.0</td>
+      <td>213.0</td>
+      <td>63.0</td>
+      <td>59.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>그룹화 기준을 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>, <code class="docutils literal notranslate"><span class="pre">시군구</span></code>로 바꾸어보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span> <span class="n">by</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;화재발생연도&quot;</span><span class="p">,</span> <span class="s2">&quot;시군구&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">2017</th>
+      <th>은평구</th>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>218200.0</td>
+      <td>159.0</td>
+      <td>51.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1077665.0</td>
+      <td>234.0</td>
+      <td>55.0</td>
+      <td>69.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>5.0</td>
+      <td>14.0</td>
+      <td>485392.0</td>
+      <td>198.0</td>
+      <td>48.0</td>
+      <td>47.0</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>332366.0</td>
+      <td>196.0</td>
+      <td>53.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2018</th>
+      <th>은평구</th>
+      <td>5.0</td>
+      <td>10.0</td>
+      <td>419503.0</td>
+      <td>214.0</td>
+      <td>58.0</td>
+      <td>47.0</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>14.0</td>
+      <td>22.0</td>
+      <td>574300.0</td>
+      <td>254.0</td>
+      <td>71.0</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>0.0</td>
+      <td>23.0</td>
+      <td>1257005.0</td>
+      <td>275.0</td>
+      <td>76.0</td>
+      <td>74.0</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>2.0</td>
+      <td>8.0</td>
+      <td>201421.0</td>
+      <td>254.0</td>
+      <td>72.0</td>
+      <td>55.0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2019</th>
+      <th>은평구</th>
+      <td>3.0</td>
+      <td>20.0</td>
+      <td>2412769.0</td>
+      <td>196.0</td>
+      <td>62.0</td>
+      <td>34.0</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>4.0</td>
+      <td>16.0</td>
+      <td>801094.0</td>
+      <td>232.0</td>
+      <td>60.0</td>
+      <td>63.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>3.0</td>
+      <td>17.0</td>
+      <td>74077097.0</td>
+      <td>213.0</td>
+      <td>51.0</td>
+      <td>39.0</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>1.0</td>
+      <td>9.0</td>
+      <td>322650.0</td>
+      <td>210.0</td>
+      <td>54.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2020</th>
+      <th>은평구</th>
+      <td>2.0</td>
+      <td>6.0</td>
+      <td>504788.0</td>
+      <td>192.0</td>
+      <td>48.0</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>639751.0</td>
+      <td>217.0</td>
+      <td>50.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>1284422.0</td>
+      <td>185.0</td>
+      <td>41.0</td>
+      <td>54.0</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>229566.0</td>
+      <td>225.0</td>
+      <td>54.0</td>
+      <td>57.0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2021</th>
+      <th>은평구</th>
+      <td>3.0</td>
+      <td>8.0</td>
+      <td>875722.0</td>
+      <td>160.0</td>
+      <td>57.0</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>0.0</td>
+      <td>12.0</td>
+      <td>465499.0</td>
+      <td>192.0</td>
+      <td>48.0</td>
+      <td>54.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>2780374.0</td>
+      <td>171.0</td>
+      <td>41.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>1.0</td>
+      <td>12.0</td>
+      <td>345257.0</td>
+      <td>213.0</td>
+      <td>63.0</td>
+      <td>59.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id7">
+<h3>다양한 집계들<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>셈 척도</strong>: 갯수 (count), 합산 (sum)</p></li>
+<li><p><strong>중심척도</strong>: 평균 (mean), 중위수 (median)</p></li>
+<li><p><strong>산포척도</strong>: 최댓값/최솟값 (max/min), 분산/표준편차 (var, std), 백분위 (quantile)</p></li>
+<li><p>기초통계량 (describe)</p></li>
+</ul>
+<p>위와 같이 여러 집계들이 있는데, 자료가 범주형인지 수치형인지에 따라 그 쓰임이 나뉜다.</p>
+<ul class="simple">
+<li><p><strong>범주형 자료</strong>: 셈 (count, percent)</p></li>
+<li><p><strong>수치형 자료</strong>: 셈 (sum), 중심 (mean, median), 산포 (man, min, var, std, quantile)</p></li>
+</ul>
+<p>예를 들어, 화재출동 데이터의 경우 자료의 형태에 따라 다음과 같이 열을 나눌 수 있다.</p>
+<ul class="simple">
+<li><p><strong>범주형 자료</strong>: <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>와 <code class="docutils literal notranslate"><span class="pre">시군구</span></code></p></li>
+<li><p><strong>수치형 자료</strong>: <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>와 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>를 제외한 나머지 열</p></li>
+</ul>
+<p>그러면 그룹화와 집계를 위해 다음과 같은 문제를 고려하자</p>
+<ul class="simple">
+<li><p><strong>문제</strong>: 시군구별 평균 재산피해금액과 총 출동횟수</p></li>
+</ul>
+<p>이 문제를 해결하기 위해 다음과 같이 설계할 수 있다.</p>
+<ul class="simple">
+<li><p><strong>그룹화</strong>: 시군구</p></li>
+<li><p><strong>계산하고 싶은 열</strong>: 재산피해금액, 출동횟수</p></li>
+<li><p><strong>집계함수</strong>: sum, mean</p></li>
+</ul>
+<p>그러면 <code class="docutils literal notranslate"><span class="pre">df5</span></code>를 다시 집계해보자. 방금 전에 했던 방법과 같은 방법으로 각 집계를 구하면 제대로 집계가 이루어지지 않거나 불필요한 정보가 생긴다는 문제가 있었다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;시군구&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>은평구</th>
+      <td>10095</td>
+      <td>13.0</td>
+      <td>47</td>
+      <td>4430982</td>
+      <td>921</td>
+      <td>276</td>
+      <td>201</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>10095</td>
+      <td>21.0</td>
+      <td>58</td>
+      <td>3558309</td>
+      <td>1129</td>
+      <td>284</td>
+      <td>305</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>10095</td>
+      <td>8.0</td>
+      <td>80</td>
+      <td>79884290</td>
+      <td>1042</td>
+      <td>257</td>
+      <td>263</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>10095</td>
+      <td>8.0</td>
+      <td>46</td>
+      <td>1431260</td>
+      <td>1098</td>
+      <td>296</td>
+      <td>258</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;시군구&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>부상자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>출동횟수_겨울</th>
+      <th>출동횟수_여름</th>
+    </tr>
+    <tr>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>은평구</th>
+      <td>2019.0</td>
+      <td>2.6</td>
+      <td>9.4</td>
+      <td>886196.4</td>
+      <td>184.2</td>
+      <td>55.2</td>
+      <td>40.2</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>2019.0</td>
+      <td>4.2</td>
+      <td>11.6</td>
+      <td>711661.8</td>
+      <td>225.8</td>
+      <td>56.8</td>
+      <td>61.0</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>2019.0</td>
+      <td>1.6</td>
+      <td>16.0</td>
+      <td>15976858.0</td>
+      <td>208.4</td>
+      <td>51.4</td>
+      <td>52.6</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>2019.0</td>
+      <td>1.6</td>
+      <td>9.2</td>
+      <td>286252.0</td>
+      <td>219.6</td>
+      <td>59.2</td>
+      <td>51.6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이처럼 한번에 여러 컬럼을 다르게 연산해야 할 때가 있다. 다음과 같이 <code class="docutils literal notranslate"><span class="pre">agg</span></code>메소드를 사용하면 가능하다. 이 때 <code class="docutils literal notranslate"><span class="pre">{계산하고</span> <span class="pre">싶은</span> <span class="pre">열</span> <span class="pre">이름:</span> <span class="pre">집계함수}</span></code>와 같이 입력한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;시군구&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;재산피해금액&quot;</span> <span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;출동횟수&quot;</span> <span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+    <tr>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>은평구</th>
+      <td>886196.4</td>
+      <td>921</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>711661.8</td>
+      <td>1129</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>15976858.0</td>
+      <td>1042</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>286252.0</td>
+      <td>1098</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이번에는 <strong>연도와 시군구별 평균 재산피해금액과 총 출동횟수</strong>를 계산해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">,</span> <span class="s1">&#39;시군구&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;재산피해금액&quot;</span> <span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;출동횟수&quot;</span> <span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+    <tr>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">2017</th>
+      <th>은평구</th>
+      <td>218200.0</td>
+      <td>159</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>1077665.0</td>
+      <td>234</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>485392.0</td>
+      <td>198</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>332366.0</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2018</th>
+      <th>은평구</th>
+      <td>419503.0</td>
+      <td>214</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>574300.0</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>1257005.0</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>201421.0</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2019</th>
+      <th>은평구</th>
+      <td>2412769.0</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>801094.0</td>
+      <td>232</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>74077097.0</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>322650.0</td>
+      <td>210</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2020</th>
+      <th>은평구</th>
+      <td>504788.0</td>
+      <td>192</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>639751.0</td>
+      <td>217</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>1284422.0</td>
+      <td>185</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>229566.0</td>
+      <td>225</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2021</th>
+      <th>은평구</th>
+      <td>875722.0</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <th>종로구</th>
+      <td>465499.0</td>
+      <td>192</td>
+    </tr>
+    <tr>
+      <th>중구</th>
+      <td>2780374.0</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <th>중랑구</th>
+      <td>345257.0</td>
+      <td>213</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이렇게 만들어진 집계데이터를 활용해보자.</p>
+<p>집계를 하면서 열 이름이 행의 인덱스로 들어갔다. 이를 <code class="docutils literal notranslate"><span class="pre">reset_index</span></code>로 인덱스 초기화를 해서 다시 열 이름으로 만들어 활용한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span> <span class="o">=</span> <span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">,</span> <span class="s1">&#39;시군구&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;재산피해금액&quot;</span> <span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;출동횟수&quot;</span> <span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span> <span class="o">=</span> <span class="n">df_summ</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_summ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>은평구</td>
+      <td>218200.0</td>
+      <td>159</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>종로구</td>
+      <td>1077665.0</td>
+      <td>234</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>중구</td>
+      <td>485392.0</td>
+      <td>198</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>중랑구</td>
+      <td>332366.0</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>은평구</td>
+      <td>419503.0</td>
+      <td>214</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>종로구</td>
+      <td>574300.0</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>중구</td>
+      <td>1257005.0</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>중랑구</td>
+      <td>201421.0</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>은평구</td>
+      <td>2412769.0</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>종로구</td>
+      <td>801094.0</td>
+      <td>232</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>중구</td>
+      <td>74077097.0</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>중랑구</td>
+      <td>322650.0</td>
+      <td>210</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>은평구</td>
+      <td>504788.0</td>
+      <td>192</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>종로구</td>
+      <td>639751.0</td>
+      <td>217</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>중구</td>
+      <td>1284422.0</td>
+      <td>185</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>중랑구</td>
+      <td>229566.0</td>
+      <td>225</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>은평구</td>
+      <td>875722.0</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>종로구</td>
+      <td>465499.0</td>
+      <td>192</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>중구</td>
+      <td>2780374.0</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>중랑구</td>
+      <td>345257.0</td>
+      <td>213</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>요약<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>여러 개의 열을 이용하여 새로운 열을 만드는 방법은 열을 선택하고 산술적인 연산을 적용해 준다.</p></li>
+<li><p>열에 대한 요약 통계는 다양한 메소드(예를 들어 <code class="docutils literal notranslate"><span class="pre">sum()</span></code>, <code class="docutils literal notranslate"><span class="pre">mean()</span></code> 등)을 적용하며 선택문 <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> 을 이용한다.</p></li>
+<li><p>자료의 그룹화는 <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 를 사용하며 이를 통해 그룹별로 요약할 수 있다.</p></li>
+</ul>
+<p><strong>함께해봅시다</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>자료에 대해 다음의 문제를 해결해보자.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">재산피해금액</span></code>의 <code class="docutils literal notranslate"><span class="pre">총합</span></code>이 가장 많은 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>와 <code class="docutils literal notranslate"><span class="pre">재산피해금액</span></code>의 <code class="docutils literal notranslate"><span class="pre">평균</span></code>이 가장 큰 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>는 어디인가요? 동일한 시군구인가요?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">출동횟수</span></code>가 가장 많았던 때는 언제, 어느 구인가요? <code class="docutils literal notranslate"><span class="pre">00년도</span> <span class="pre">00구</span></code>로 알려주세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">여름</span></code>과 <code class="docutils literal notranslate"><span class="pre">겨울</span></code>을 합산하여 가장 출동이 많았던 때는 어느 구인가요? 그리고 <code class="docutils literal notranslate"><span class="pre">출동횟수</span></code>의 편차가 가장 큰 구는 어느 구인가요? <code class="docutils literal notranslate"><span class="pre">00구</span></code>로 알려주세요.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/day2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="day1_summary.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.4. </span>데이터프레임 실습 1: 정리와 요약</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dataframe-merge.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.6. </span>데이터프레임의 결합</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">그룹별 요약</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">새로운 정보</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">여러 개의 그룹</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">다양한 집계들</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">요약</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

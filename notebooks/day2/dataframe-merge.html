@@ -1,0 +1,4646 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2.6. 데이터프레임의 결합 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day2/dataframe-merge';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.7. 데이터프레임 실습 2: 그룹 요약 및 결합" href="../day3/practice_day3.html" />
+    <link rel="prev" title="2.5. 데이터프레임의 그룹별 요약" href="dataframe-group.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">파이썬 프로그래밍의 기초와 데이터 활용 방법</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    개요
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.6. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notebooks/day2/dataframe-merge.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/UOS-Bigdata/bigdatabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/day2/dataframe-merge.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>데이터프레임의 결합</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">식별자의 불일치</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">요약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">화재출동 데이터와 화재원인 데이터의 결합</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2.6. </span>데이터프레임의 결합<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>데이터를 이용하여 분석을 하는 경우 사용할 자료가 두 개 이상이 경우는 매우 흔한 일이다. 실제로 데이터 분석에서 하나의 자료만 가지고 수행하는 일은 매우 드물다.</p>
+<p>여러 개의 자료를 사용하는 경우 두 개의 자료를 서로 결합하여 새로운 자료를 만들어야 하는 경우가 많다.</p>
+<p>이 절에서는 데이터프레임을 결합하는 예시를 살펴볼 것이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h2>간단한 결합<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>두 개의 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 가 다음과 같이 주어졌다고 하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;철수&quot;</span><span class="p">,</span> <span class="s2">&quot;영이&quot;</span><span class="p">,</span> <span class="s2">&quot;John&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;age&quot;</span>  <span class="p">:</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>19</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;철수&quot;</span><span class="p">,</span> <span class="s2">&quot;영이&quot;</span><span class="p">,</span> <span class="s2">&quot;John&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;sex&quot;</span>  <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>M</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 에는 같은 이름을 가지는 열 <code class="docutils literal notranslate"><span class="pre">name</span></code> 이 있다. 우리는 두 개의 데이터프레임을 합쳐서 나이(<code class="docutils literal notranslate"><span class="pre">age</span></code>)와 성(<code class="docutils literal notranslate"><span class="pre">sex</span></code>) 이 모두 포함된 새로운 데이터프레임을 만들려고 한다.</p>
+<p>이렇게 공통으로 포함된 열의 정보를 이용하여 두 개의 데이터프레임을 결합하려면  pandas 라이브러리의 <code class="docutils literal notranslate"><span class="pre">merge()</span></code> 함수 를 이용한다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">merge()</span></code> 함수의 첫 번째(<strong>왼쪽</strong>)와 두 번째 인자(<strong>오른쪽</strong>)에는 결합할 데이터프레임의 이름을 넣어준다.</p></li>
+<li><p>앞에 <code class="docutils literal notranslate"><span class="pre">pd.</span></code> 를 붙여서 <code class="docutils literal notranslate"><span class="pre">pd.merge()</span></code> 로 사용하는 것은 함수 <code class="docutils literal notranslate"><span class="pre">merge()</span></code> 가 pandas 라이브러리에 있다는 것을 알려준다.</p></li>
+<li><p>선택문 <code class="docutils literal notranslate"><span class="pre">on=</span></code> 에 두 데이터프레임에 <strong>결합의 기준이 되는 열이름</strong>을 문자열로 지정해준다. 결합의 기준으로 사용되는 열이름은 두 개의 데이터프레임에 모두 존재해야 한다.</p></li>
+<li><p>자료의 결합에 사용되는 공통으로 포함된 열의 내용을 <strong>식별자(key, identifier,..)</strong> 라고 부른다. 이 예제에서 식별자는 사람의 이름이다.</p></li>
+</ul>
+<p>다음 코드의 결과를 먼저 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>19</td>
+      <td>M</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>두 개의 데이터프레임이 지정된 열 <code class="docutils literal notranslate"><span class="pre">name</span></code> 에 의하여 결합되어 나이(<code class="docutils literal notranslate"><span class="pre">age</span></code>)와 성(<code class="docutils literal notranslate"><span class="pre">sex</span></code>)이 같이 나타나게 된다.</p>
+</section>
+<section id="id3">
+<h2>식별자의 불일치<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>만약 두 개의 데이터프레임에 있는 식별자에 포함된 자료가 다르면 어떻게 될까?</p>
+<p>다음과 같이 <code class="docutils literal notranslate"><span class="pre">john</span></code> 의 자료가 빠져 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df3</span></code>을  <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 결합해 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;철수&quot;</span><span class="p">,</span> <span class="s2">&quot;영이&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;weight&quot;</span>  <span class="p">:</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">44</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>44</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>19</td>
+      <td>M</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>위의 결과에서 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 자료가 사라져 버렸다. 물론 몸무게 값이 없는 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 자료가 필요없을 수도 있지만 많은 경우 자료를 유지해야 한다.</p>
+<p>이렇게 식별자의 항목이 다른 경우, 결합의 기준이 되는 식별자를 데이터프레임의 위치로 지정할 수 있다. 위에서 함수 <code class="docutils literal notranslate"><span class="pre">merge()</span></code>를 설명할 때 사용되는 데이터프레임의 위치에 따라서 <strong>왼쪽</strong> (첫 번째 인자) 과  <strong>오른쪽</strong> (두 번째 인자)으로 나타냈다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="o">....</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>이제 결합시 기준이 되는 식별자가 왼쪽에 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 에 있다는 것을 선택명령문 <code class="docutils literal notranslate"><span class="pre">how='left'</span></code> 로 알려주자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df3</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23</td>
+      <td>55.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>19</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 자료가 나타나고 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 키는 결측값(<code class="docutils literal notranslate"><span class="pre">NaN</span></code>) 으로 표시된다.</p>
+<p>만약 두 개의 식별자에 서로 다른 내용이 나타나면 어떻게 될까?</p>
+<p>이제 새로운 사람 <code class="docutils literal notranslate"><span class="pre">흥민</span></code>의 자료를 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df4</span></code>를 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 결합하는 예를 살펴보자. 아래 코드에서 선택명령문 <code class="docutils literal notranslate"><span class="pre">how=</span></code> 에 지정된 문자열에 따라서 결합의 결과가 어떻게 다른지 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;철수&quot;</span><span class="p">,</span> <span class="s2">&quot;영이&quot;</span><span class="p">,</span> <span class="s2">&quot;흥민&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;height&quot;</span>  <span class="p">:</span> <span class="p">[</span><span class="mi">167</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">183</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>흥민</td>
+      <td>183</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df4</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>  <span class="c1"># 식별자는 왼쪽 데이터프레임에만 있는 것으로</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23</td>
+      <td>167.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34</td>
+      <td>175.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>19</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df4</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span> <span class="c1"># 식별자는 오른쪽 데이터프레임만 있는 것으로</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23.0</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34.0</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>흥민</td>
+      <td>NaN</td>
+      <td>183</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df4</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span> <span class="c1"># 식별자는 두 데이터프레임에 공통인 것</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34</td>
+      <td>175</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df4</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>  <span class="c1"># 식별자는 두 데이터프레임의 모든 것</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>철수</td>
+      <td>23.0</td>
+      <td>167.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>영이</td>
+      <td>34.0</td>
+      <td>175.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>19.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>흥민</td>
+      <td>NaN</td>
+      <td>183.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h2>요약<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>두 개의 데이터프라임을 결합하는 경우 pandas 라이브러리의 함수 <code class="docutils literal notranslate"><span class="pre">merge()</span></code> 를 사용하며 식별자가 포함된 공통의 열은 <code class="docutils literal notranslate"><span class="pre">on=</span></code> 으로 지정한다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>이제 두 개의 데이터 프레임을 결합할 때 식별자를 선택하는 방법을 요약해 보자.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">how='left'</span></code> : 식별자는 왼쪽 데이터프레임에만 있는 것으로 선택</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='right'</span></code> : 식별자는 오른쪽 데이터프레임에만 있는 것으로 선택</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='inner'</span></code> : 식별자는 두 데이터프레임에 공통인 것으로 선택</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='outer'</span></code> : 식별자는 두 데이터프레임에 나타난 모든 것으로 선택</p></li>
+</ul>
+<p>식별자를 선택하는 선택명령문 <code class="docutils literal notranslate"><span class="pre">how=</span></code> 을 지정하지 않으면 디폴트는 방법은 <code class="docutils literal notranslate"><span class="pre">how='inner</span></code> 이다.</p>
+</section>
+<section id="id5">
+<h2>화재출동 데이터와 화재원인 데이터의 결합<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>이번에는 화재출동 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)와 화재원인 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_reason_summary.csv</span></code>) 을 결합하는 작업을 해보려고 한다. 2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 관악구) 정보가 있습니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_reason_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>185</td>
+      <td>35</td>
+      <td>39</td>
+      <td>150</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>144</td>
+      <td>26</td>
+      <td>22</td>
+      <td>88</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>113</td>
+      <td>24</td>
+      <td>14</td>
+      <td>71</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>100</td>
+      <td>11</td>
+      <td>9</td>
+      <td>42</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>111</td>
+      <td>37</td>
+      <td>14</td>
+      <td>68</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>180</td>
+      <td>30</td>
+      <td>13</td>
+      <td>146</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>113</td>
+      <td>17</td>
+      <td>13</td>
+      <td>55</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>111</td>
+      <td>19</td>
+      <td>13</td>
+      <td>59</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>76</td>
+      <td>12</td>
+      <td>5</td>
+      <td>38</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>166</td>
+      <td>27</td>
+      <td>9</td>
+      <td>53</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>먼저 결합의 기준으로 삼을 열을 결정해야 한다. 우리의 데이터로는 <code class="docutils literal notranslate"><span class="pre">연도</span></code>와 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 있다.</p>
+<p>그런데 첫 번째 데이터에는 열 이름이 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>, <code class="docutils literal notranslate"><span class="pre">시군구</span></code>라고 되어있고, 두 번째 데이터에는 <code class="docutils literal notranslate"><span class="pre">연도</span></code>와 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code>으로 저장되어 있다. 데이터를 결합할 때에는 두 데이터의 기준 열 이름을 동일하게 맞춰주어야 한다. 따라서 첫 번째 데이터의 열 이름을 두 번째 데이터의 열 이름과 동일하게 바꿔주자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;화재발생연도&#39;, &#39;시군구&#39;, &#39;사망자수&#39;, &#39;재산피해금액&#39;, &#39;출동횟수&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;연도&#39;</span><span class="p">,</span> <span class="s1">&#39;시군구명&#39;</span><span class="p">,</span> <span class="s1">&#39;사망자수&#39;</span><span class="p">,</span> <span class="s1">&#39;재산피해금액&#39;</span><span class="p">,</span> <span class="s1">&#39;출동횟수&#39;</span><span class="p">]</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 에는 같은 이름을 가지는 열 <code class="docutils literal notranslate"><span class="pre">연도</span></code> 와 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code> 이 있다. 우리는 두 개의 데이터프레임을 합쳐 출동현황과 화재원인이 모두 포함된 새로운 데이터프레임을 만들것이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+      <td>185</td>
+      <td>35</td>
+      <td>39</td>
+      <td>150</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+      <td>113</td>
+      <td>24</td>
+      <td>14</td>
+      <td>71</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+      <td>100</td>
+      <td>11</td>
+      <td>9</td>
+      <td>42</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+      <td>144</td>
+      <td>26</td>
+      <td>22</td>
+      <td>88</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+      <td>111</td>
+      <td>37</td>
+      <td>14</td>
+      <td>68</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+      <td>180</td>
+      <td>30</td>
+      <td>13</td>
+      <td>146</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+      <td>111</td>
+      <td>19</td>
+      <td>13</td>
+      <td>59</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+      <td>76</td>
+      <td>12</td>
+      <td>5</td>
+      <td>38</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+      <td>113</td>
+      <td>17</td>
+      <td>13</td>
+      <td>55</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+      <td>166</td>
+      <td>27</td>
+      <td>9</td>
+      <td>53</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>두 개의 데이터프레임이 지정된 열 <code class="docutils literal notranslate"><span class="pre">연도</span></code>와 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code> 에 의하여 결합되어 나타나게 된다.</p>
+<p>만약 두 개의 데이터프레임에 있는 식별자에 포함된 자료가 다르면 어떻게 될까? 다음 상황을 고려해보자.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 자료가 빠져 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1_no2017</span></code>을 새로 만들자.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df2</span></code> 과 결합해 보자.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1_no2017</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;연도&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2017</span><span class="p">]</span>
+<span class="n">df1_no2017</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+      <td>180</td>
+      <td>30</td>
+      <td>13</td>
+      <td>146</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+      <td>111</td>
+      <td>19</td>
+      <td>13</td>
+      <td>59</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+      <td>76</td>
+      <td>12</td>
+      <td>5</td>
+      <td>38</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+      <td>113</td>
+      <td>17</td>
+      <td>13</td>
+      <td>55</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+      <td>166</td>
+      <td>27</td>
+      <td>9</td>
+      <td>53</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>위의 결과에서 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 자료가 사라져 버렸다. 물론 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code>의 자료가 필요없을 수도 있지만 많은 경우 자료를 유지해야 한다.</p>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">how</span></code> 옵션을 바꾸어 결합 시 기준이 되는 식별자에 조건을 바꾸어보자.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">how</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="merge" src="../../_images/merge.png" /></p>
+<p>먼저 결합시 기준이 되는 식별자가 오른쪽에 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 에 있다는 것을 선택명령문 <code class="docutils literal notranslate"><span class="pre">how='right'</span></code> 로 알려주자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>185</td>
+      <td>35</td>
+      <td>39</td>
+      <td>150</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144</td>
+      <td>26</td>
+      <td>22</td>
+      <td>88</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>113</td>
+      <td>24</td>
+      <td>14</td>
+      <td>71</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>100</td>
+      <td>11</td>
+      <td>9</td>
+      <td>42</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>111</td>
+      <td>37</td>
+      <td>14</td>
+      <td>68</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983.0</td>
+      <td>436.0</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401.0</td>
+      <td>383.0</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625.0</td>
+      <td>324.0</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838.0</td>
+      <td>203.0</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562.0</td>
+      <td>337.0</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681.0</td>
+      <td>456.0</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297.0</td>
+      <td>331.0</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359.0</td>
+      <td>254.0</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805.0</td>
+      <td>167.0</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586.0</td>
+      <td>311.0</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556.0</td>
+      <td>387.0</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966.0</td>
+      <td>212.0</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839.0</td>
+      <td>221.0</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380.0</td>
+      <td>186.0</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149.0</td>
+      <td>219.0</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949.0</td>
+      <td>391.0</td>
+      <td>180</td>
+      <td>30</td>
+      <td>13</td>
+      <td>146</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614.0</td>
+      <td>223.0</td>
+      <td>113</td>
+      <td>17</td>
+      <td>13</td>
+      <td>55</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741.0</td>
+      <td>211.0</td>
+      <td>111</td>
+      <td>19</td>
+      <td>13</td>
+      <td>59</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205.0</td>
+      <td>146.0</td>
+      <td>76</td>
+      <td>12</td>
+      <td>5</td>
+      <td>38</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294.0</td>
+      <td>259.0</td>
+      <td>166</td>
+      <td>27</td>
+      <td>9</td>
+      <td>53</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 자료가 나타나고 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 화재 원인 부분이 결측값(<code class="docutils literal notranslate"><span class="pre">NaN</span></code>) 으로 표시된다.</p>
+<p>만약 두 개의 식별자에 서로 다른 내용이 나타나면 어떻게 될까? 다음과 같이 서로 다른 연도를 가진 데이터를 결합해보자.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2018~2021년도</span></code>의 자료를 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df4</span></code>를 새로 만든다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2017~2020년도</span></code>의 자료를 가진 데이터프레임<code class="docutils literal notranslate"><span class="pre">df1</span></code>과 결합한다.</p></li>
+</ul>
+<p>아래 코드에서 선택명령문 <code class="docutils literal notranslate"><span class="pre">how=</span></code> 에 지정된 문자열에 따라서 결합의 결과가 어떻게 다른지 확인한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2_no2021</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;연도&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2021</span><span class="p">]</span>
+<span class="n">df2_no2021</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>185</td>
+      <td>35</td>
+      <td>39</td>
+      <td>150</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>144</td>
+      <td>26</td>
+      <td>22</td>
+      <td>88</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>113</td>
+      <td>24</td>
+      <td>14</td>
+      <td>71</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>100</td>
+      <td>11</td>
+      <td>9</td>
+      <td>42</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>111</td>
+      <td>37</td>
+      <td>14</td>
+      <td>68</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2_no2021</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>  <span class="c1"># 식별자는 왼쪽 데이터프레임에만 있는 것으로</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+      <td>216.0</td>
+      <td>32.0</td>
+      <td>24.0</td>
+      <td>131.0</td>
+      <td>29.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+      <td>174.0</td>
+      <td>14.0</td>
+      <td>15.0</td>
+      <td>87.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+      <td>123.0</td>
+      <td>14.0</td>
+      <td>7.0</td>
+      <td>46.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+      <td>231.0</td>
+      <td>24.0</td>
+      <td>17.0</td>
+      <td>89.0</td>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+      <td>209.0</td>
+      <td>30.0</td>
+      <td>21.0</td>
+      <td>71.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+      <td>202.0</td>
+      <td>20.0</td>
+      <td>20.0</td>
+      <td>158.0</td>
+      <td>52.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+      <td>132.0</td>
+      <td>17.0</td>
+      <td>8.0</td>
+      <td>73.0</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+      <td>100.0</td>
+      <td>15.0</td>
+      <td>6.0</td>
+      <td>38.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+      <td>147.0</td>
+      <td>22.0</td>
+      <td>19.0</td>
+      <td>81.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+      <td>187.0</td>
+      <td>34.0</td>
+      <td>12.0</td>
+      <td>60.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+      <td>167.0</td>
+      <td>21.0</td>
+      <td>21.0</td>
+      <td>151.0</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+      <td>132.0</td>
+      <td>12.0</td>
+      <td>9.0</td>
+      <td>49.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+      <td>120.0</td>
+      <td>17.0</td>
+      <td>5.0</td>
+      <td>35.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+      <td>78.0</td>
+      <td>15.0</td>
+      <td>18.0</td>
+      <td>63.0</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+      <td>116.0</td>
+      <td>19.0</td>
+      <td>14.0</td>
+      <td>62.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2_no2021</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span> <span class="c1"># 식별자는 오른쪽 데이터프레임만 있는 것으로</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>185</td>
+      <td>35</td>
+      <td>39</td>
+      <td>150</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144</td>
+      <td>26</td>
+      <td>22</td>
+      <td>88</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>113</td>
+      <td>24</td>
+      <td>14</td>
+      <td>71</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>100</td>
+      <td>11</td>
+      <td>9</td>
+      <td>42</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>111</td>
+      <td>37</td>
+      <td>14</td>
+      <td>68</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983.0</td>
+      <td>436.0</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401.0</td>
+      <td>383.0</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625.0</td>
+      <td>324.0</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838.0</td>
+      <td>203.0</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562.0</td>
+      <td>337.0</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681.0</td>
+      <td>456.0</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297.0</td>
+      <td>331.0</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359.0</td>
+      <td>254.0</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805.0</td>
+      <td>167.0</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586.0</td>
+      <td>311.0</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556.0</td>
+      <td>387.0</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966.0</td>
+      <td>212.0</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839.0</td>
+      <td>221.0</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380.0</td>
+      <td>186.0</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149.0</td>
+      <td>219.0</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2_no2021</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span> <span class="c1"># 식별자는 두 데이터프레임에 공통인 것</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+      <td>216</td>
+      <td>32</td>
+      <td>24</td>
+      <td>131</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+      <td>174</td>
+      <td>14</td>
+      <td>15</td>
+      <td>87</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+      <td>123</td>
+      <td>14</td>
+      <td>7</td>
+      <td>46</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+      <td>231</td>
+      <td>24</td>
+      <td>17</td>
+      <td>89</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+      <td>209</td>
+      <td>30</td>
+      <td>21</td>
+      <td>71</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+      <td>202</td>
+      <td>20</td>
+      <td>20</td>
+      <td>158</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+      <td>132</td>
+      <td>17</td>
+      <td>8</td>
+      <td>73</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+      <td>100</td>
+      <td>15</td>
+      <td>6</td>
+      <td>38</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+      <td>147</td>
+      <td>22</td>
+      <td>19</td>
+      <td>81</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+      <td>187</td>
+      <td>34</td>
+      <td>12</td>
+      <td>60</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+      <td>167</td>
+      <td>21</td>
+      <td>21</td>
+      <td>151</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+      <td>132</td>
+      <td>12</td>
+      <td>9</td>
+      <td>49</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+      <td>120</td>
+      <td>17</td>
+      <td>5</td>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+      <td>78</td>
+      <td>15</td>
+      <td>18</td>
+      <td>63</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+      <td>116</td>
+      <td>19</td>
+      <td>14</td>
+      <td>62</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2_no2021</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>  <span class="c1"># 식별자는 두 데이터프레임의 모든 것</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>연도</th>
+      <th>시군구명</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+      <th>작동기기</th>
+      <th>미상(발화원인)</th>
+      <th>불꽃/ 불티</th>
+      <th>담뱃불/ 라이터불</th>
+      <th>마찰/ 전도/ 복사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983.0</td>
+      <td>436.0</td>
+      <td>216.0</td>
+      <td>32.0</td>
+      <td>24.0</td>
+      <td>131.0</td>
+      <td>29.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625.0</td>
+      <td>324.0</td>
+      <td>174.0</td>
+      <td>14.0</td>
+      <td>15.0</td>
+      <td>87.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838.0</td>
+      <td>203.0</td>
+      <td>123.0</td>
+      <td>14.0</td>
+      <td>7.0</td>
+      <td>46.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401.0</td>
+      <td>383.0</td>
+      <td>231.0</td>
+      <td>24.0</td>
+      <td>17.0</td>
+      <td>89.0</td>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562.0</td>
+      <td>337.0</td>
+      <td>209.0</td>
+      <td>30.0</td>
+      <td>21.0</td>
+      <td>71.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681.0</td>
+      <td>456.0</td>
+      <td>202.0</td>
+      <td>20.0</td>
+      <td>20.0</td>
+      <td>158.0</td>
+      <td>52.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359.0</td>
+      <td>254.0</td>
+      <td>132.0</td>
+      <td>17.0</td>
+      <td>8.0</td>
+      <td>73.0</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805.0</td>
+      <td>167.0</td>
+      <td>100.0</td>
+      <td>15.0</td>
+      <td>6.0</td>
+      <td>38.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297.0</td>
+      <td>331.0</td>
+      <td>147.0</td>
+      <td>22.0</td>
+      <td>19.0</td>
+      <td>81.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586.0</td>
+      <td>311.0</td>
+      <td>187.0</td>
+      <td>34.0</td>
+      <td>12.0</td>
+      <td>60.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556.0</td>
+      <td>387.0</td>
+      <td>167.0</td>
+      <td>21.0</td>
+      <td>21.0</td>
+      <td>151.0</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839.0</td>
+      <td>221.0</td>
+      <td>132.0</td>
+      <td>12.0</td>
+      <td>9.0</td>
+      <td>49.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380.0</td>
+      <td>186.0</td>
+      <td>120.0</td>
+      <td>17.0</td>
+      <td>5.0</td>
+      <td>35.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966.0</td>
+      <td>212.0</td>
+      <td>78.0</td>
+      <td>15.0</td>
+      <td>18.0</td>
+      <td>63.0</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149.0</td>
+      <td>219.0</td>
+      <td>116.0</td>
+      <td>19.0</td>
+      <td>14.0</td>
+      <td>62.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949.0</td>
+      <td>391.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741.0</td>
+      <td>211.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205.0</td>
+      <td>146.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614.0</td>
+      <td>223.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294.0</td>
+      <td>259.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>185.0</td>
+      <td>35.0</td>
+      <td>39.0</td>
+      <td>150.0</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144.0</td>
+      <td>26.0</td>
+      <td>22.0</td>
+      <td>88.0</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>113.0</td>
+      <td>24.0</td>
+      <td>14.0</td>
+      <td>71.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>11.0</td>
+      <td>9.0</td>
+      <td>42.0</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>111.0</td>
+      <td>37.0</td>
+      <td>14.0</td>
+      <td>68.0</td>
+      <td>51.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>함께해봅시다</strong></p>
+<ul class="simple">
+<li><p>화재출동 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_call.csv</span></code>)로 사망자수, 부상자수, 재산피해금액에 대한 연도와 시군구별 평균 데이터 <code class="docutils literal notranslate"><span class="pre">call_summ</span></code>를 만들어주세요.</p></li>
+<li><p>화재원인 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_reason.csv</span></code>)로 작동기기, 불꽃/불티, 담뱃불/라이터불, 마찰/전도/복사에 대한 연도와 시군구별 평균을 데이터 <code class="docutils literal notranslate"><span class="pre">reason_summ</span></code>를 만들어주세요.</p></li>
+<li><p>두 요약 데이터 <code class="docutils literal notranslate"><span class="pre">call_summ</span></code>와 <code class="docutils literal notranslate"><span class="pre">reason_summ</span></code>를 연도와 시군구를 기준으로 결합하세요.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+<span class="c1"># fire = pd.read_csv(&quot;data/fire_calling.csv&quot;, encoding = &#39;cp949&#39;)</span>
+<span class="c1"># reason = pd.read_csv(&quot;data/fire_reason.csv&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/day2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dataframe-group.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>데이터프레임의 그룹별 요약</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../day3/practice_day3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.7. </span>데이터프레임 실습 2: 그룹 요약 및 결합</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">식별자의 불일치</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">요약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">화재출동 데이터와 화재원인 데이터의 결합</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,2340 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2.3. 데이터프레임의 요약 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day1/dataframe-summary';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.4. 데이터프레임 실습 1: 정리와 요약" href="../day2/day1_summary.html" />
+    <link rel="prev" title="2.2. 데이터프레임의 정리" href="dataframe-change.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">파이썬 프로그래밍의 기초와 데이터 활용 방법</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    개요
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">1.2. 자료의 형식</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numbers.html">1.3. 숫자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">1.4. 문자열</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.3. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notebooks/day1/dataframe-summary.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/UOS-Bigdata/bigdatabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/day1/dataframe-summary.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>데이터프레임의 요약</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">데이터의 요약</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">열의 요약 통계</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">해당 연도 요약 통계</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">해당 시군구 통계</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">데이터 내보내기</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2.3. </span>데이터프레임의 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>이 절에서는 데이터프레임으로 저장된 데이터로부터 나열된 값을 요약하여 새로운 정보를 생성하는 방법을 배운다. 살펴볼 내용은 다음과 같다.</p>
+<ul class="simple">
+<li><p>데이터 불러오기</p></li>
+<li><p>열에 대한 요약 통계</p></li>
+<li><p>해당 연도 요약 통계</p></li>
+<li><p>해당 시군구 요약 통계</p></li>
+<li><p>데이터 내보내기</p></li>
+</ul>
+<p>먼저 자료의 형태에 대해 알아야 한다. 자료는 크게 두 가지의 형태로 나타낼 수 있다.</p>
+<p><img alt="aa" src="../../_images/datatypes.png" /></p>
+<p>화재출동 데이터를 위의 기준에 따라 분류해보면 어떻게 될까?</p>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><p>명목형 자료: 시군구</p>
+</div></blockquote>
+<blockquote>
+<div><p>순서형 자료: 화재발생연도</p>
+</div></blockquote>
+<blockquote>
+<div><p>이산형 자료: 사망자수, 출동횟수</p>
+</div></blockquote>
+<blockquote>
+<div><p>연속형 자료: 재산피해금액</p>
+</div></blockquote>
+</details>
+<section id="id2">
+<h2>데이터의 요약<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>데이터 프레임은 행(row)과 열(column)로 이루어져 있다. 행은 관측치라고도 부르며, 각 관측치의 측정된 정보가 해당 열 위치에 기술되어 있다. 따라서 데이터는 각 열을 기준으로 요약하며, 이 절에서도 열(column)의  <code class="docutils literal notranslate"><span class="pre">평균,</span> <span class="pre">표준편차,</span> <span class="pre">최댓값/최솟값,</span> <span class="pre">분위수</span></code> 등 요약된 수치들을 출력한다. 이러한 요약된 수치들을 <code class="docutils literal notranslate"><span class="pre">통계량</span></code>이라고도 부른다.</p>
+<p>실습할 데이터는 화재출동 데이터(<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)이다. 화재출동 데이터는 2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 금천구) 자료를 담고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="id3">
+<h3>열의 요약 통계<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>전체 데이터를 요약하는 메소드는 <code class="docutils literal notranslate"><span class="pre">describe</span></code>이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.000000</td>
+      <td>25.000000</td>
+      <td>2.500000e+01</td>
+      <td>25.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2019.000000</td>
+      <td>1.800000</td>
+      <td>6.852555e+05</td>
+      <td>290.56000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.443376</td>
+      <td>1.414214</td>
+      <td>4.674389e+05</td>
+      <td>97.34521</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2017.000000</td>
+      <td>0.000000</td>
+      <td>2.009660e+05</td>
+      <td>146.00000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.000000</td>
+      <td>1.000000</td>
+      <td>3.638390e+05</td>
+      <td>212.00000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2019.000000</td>
+      <td>2.000000</td>
+      <td>5.596140e+05</td>
+      <td>269.00000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2020.000000</td>
+      <td>3.000000</td>
+      <td>7.068710e+05</td>
+      <td>364.00000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.000000</td>
+      <td>5.000000</td>
+      <td>1.677681e+06</td>
+      <td>502.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>뭔가 문제가 있다. 무엇일까?</p>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>는 요약이 필요없다.</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">사망자수</span></code>와 <code class="docutils literal notranslate"><span class="pre">출동횟수</span></code>는 불필요한 소숫점으로 과도하게 표현되어있다.</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">재산피해금액</span></code>은 숫자가 너무 커서 보기가 힘들다.</p></li>
+</ol>
+</div></blockquote>
+</details>
+<p>그렇다면 어떻게 고치는 것이 좋을까?</p>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>: 요약 대상에서 제외한다.</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">사망자수</span></code>와 <code class="docutils literal notranslate"><span class="pre">출동횟수</span></code>는 요약 후 결과를 소숫점 둘 째 자리에서 반올림하여 표현한다.</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">재산피해금액</span></code>은 만 원 단위로 표현한다.</p></li>
+</ol>
+</div></blockquote>
+</details>
+<p>먼저 요약한 데이터를 <code class="docutils literal notranslate"><span class="pre">df_summ</span></code>으로 저장하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">사망자수</span></code>와 <code class="docutils literal notranslate"><span class="pre">출동횟수</span></code>의 소수점을 조정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;사망자수&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;사망자수&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;출동횟수&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;출동횟수&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df_summ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.000000</td>
+      <td>25.00</td>
+      <td>2.500000e+01</td>
+      <td>25.00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2019.000000</td>
+      <td>1.80</td>
+      <td>6.852555e+05</td>
+      <td>290.56</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.443376</td>
+      <td>1.41</td>
+      <td>4.674389e+05</td>
+      <td>97.35</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2017.000000</td>
+      <td>0.00</td>
+      <td>2.009660e+05</td>
+      <td>146.00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.000000</td>
+      <td>1.00</td>
+      <td>3.638390e+05</td>
+      <td>212.00</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2019.000000</td>
+      <td>2.00</td>
+      <td>5.596140e+05</td>
+      <td>269.00</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2020.000000</td>
+      <td>3.00</td>
+      <td>7.068710e+05</td>
+      <td>364.00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.000000</td>
+      <td>5.00</td>
+      <td>1.677681e+06</td>
+      <td>502.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">재산피해금액</span></code>의 단위를 바꿔준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;재산피해금액&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;재산피해금액&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10000</span>
+<span class="n">df_summ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.000000</td>
+      <td>25.00</td>
+      <td>0.002500</td>
+      <td>25.00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2019.000000</td>
+      <td>1.80</td>
+      <td>68.525552</td>
+      <td>290.56</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.443376</td>
+      <td>1.41</td>
+      <td>46.743890</td>
+      <td>97.35</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2017.000000</td>
+      <td>0.00</td>
+      <td>20.096600</td>
+      <td>146.00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.000000</td>
+      <td>1.00</td>
+      <td>36.383900</td>
+      <td>212.00</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2019.000000</td>
+      <td>2.00</td>
+      <td>55.961400</td>
+      <td>269.00</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2020.000000</td>
+      <td>3.00</td>
+      <td>70.687100</td>
+      <td>364.00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.000000</td>
+      <td>5.00</td>
+      <td>167.768100</td>
+      <td>502.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">재산피해금액</span></code>도 소수점 조정을 한다. 이 경우 소수점 4째 자리에서  하였다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;재산피해금액&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_summ</span><span class="p">[</span><span class="s1">&#39;재산피해금액&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df_summ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.000000</td>
+      <td>25.00</td>
+      <td>2.500000e+01</td>
+      <td>25.00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2019.000000</td>
+      <td>1.80</td>
+      <td>6.852555e+05</td>
+      <td>290.56</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.443376</td>
+      <td>1.41</td>
+      <td>4.674389e+05</td>
+      <td>97.35</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2017.000000</td>
+      <td>0.00</td>
+      <td>2.009660e+05</td>
+      <td>146.00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.000000</td>
+      <td>1.00</td>
+      <td>3.638390e+05</td>
+      <td>212.00</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2019.000000</td>
+      <td>2.00</td>
+      <td>5.596140e+05</td>
+      <td>269.00</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2020.000000</td>
+      <td>3.00</td>
+      <td>7.068710e+05</td>
+      <td>364.00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.000000</td>
+      <td>5.00</td>
+      <td>1.677681e+06</td>
+      <td>502.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>열 이름을 이해하기 쉽게 단위로 표현해주었다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">,</span> <span class="s1">&#39;사망자수&#39;</span><span class="p">,</span> <span class="s1">&#39;재산피해금액(만원)&#39;</span><span class="p">,</span> <span class="s1">&#39;출동횟수&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액(만원)</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.000000</td>
+      <td>25.00</td>
+      <td>2.500000e+01</td>
+      <td>25.00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2019.000000</td>
+      <td>1.80</td>
+      <td>6.852555e+05</td>
+      <td>290.56</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.443376</td>
+      <td>1.41</td>
+      <td>4.674389e+05</td>
+      <td>97.35</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2017.000000</td>
+      <td>0.00</td>
+      <td>2.009660e+05</td>
+      <td>146.00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.000000</td>
+      <td>1.00</td>
+      <td>3.638390e+05</td>
+      <td>212.00</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2019.000000</td>
+      <td>2.00</td>
+      <td>5.596140e+05</td>
+      <td>269.00</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2020.000000</td>
+      <td>3.00</td>
+      <td>7.068710e+05</td>
+      <td>364.00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.000000</td>
+      <td>5.00</td>
+      <td>1.677681e+06</td>
+      <td>502.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>마지막으로 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>를 제거하였다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summ</span> <span class="o">=</span> <span class="n">df_summ</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;화재발생연도&#39;</span><span class="p">)</span>
+<span class="n">df_summ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>사망자수</th>
+      <th>재산피해금액(만원)</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.00</td>
+      <td>2.500000e+01</td>
+      <td>25.00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.80</td>
+      <td>6.852555e+05</td>
+      <td>290.56</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.41</td>
+      <td>4.674389e+05</td>
+      <td>97.35</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.00</td>
+      <td>2.009660e+05</td>
+      <td>146.00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.00</td>
+      <td>3.638390e+05</td>
+      <td>212.00</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.00</td>
+      <td>5.596140e+05</td>
+      <td>269.00</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.00</td>
+      <td>7.068710e+05</td>
+      <td>364.00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.00</td>
+      <td>1.677681e+06</td>
+      <td>502.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h3>해당 연도 요약 통계<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>위에서는 전체 데이터를 요약해보았다. 이번에는 범주별로 나누어 <code class="docutils literal notranslate"><span class="pre">연도</span></code> 혹은 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>의 자료를 각각 요약해보자.</p>
+<p>2017년 부터 2021년 5년간의 자료가 있기 때문에 2021년 자료만 보고 싶은 경우 다음과 같이 원하는 열을 추출한 뒤 <code class="docutils literal notranslate"><span class="pre">loc</span></code>메소드로 인덱싱해주면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_2021</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2021</span><span class="p">]</span>
+<span class="n">df_2021</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">describe</span></code>메소드로 자료를 요약한다. 이 때 표현방식을 바꾸고싶다면 위의 과정을 동일하게 거치면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_2021</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5.0</td>
+      <td>5.000000</td>
+      <td>5.000000e+00</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2021.0</td>
+      <td>2.400000</td>
+      <td>6.467606e+05</td>
+      <td>246.00000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.0</td>
+      <td>1.516575</td>
+      <td>4.068877e+05</td>
+      <td>90.75792</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2021.0</td>
+      <td>1.000000</td>
+      <td>3.467410e+05</td>
+      <td>146.00000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2021.0</td>
+      <td>2.000000</td>
+      <td>4.102050e+05</td>
+      <td>211.00000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2021.0</td>
+      <td>2.000000</td>
+      <td>5.596140e+05</td>
+      <td>223.00000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2021.0</td>
+      <td>2.000000</td>
+      <td>5.622940e+05</td>
+      <td>259.00000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.0</td>
+      <td>5.000000</td>
+      <td>1.354949e+06</td>
+      <td>391.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>2021년 중에 출동 횟수가 많은 지역구대로 정렬 해보자.</p>
+<p>정렬하기 위해서는 <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code>메소드를 사용한다. 괄호 안에 정렬할 열을 지정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_2021</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;출동횟수&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ascending=False</span></code> 선택문을 추가하면 출동 횟수가 많은 순으로 내림차순 정렬을 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_2021</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;출동횟수&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h3>해당 시군구 통계<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>이번에는 강남구의 자료를 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_강남구</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;시군구&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;강남구&quot;</span><span class="p">]</span>
+<span class="n">df_강남구</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">describe</span></code>메소드를 용하면 5년간 강남구의 기초통계량을 출력한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_강남구</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5.000000</td>
+      <td>5.00000</td>
+      <td>5.000000e+00</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2019.000000</td>
+      <td>0.80000</td>
+      <td>1.534885e+06</td>
+      <td>434.40000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.581139</td>
+      <td>0.83666</td>
+      <td>1.311026e+05</td>
+      <td>47.87797</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2017.000000</td>
+      <td>0.00000</td>
+      <td>1.354949e+06</td>
+      <td>387.00000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.000000</td>
+      <td>0.00000</td>
+      <td>1.451556e+06</td>
+      <td>391.00000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2019.000000</td>
+      <td>1.00000</td>
+      <td>1.565258e+06</td>
+      <td>436.00000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2020.000000</td>
+      <td>1.00000</td>
+      <td>1.624983e+06</td>
+      <td>456.00000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2021.000000</td>
+      <td>2.00000</td>
+      <td>1.677681e+06</td>
+      <td>502.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>5년간 강남구의 <code class="docutils literal notranslate"><span class="pre">출동횟수</span></code>가 많은 순으로 출력해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_강남구</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;출동횟수&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="id6">
+<h2>데이터 내보내기<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>처음에 만든 2017년 요약데이터를 csv 내보내려면 to_csv를 입력하고 괄호() 안에는 저장링크를 넣고 마지막 부분에는 저장할 파일 이름을 지정하면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span> <span class="o">=</span> <span class="n">df_2021</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+<span class="n">summary2017</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/2021년요약.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>엑셀 .xlsx로 내보낼수도 있다. 만약 시트 이름을 바꾸고 싶다면 <code class="docutils literal notranslate"><span class="pre">sheet_name</span></code>을 추가하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/2021년요약.xlsx&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/2021년요약.xlsx&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>만약 여러 개 시트에 저장하고 싶다면 다음과 같이 지정해주면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>  
+    <span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;2021년도 요약표&#39;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+    <span class="n">df_강남구</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;강남구 요약표&#39;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>저장했던 데이터를 다시 불러와보자. 특정 시트를 지정해주지 않으면 기본적으로 첫 번째 시트를 불러온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">)</span>
+<span class="n">excel1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>count</td>
+      <td>5</td>
+      <td>5.000000</td>
+      <td>5.000000e+00</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean</td>
+      <td>2021</td>
+      <td>2.400000</td>
+      <td>6.467606e+05</td>
+      <td>246.00000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>std</td>
+      <td>0</td>
+      <td>1.516575</td>
+      <td>4.068877e+05</td>
+      <td>90.75792</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>min</td>
+      <td>2021</td>
+      <td>1.000000</td>
+      <td>3.467410e+05</td>
+      <td>146.00000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>4.102050e+05</td>
+      <td>211.00000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>5.596140e+05</td>
+      <td>223.00000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>75%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>5.622940e+05</td>
+      <td>259.00000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>max</td>
+      <td>2021</td>
+      <td>5.000000</td>
+      <td>1.354949e+06</td>
+      <td>391.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>특정 시트를 불러오고 싶다면 <code class="docutils literal notranslate"><span class="pre">sheet_name</span></code>로 시트명이나 시트번호를 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;2021년도 요약표&#39;</span><span class="p">)</span> <span class="c1"># 시트명으로 불러오기.</span>
+<span class="n">excel2</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>count</td>
+      <td>5</td>
+      <td>5.000000</td>
+      <td>5.000000e+00</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean</td>
+      <td>2021</td>
+      <td>2.400000</td>
+      <td>6.467606e+05</td>
+      <td>246.00000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>std</td>
+      <td>0</td>
+      <td>1.516575</td>
+      <td>4.068877e+05</td>
+      <td>90.75792</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>min</td>
+      <td>2021</td>
+      <td>1.000000</td>
+      <td>3.467410e+05</td>
+      <td>146.00000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>4.102050e+05</td>
+      <td>211.00000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>5.596140e+05</td>
+      <td>223.00000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>75%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>5.622940e+05</td>
+      <td>259.00000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>max</td>
+      <td>2021</td>
+      <td>5.000000</td>
+      <td>1.354949e+06</td>
+      <td>391.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># 번호로 불러오기. 번호는 0부터 시작</span>
+<span class="n">excel3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>화재발생연도</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>count</td>
+      <td>5</td>
+      <td>5.000000</td>
+      <td>5.000000e+00</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean</td>
+      <td>2021</td>
+      <td>2.400000</td>
+      <td>6.467606e+05</td>
+      <td>246.00000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>std</td>
+      <td>0</td>
+      <td>1.516575</td>
+      <td>4.068877e+05</td>
+      <td>90.75792</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>min</td>
+      <td>2021</td>
+      <td>1.000000</td>
+      <td>3.467410e+05</td>
+      <td>146.00000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>4.102050e+05</td>
+      <td>211.00000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>5.596140e+05</td>
+      <td>223.00000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>75%</td>
+      <td>2021</td>
+      <td>2.000000</td>
+      <td>5.622940e+05</td>
+      <td>259.00000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>max</td>
+      <td>2021</td>
+      <td>5.000000</td>
+      <td>1.354949e+06</td>
+      <td>391.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>함께해봅시다</strong></p>
+<ul class="simple">
+<li><p>2017, 2018, 2019년도의 관악구, 강북구 자료를 각각 요약하고 그 결과를 비교해보자.</p></li>
+<li><p>관악구, 강북구 자료를 각각 csv파일로 저장해보자.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/day1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dataframe-change.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.2. </span>데이터프레임의 정리</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../day2/day1_summary.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.4. </span>데이터프레임 실습 1: 정리와 요약</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">데이터의 요약</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">열의 요약 통계</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">해당 연도 요약 통계</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">해당 시군구 통계</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">데이터 내보내기</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

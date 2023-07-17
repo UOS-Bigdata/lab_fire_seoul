@@ -1,0 +1,3129 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2.2. 데이터프레임의 정리 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day1/dataframe-change';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.3. 데이터프레임의 요약" href="dataframe-summary.html" />
+    <link rel="prev" title="2.1. 데이터프레임의 정의와 구성요소" href="dataframe-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">파이썬 프로그래밍의 기초와 데이터 활용 방법</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    개요
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">1.2. 자료의 형식</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numbers.html">1.3. 숫자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">1.4. 문자열</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.2. 데이터프레임의 정리</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notebooks/day1/dataframe-change.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/UOS-Bigdata/bigdatabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/day1/dataframe-change.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>데이터프레임의 정리</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">자료의 정리</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">정렬</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">행과 열 지우기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">열 지우기</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">행 지우기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">열이름 바꾸기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">요약</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2.2. </span>데이터프레임의 정리<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>이 절에서는 데이터프레임을 정리할 떄 지주 사용되는 다음과 같은 내용을 살펴본다.</p>
+<ul class="simple">
+<li><p>정렬(sorting)</p></li>
+<li><p>열 지우기</p></li>
+<li><p>행 지우기</p></li>
+<li><p>행 인덱스 재구성</p></li>
+<li><p>열이름 바꾸기</p></li>
+<li><p>외부화일로 저장하기</p></li>
+</ul>
+<section id="id2">
+<h2>자료의 정리<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>앞 절에서 살펴본 내용은 데이터의 일부분을 조건에 맞게 열과 행을 선택하여 필요한 데이터만 선택하는 작업이었다.</p>
+<p>컴퓨터에서 사용할 수 있도록 데이터를 읽은 후에, 데이터프레임을 정렬하거나 열이름을 바꾸어 새로운 자료를 만들기 위한  전처리 작업을 한다.</p>
+<p>자료를 주어진 규칙에 따라서 정렬하는(sorting) 작업은 분석 단계에서도 많이 사용하지만 자료를 처음 받고 살펴볼 때도 자주 사용한다. 초기 자료는 대부분 우리가 예상하지 못하는 오류나 결함을 가지고 있을 가능성이 있다. 빅데이터 시대에 자료를 눈으로 살펴보는 것이 자주 있는 일은 아니지만 자료의 일부분을 보면서 원하는 자료가 제대로 입력이 되있는지 간단하게 살펴보는 버릇은 매우 좋은 버릇이다.</p>
+<p>최근에는 컴퓨터 프로그램에서 한글을 자유롭게 사용할 수 있게 되었지만 아직도 자료를 여러 개의 다른 프로그램으로 바꾸어 작업하는 경우 한글 때문에 호환이 자유롭게 안돼는 경우가  많다. 특히 순수한 자료가 아닌 프로그램 언어의 표현식, 인덱스, 열이름 등에 한글을 사용하면 문제를 일으킬 수 있다. 데이터프레임에서는 열이름이나 행인덱스에 한글을 사용할 수 있지만 영문으로 바꾸어야 하는 경우도 많다.</p>
+<p>이제 데이터프레임을 원하는대로 정렬하고, 열과 행을 지우고, 열의 이름을 바꾸는 작업에 대하여 알아보자.</p>
+<p>먼저, 예제로 사용될 자료를 살펴보자</p>
+</section>
+<section id="id3">
+<h2>화재출동 데이터<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 금천구) 화재출동 데이터입니다.</p>
+<p>데이터를 외부 CSV 화일에서 데이터프레임으로 읽어 오려면 다음과 같은 <code class="docutils literal notranslate"><span class="pre">read_csv()</span></code> 함수를 사용한다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">encoding=&quot;cp949&quot;</span></code> 은 화일의 언어형식을 지정하는 선택 명령이다. <code class="docutils literal notranslate"><span class="pre">cp949</span></code> 는 MS Windows 에서 사용하는 한글의 언어형식이다.</p></li>
+<li><p>만약  <code class="docutils literal notranslate"><span class="pre">cp949</span></code> 를 사용하였을 때 한글이 깨져보이면 <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> 을 사용해 보자.</p></li>
+<li><p>언어형식은 컴퓨터(운영체제; MS Window, MacOS, Linux) 에 따라서 다를 수 있으므로  <code class="docutils literal notranslate"><span class="pre">cp949</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> 중 잘 작동하는 하나를 선택한다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>아래 <code class="docutils literal notranslate"><span class="pre">df.head(10)</span></code> 은 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>의 처음 10개 행만을 출력하는 메소드이다. 데이터프레임의 앞부부만 보고 자료의 특성을 파악하는데 유용하다. 유사한  방법으로 <code class="docutils literal notranslate"><span class="pre">df.tail(5)</span></code> 를 실행하면 어떤 결과가 나올까?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h2>정렬<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>먼저 데이터프레임의 행들을 지정된 열에 있는 자료의 순서대로 정렬하는 방법을 알아보자.</p>
+<ul class="simple">
+<li><p>정렬은 <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> 메소드를 사용한다. 괄호 안에 <code class="docutils literal notranslate"><span class="pre">by=</span></code> 을 사용하여 정렬항 열이름이나 열이름으로 구성된 리스트를 지정한다.</p></li>
+<li><p>정렬의 순서는 선택문 <code class="docutils literal notranslate"><span class="pre">ascending=</span></code> 을 사용하며 오름차순은 <code class="docutils literal notranslate"><span class="pre">ascending=True</span></code> 으로, 내림차순은 <code class="docutils literal notranslate"><span class="pre">ascending=False</span></code> 로 지정한다. 순서를 지정하지 않으면 오름차순이 적용된다.</p></li>
+</ul>
+<p>이제 데이터프레임을 <code class="docutils literal notranslate"><span class="pre">행정구역별(읍면동)</span></code>으로 정렬해보자. 강남구가 처음으로, 강북구가 마지막으로 나타나는 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;시군구&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code>별로, <code class="docutils literal notranslate"><span class="pre">연도</span></code> 별로, 두 개의 열에 대하여 정렬해 보자</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;시군구&#39;</span><span class="p">,</span> <span class="s1">&#39;화재발생연도&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>2020년 원인들만 볼 수 있을까? 다음 표현식의 결과를 보자. 앞 절에서 배운 조건식을 이용한 슬라이싱을 사용하였다.</p>
+<p>2020년만 선택한 후, 재산피해금액을 이용하여 내림차순으로 정렬해 보자. 강남구가 가장 많은 재산피해금액의 수를 가진 구이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span> <span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;재산피해금액&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>지금까지 여러 조합을 이용하여 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 를 정렬을 했는데 원자료는 변했을까?</p>
+<p>데이터프레임을 위와 같이 정렬해도 출력으로만 결과를 보여주고 원자료는 실제로 정렬되지 않는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>만약 정렬된 결과를 다른 이름으로 데이터프레임에 저장하면 어떻게 될까?<br />
+다른 데이터프레임으로 지정하면 정렬로 변한 결과가 적용되어 저장된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_copy</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;사망자수&#39;</span><span class="p">,</span> <span class="s1">&#39;시군구&#39;</span><span class="p">],</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">df_copy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>정렬한 자료를 유지하여 데이터프레임을 바꾸고 싶다면 메소드  <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> 의 선택문으로 <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code> 라고 지정해주면 된다.</p>
+<p>물론 지정하지 않는 경우 <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">False</span></code> 가 자동적으로 적용된다.</p>
+<p>이제 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df_sorted</span></code>를 년도로 정렬하고 그 결과를 유지하게 해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_copy</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df_copy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+      <th>출동횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+      <td>286</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+      <td>364</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+      <td>502</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+      <td>219</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+      <td>259</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+      <td>211</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h2>행과 열 지우기<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>처음 자료를 데이터프레임으로 만든 후에 특정한 행 또는 열을 제거해야 할 떄가 많다. 이제 행과 열을 지우는 방법을 알아보자.</p>
+<p>행과 열을 지우는 작업은 슬라이싱과 다르다. 물론 슬라이싱으로 열과 행을 선택한 후에 새로운 데이터프레임에 저장하면 원하는 행과 열을 지운 결과를 얻는다.
+이 절에서는 새로운 데이터프레임을 만들지 않고 주어진 데이터프레임에서 행과 열을 제거하는  방법을 배운다.</p>
+<section id="id6">
+<h3>열 지우기<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>열을 지우는 일이 행을 지우는 것보다 쉬우니 먼저 열을 지우는 방법부터 알아보자.</p>
+<p>이제  데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 에서 열 <code class="docutils literal notranslate"><span class="pre">출동횟수</span></code> 를 지워보자.</p>
+<p>열을 지우는 방법은 <code class="docutils literal notranslate"><span class="pre">drop</span></code> 메소드로 쉽게 할 수 있다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">=</span></code> 에 삭제할 열이름을 리스트 형식으로 지정해 준다.</p></li>
+<li><p>선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>의 내용을 변경한다.</p></li>
+</ul>
+<p><strong>주의</strong>: 선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 를 사용할 떄 실수하면  데이터프레임을 복구할 수없으니 조심해서 사용하자. 이제 왜 선택문 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 가 있는지 생각해 보자. 변경된 내용을 새로운 데이터프레임에 저장하면 원래 자료는 그냥 변하지 않고 있으니 자료를 잃을 위험은 없다.  하지만 빅데이터를 다루는 경우 자료의 복사본을 계속 만들면 어떻게 될지 생각헤 보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;출동횟수&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강동구</td>
+      <td>0.0</td>
+      <td>418593</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강동구</td>
+      <td>4.0</td>
+      <td>540625</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>533359</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020</td>
+      <td>강동구</td>
+      <td>3.0</td>
+      <td>363839</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2021</td>
+      <td>강동구</td>
+      <td>1.0</td>
+      <td>346741</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id7">
+<h3>행 지우기<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 는 행정구역이 시도별로 자료가 구성되어 있다.</p>
+<p>그런데 열 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>에 <code class="docutils literal notranslate"><span class="pre">강동구</span></code> 를 포함하고 있다. 강동구 데이터를 특별히 다루지 않는다면 해당 데이터를 삭제해보자. 특히, 자료를 만드는 경우 열의 구성요소가 아닌 내용이 포함되면 분석할 떄 문제가 생길 수 있다.</p>
+<p>이제 열 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>의 값으로  <code class="docutils literal notranslate"><span class="pre">강동구</span></code> 을 가지는 행을 지워보자.</p>
+<p><strong>다시 주의</strong>: 앞 절에서 배운대로 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>가 아닌 행들만 <strong>슬라이싱</strong> 할 수 있다. 선택된 행들을 다른 이름의 데이터프레임으로 저정하면 되지만 슬라이싱은 선택만 할 뿐 데이터프레임 자체를 바꾸진 않는다.</p>
+<p>조건에 따라서 행을 지우는 경우 <code class="docutils literal notranslate"><span class="pre">drop</span></code>  메소드를 사용할 수 있다.</p>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 행을 <code class="docutils literal notranslate"><span class="pre">drop</span></code> 메소드로 지우고 데이터프레임에 적용되게 해보자. 다음과 같은 순서로 처리할 수 있다.</p>
+<p>먼저, <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 데이터프레임을 만들고 해당하는 행의 위치(index,인덱스)를 추출한다. 아래와 같이 메소드 <code class="docutils literal notranslate"><span class="pre">.index</span></code> 를 사용하면 데이터프레임의 행의 위치를 나타내는 인덱스를 추출할 수 있다. 추출한 인덱스의 자료 형식은 <code class="docutils literal notranslate"><span class="pre">Int64Index</span></code> 이며 이는 행의 위치를 나타내는 형식이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index_for_delete</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;시군구&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;강동구&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index_for_delete</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64Index([1, 6, 11, 16, 21], dtype=&#39;int64&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">drop</span></code> 메소드를 사용하여 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>기 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 행을 지워보자.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">=</span> </code> 은 행에 대한 인덱스를 지정한다. 위에서 조건으로 만든 <code class="docutils literal notranslate"><span class="pre">index_for_delete</span></code>를 지정하면 해당하는 행이 제거된다.</p></li>
+<li><p>선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">house</span></code>의 내용을 변경한다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index_for_delete</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이제 우리는 연도별, 시군구명별 자료를 특정 행과 열을 삭제하여 정리하였다.</p>
+<p>그런데 바로 위에 나타난 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>를 보면 행을 나타나는 인덱스에 <code class="docutils literal notranslate"><span class="pre">1</span></code>과 <code class="docutils literal notranslate"><span class="pre">13</span></code> 이 나타나지 않는다. 이러한 이유는
+지워진 행에 대한 인덱스가 같이 없어진 것이다. 즉, 행을 지우는 경우(그리고 정령을 하는 경우도) 자동적으로 행의 인덱스가 0부터 다시 구성되지 않는다.</p>
+<p>이제 완성된 데이터프레임의 행 인덱스를 0부터 시작에서 빠진 수없이 다시 구성해 보자.</p>
+<p><code class="docutils literal notranslate"><span class="pre">reset_index</span></code> 메소드를 다음과 같이 적용하면 행 인덱스가 0부터 차례대로 구성된다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">drop=True</span></code>는 행 인덱스를 재구성 할 때 인덱스를 나타내는 새로운 열을 만들지 말라는 명령이다. 만약 <code class="docutils literal notranslate"><span class="pre">drop=Fase</span></code> 로 하면
+열이름이 <code class="docutils literal notranslate"><span class="pre">index</span></code>인 새로운 열이 추가된다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>화재발생연도</th>
+      <th>시군구</th>
+      <th>사망자수</th>
+      <th>재산피해금액</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>열이름 바꾸기<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>자료를 정리할 때  열이름을 바꾸는 경우가 매우 흔하다.</p>
+<p>열이름의 길이를 줄이거나, 열이름에 대한 새로운 규칙을 적용하거나, 개인의 취향을 사용하거나… 열이름을 변경해야할 일이 자주 일어난다.</p>
+<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>의 열이름을 영문으로 바꾸어 보자.</p>
+<p>먼저 데이터프레임 뒤에 <code class="docutils literal notranslate"><span class="pre">.columns</span></code> 를 붙이면 열이름을 볼 수 있다. 형식은 행의 위치를 나타내내는 인덱스(Index) 형식이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;화재발생연도&#39;, &#39;시군구&#39;, &#39;사망자수&#39;, &#39;재산피해금액&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>열이름을 바꿀 떄는 <code class="docutils literal notranslate"><span class="pre">rename()</span></code> 메소드를 사용한다. 다음과 같이 열이름을 바꾸어 보자.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">=</span></code> 에 사전 형식((Dictionary type)으로 새로운 열의 이름을 지정한다.</p></li>
+<li><p>열이름은 앞에서 잠깐 나온 사전(Dictionary) 형식이다. 다음과 같은 규칙을 가진다.</p>
+<ul>
+<li><p>내용은 <code class="docutils literal notranslate"><span class="pre">{...}</span></code> 안에 넣는다.</p></li>
+<li><p>원래 열이름과 새로운 열이름의 문자열을 각각 <code class="docutils literal notranslate"><span class="pre">:</span></code> 의 왼쪽과 오른쪽에 놓는다.</p></li>
+<li><p>다른 열이름을 컴마 <code class="docutils literal notranslate"><span class="pre">,</span></code> 로 구분한다.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> 를 선택해여 열이름 변경이 데이터프레임에 적용된다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span> <span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+	<span class="s2">&quot;화재발생연도&quot;</span> <span class="p">:</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;시군구&quot;</span> <span class="p">:</span> <span class="s2">&quot;region&quot;</span><span class="p">,</span>
+	<span class="s2">&quot;사망자수&quot;</span> <span class="p">:</span> <span class="s2">&quot;samang_n&quot;</span><span class="p">,</span> <span class="s2">&quot;재산피해금액&quot;</span> <span class="p">:</span> <span class="s2">&quot;money&quot;</span><span class="p">},</span>
+	<span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>region</th>
+      <th>samang_n</th>
+      <th>money</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;year&#39;, &#39;region&#39;, &#39;samang_n&#39;, &#39;money&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>위에서 열이름을 모두 바꾸는 코드와 동일한 작업을 새로운 이름을 가진 리스트로 다음과 같이 할 수 있다.</p>
+<p>예를 들어 위에서 영문으로 변경한 <code class="docutils literal notranslate"><span class="pre">사망자수</span></code>를 <code class="docutils literal notranslate"><span class="pre">samang_n</span></code> 에서 <code class="docutils literal notranslate"><span class="pre">death_n</span></code>로 바꾸어보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;death_n&#39;</span><span class="p">,</span> <span class="s1">&#39;money&#39;</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>region</th>
+      <th>death_n</th>
+      <th>money</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1565258</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017</td>
+      <td>강북구</td>
+      <td>0.0</td>
+      <td>339146</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>706871</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654690</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>강남구</td>
+      <td>0.0</td>
+      <td>1624983</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2018</td>
+      <td>강북구</td>
+      <td>4.0</td>
+      <td>216838</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2018</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>393401</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>관악구</td>
+      <td>1.0</td>
+      <td>816562</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1677681</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>217805</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2019</td>
+      <td>강서구</td>
+      <td>0.0</td>
+      <td>666297</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2019</td>
+      <td>관악구</td>
+      <td>3.0</td>
+      <td>654586</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020</td>
+      <td>강남구</td>
+      <td>1.0</td>
+      <td>1451556</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020</td>
+      <td>강북구</td>
+      <td>1.0</td>
+      <td>208380</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020</td>
+      <td>강서구</td>
+      <td>3.0</td>
+      <td>200966</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>646149</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2021</td>
+      <td>강남구</td>
+      <td>2.0</td>
+      <td>1354949</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2021</td>
+      <td>강북구</td>
+      <td>5.0</td>
+      <td>410205</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2021</td>
+      <td>강서구</td>
+      <td>2.0</td>
+      <td>559614</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2021</td>
+      <td>관악구</td>
+      <td>2.0</td>
+      <td>562294</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id9">
+<h2>요약<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>데이터프레임을…</p>
+<ul class="simple">
+<li><p>정렬할 때는 <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> 메소드를 사용한다.</p></li>
+<li><p>열 또는 행을 제거할 때 <code class="docutils literal notranslate"><span class="pre">drop()</span></code> 메소드를 사용한다.</p></li>
+<li><p>열이름을 바꿀 때는 <code class="docutils literal notranslate"><span class="pre">rename()</span></code> 메소드를 사용한다.</p></li>
+<li><p>행의 인덱스를 재구성하는 경우 <code class="docutils literal notranslate"><span class="pre">reset_index()</span></code> 를 이용한다.</p></li>
+<li><p>변경된 내용을 데이터프레임에 적용하려면 <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code> 선택문을 사용한다.</p></li>
+</ul>
+<p><strong>함께해봅시다</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df</span></code>의 열이름을 다시 한글로 바꾸기 [‘연도’, ‘시군구’ , ‘사망자수’, ‘피해금액’]</p></li>
+<li><p>관악구를 제외한 최근 4개년의 자료를 <code class="docutils literal notranslate"><span class="pre">df_new</span></code>이름으로 저장하기</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df_new</span></code>의 인덱스를 재구성하기</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df_new</span></code>의 새로운 열 <code class="docutils literal notranslate"><span class="pre">연도별시군구</span></code>를 만들어 <code class="docutils literal notranslate"><span class="pre">연도</span></code>+<code class="docutils literal notranslate"><span class="pre">시군구</span></code>값을 저장하기 (예: <code class="docutils literal notranslate"><span class="pre">2017</span> <span class="pre">강남구</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df_new</span></code>의 <code class="docutils literal notranslate"><span class="pre">연도</span></code>와 <code class="docutils literal notranslate"><span class="pre">시군구</span></code> 열 제거하기</p></li>
+</ul>
+<details>
+<summary>접기/펼치기</summary>
+<p><code class="docutils literal notranslate"><span class="pre">df['year2']</span> <span class="pre">=</span> <span class="pre">df['year'].astype(str)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">df['year_region']</span> <span class="pre">=</span> <span class="pre">df['year2']+</span> <span class="pre">'</span> <span class="pre">'</span> <span class="pre">+</span> <span class="pre">df['region']</span></code></p>
+</details>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/day1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dataframe-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.1. </span>데이터프레임의 정의와 구성요소</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dataframe-summary.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.3. </span>데이터프레임의 요약</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">자료의 정리</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">정렬</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">행과 열 지우기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">열 지우기</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">행 지우기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">열이름 바꾸기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">요약</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
