@@ -1020,7 +1020,7 @@ document.write(`
 <p>이번에는 화재출동 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)와 화재원인 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_reason_summary.csv</span></code>) 을 결합하는 작업을 해보려고 한다. 2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 관악구) 정보가 있습니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df1</span>
 </pre></div>
 </div>
@@ -1258,7 +1258,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_reason_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_reason_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df2</span>
 </pre></div>
 </div>
@@ -4510,8 +4510,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
-<span class="c1"># fire = pd.read_csv(&quot;data/fire_calling.csv&quot;, encoding = &#39;cp949&#39;)</span>
-<span class="c1"># reason = pd.read_csv(&quot;data/fire_reason.csv&quot;)</span>
+<span class="c1"># fire = pd.read_csv(&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling.csv&quot;, encoding = &#39;cp949&#39;)</span>
+<span class="c1"># reason = pd.read_csv(&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_reason.csv&quot;)</span>
 </pre></div>
 </div>
 </div>
