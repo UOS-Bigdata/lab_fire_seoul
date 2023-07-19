@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.2. 데이터프레임의 정리 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+    <title>데이터프레임의 정리 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
   
   
   
@@ -61,11 +61,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day1/dataframe-change';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day1/dataframe_change';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.3. 데이터프레임의 요약" href="dataframe-summary.html" />
-    <link rel="prev" title="2.1. 데이터프레임의 정의와 구성요소" href="dataframe-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,27 +148,21 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html">1.2. 자료의 형식</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numbers.html">1.3. 숫자</a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html">1.4. 문자열</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro-python.html">1. 데이터분석과 프로그래밍</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataframe.html">3. 데이터프레임</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-intro.html">3.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-summary.html">3.2. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">3.3. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">3.4. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">3.5. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">3.6. 화재출동 현황 적용</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.2. 데이터프레임의 정리</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">4. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">4.1. 화재데이터를 이용한 기초그래프</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">4.2. 공간자료 시각화</a></li>
 </ul>
 </li>
 </ul>
@@ -227,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/lab_fire_seoul/blob/master/notebooks/day1/dataframe-change.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/lab_fire_seoul/blob/master/notebooks/day1/dataframe_change.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -273,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/notebooks/day1/dataframe-change.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/day1/dataframe_change.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +379,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.2. </span>데이터프레임의 정리<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>데이터프레임의 정리<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>이 절에서는 데이터프레임을 정리할 떄 지주 사용되는 다음과 같은 내용을 살펴본다.</p>
 <ul class="simple">
 <li><p>정렬(sorting)</p></li>
@@ -395,7 +387,6 @@ document.write(`
 <li><p>행 지우기</p></li>
 <li><p>행 인덱스 재구성</p></li>
 <li><p>열이름 바꾸기</p></li>
-<li><p>외부화일로 저장하기</p></li>
 </ul>
 <section id="id2">
 <h2>자료의 정리<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
@@ -408,10 +399,10 @@ document.write(`
 </section>
 <section id="id3">
 <h2>화재출동 데이터<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 금천구) 화재출동 데이터입니다.</p>
-<p>데이터를 외부 CSV 화일에서 데이터프레임으로 읽어 오려면 다음과 같은 <code class="docutils literal notranslate"><span class="pre">read_csv()</span></code> 함수를 사용한다.</p>
+<p>2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 관악구) 화재출동 데이터이다.</p>
+<p>데이터를 외부 CSV 파일에서 데이터프레임으로 읽어 오려면 다음과 같은 <code class="docutils literal notranslate"><span class="pre">read_csv()</span></code> 함수를 사용한다.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">encoding=&quot;cp949&quot;</span></code> 은 화일의 언어형식을 지정하는 선택 명령이다. <code class="docutils literal notranslate"><span class="pre">cp949</span></code> 는 MS Windows 에서 사용하는 한글의 언어형식이다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encoding=&quot;cp949&quot;</span></code> 은 파일의 언어형식을 지정하는 선택 명령이다. <code class="docutils literal notranslate"><span class="pre">cp949</span></code> 는 MS Windows 에서 사용하는 한글의 언어형식이다.</p></li>
 <li><p>만약  <code class="docutils literal notranslate"><span class="pre">cp949</span></code> 를 사용하였을 때 한글이 깨져보이면 <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> 을 사용해 보자.</p></li>
 <li><p>언어형식은 컴퓨터(운영체제; MS Window, MacOS, Linux) 에 따라서 다를 수 있으므로  <code class="docutils literal notranslate"><span class="pre">cp949</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> 중 잘 작동하는 하나를 선택한다.</p></li>
 </ul>
@@ -424,7 +415,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -786,7 +777,7 @@ document.write(`
 <li><p>정렬은 <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> 메소드를 사용한다. 괄호 안에 <code class="docutils literal notranslate"><span class="pre">by=</span></code> 을 사용하여 정렬항 열이름이나 열이름으로 구성된 리스트를 지정한다.</p></li>
 <li><p>정렬의 순서는 선택문 <code class="docutils literal notranslate"><span class="pre">ascending=</span></code> 을 사용하며 오름차순은 <code class="docutils literal notranslate"><span class="pre">ascending=True</span></code> 으로, 내림차순은 <code class="docutils literal notranslate"><span class="pre">ascending=False</span></code> 로 지정한다. 순서를 지정하지 않으면 오름차순이 적용된다.</p></li>
 </ul>
-<p>이제 데이터프레임을 <code class="docutils literal notranslate"><span class="pre">행정구역별(읍면동)</span></code>으로 정렬해보자. 강남구가 처음으로, 강북구가 마지막으로 나타나는 것을 알 수 있다.</p>
+<p>이제 데이터프레임을 <code class="docutils literal notranslate"><span class="pre">행정구역별(읍면동)</span></code>으로 정렬해보자. 강남구가 처음으로, 관악구가 마지막으로 나타나는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;시군구&#39;</span><span class="p">)</span>
@@ -1024,7 +1015,7 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>이제 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code>별로, <code class="docutils literal notranslate"><span class="pre">연도</span></code> 별로, 두 개의 열에 대하여 정렬해 보자</p>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>별로, <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code> 별로, 두 개의 열에 대하여 정렬해 보자</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;시군구&#39;</span><span class="p">,</span> <span class="s1">&#39;화재발생연도&#39;</span><span class="p">])</span>
@@ -1702,7 +1693,7 @@ document.write(`
 </div>
 <p>정렬한 자료를 유지하여 데이터프레임을 바꾸고 싶다면 메소드  <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> 의 선택문으로 <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code> 라고 지정해주면 된다.</p>
 <p>물론 지정하지 않는 경우 <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">False</span></code> 가 자동적으로 적용된다.</p>
-<p>이제 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df_sorted</span></code>를 년도로 정렬하고 그 결과를 유지하게 해보자.</p>
+<p>이제 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df_sorted</span></code>를 화재발생연도로 정렬하고 그 결과를 유지하게 해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_copy</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;화재발생연도&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -1956,7 +1947,9 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">=</span></code> 에 삭제할 열이름을 리스트 형식으로 지정해 준다.</p></li>
 <li><p>선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>의 내용을 변경한다.</p></li>
 </ul>
-<p><strong>주의</strong>: 선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 를 사용할 떄 실수하면  데이터프레임을 복구할 수없으니 조심해서 사용하자. 이제 왜 선택문 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 가 있는지 생각해 보자. 변경된 내용을 새로운 데이터프레임에 저장하면 원래 자료는 그냥 변하지 않고 있으니 자료를 잃을 위험은 없다.  하지만 빅데이터를 다루는 경우 자료의 복사본을 계속 만들면 어떻게 될지 생각헤 보자.</p>
+<blockquote>
+<div><p><strong>!주의</strong>: 선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 를 사용할 떄 실수하면  데이터프레임을 복구할 수없으니 조심해서 사용하자. 이제 왜 선택문 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 가 있는지 생각해 보자. 변경된 내용을 새로운 데이터프레임에 저장하면 원래 자료는 그냥 변하지 않고 있으니 자료를 잃을 위험은 없다.  하지만 빅데이터를 다루는 경우 자료의 복사본을 계속 만들면 어떻게 될지 생각해 보자.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;출동횟수&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -2175,7 +2168,9 @@ document.write(`
 <p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 는 행정구역이 시도별로 자료가 구성되어 있다.</p>
 <p>그런데 열 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>에 <code class="docutils literal notranslate"><span class="pre">강동구</span></code> 를 포함하고 있다. 강동구 데이터를 특별히 다루지 않는다면 해당 데이터를 삭제해보자. 특히, 자료를 만드는 경우 열의 구성요소가 아닌 내용이 포함되면 분석할 떄 문제가 생길 수 있다.</p>
 <p>이제 열 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>의 값으로  <code class="docutils literal notranslate"><span class="pre">강동구</span></code> 을 가지는 행을 지워보자.</p>
-<p><strong>다시 주의</strong>: 앞 절에서 배운대로 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>가 아닌 행들만 <strong>슬라이싱</strong> 할 수 있다. 선택된 행들을 다른 이름의 데이터프레임으로 저정하면 되지만 슬라이싱은 선택만 할 뿐 데이터프레임 자체를 바꾸진 않는다.</p>
+<blockquote>
+<div><p><strong>!다시 주의</strong>: 앞 절에서 배운대로 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>가 아닌 행들만 <strong>슬라이싱</strong> 할 수 있다. 선택된 행들을 다른 이름의 데이터프레임으로 저정하면 되지만 슬라이싱은 선택만 할 뿐 데이터프레임 자체를 바꾸진 않는다.</p>
+</div></blockquote>
 <p>조건에 따라서 행을 지우는 경우 <code class="docutils literal notranslate"><span class="pre">drop</span></code>  메소드를 사용할 수 있다.</p>
 <p>이제 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 행을 <code class="docutils literal notranslate"><span class="pre">drop</span></code> 메소드로 지우고 데이터프레임에 적용되게 해보자. 다음과 같은 순서로 처리할 수 있다.</p>
 <p>먼저, <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 데이터프레임을 만들고 해당하는 행의 위치(index,인덱스)를 추출한다. 아래와 같이 메소드 <code class="docutils literal notranslate"><span class="pre">.index</span></code> 를 사용하면 데이터프레임의 행의 위치를 나타내는 인덱스를 추출할 수 있다. 추출한 인덱스의 자료 형식은 <code class="docutils literal notranslate"><span class="pre">Int64Index</span></code> 이며 이는 행의 위치를 나타내는 형식이다.</p>
@@ -2198,7 +2193,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>이제 <code class="docutils literal notranslate"><span class="pre">drop</span></code> 메소드를 사용하여 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>기 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 행을 지워보자.</p>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">drop</span></code> 메소드를 사용하여 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>가 <code class="docutils literal notranslate"><span class="pre">강동구</span></code>인 행을 지워보자.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">=</span> </code> 은 행에 대한 인덱스를 지정한다. 위에서 조건으로 만든 <code class="docutils literal notranslate"><span class="pre">index_for_delete</span></code>를 지정하면 해당하는 행이 제거된다.</p></li>
 <li><p>선택문 <code class="docutils literal notranslate"><span class="pre">inplace=</span> <span class="pre">True</span></code> 는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">house</span></code>의 내용을 변경한다.</p></li>
@@ -2381,7 +2376,7 @@ document.write(`
 </div></div></div>
 </div>
 <p>이제 우리는 연도별, 시군구명별 자료를 특정 행과 열을 삭제하여 정리하였다.</p>
-<p>그런데 바로 위에 나타난 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>를 보면 행을 나타나는 인덱스에 <code class="docutils literal notranslate"><span class="pre">1</span></code>과 <code class="docutils literal notranslate"><span class="pre">13</span></code> 이 나타나지 않는다. 이러한 이유는
+<p>그런데 바로 위에 나타난 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code>를 보면 행을 나타나는 인덱스에 <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, <code class="docutils literal notranslate"><span class="pre">11</span></code>, <code class="docutils literal notranslate"><span class="pre">16</span></code>, <code class="docutils literal notranslate"><span class="pre">21</span></code> 이 나타나지 않는다. 이러한 이유는
 지워진 행에 대한 인덱스가 같이 없어진 것이다. 즉, 행을 지우는 경우(그리고 정령을 하는 경우도) 자동적으로 행의 인덱스가 0부터 다시 구성되지 않는다.</p>
 <p>이제 완성된 데이터프레임의 행 인덱스를 0부터 시작에서 빠진 수없이 다시 구성해 보자.</p>
 <p><code class="docutils literal notranslate"><span class="pre">reset_index</span></code> 메소드를 다음과 같이 적용하면 행 인덱스가 0부터 차례대로 구성된다.</p>
@@ -2982,7 +2977,7 @@ document.write(`
 </ul>
 <p><strong>함께해봅시다</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">df</span></code>의 열이름을 다시 한글로 바꾸기 [‘연도’, ‘시군구’ , ‘사망자수’, ‘피해금액’]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df</span></code>의 열이름을 다시 한글로 바꾸기 ex) [‘연도’, ‘시군구’ , ‘사망자수’, ‘피해금액’]</p></li>
 <li><p>관악구를 제외한 최근 4개년의 자료를 <code class="docutils literal notranslate"><span class="pre">df_new</span></code>이름으로 저장하기</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">df_new</span></code>의 인덱스를 재구성하기</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">df_new</span></code>의 새로운 열 <code class="docutils literal notranslate"><span class="pre">연도별시군구</span></code>를 만들어 <code class="docutils literal notranslate"><span class="pre">연도</span></code>+<code class="docutils literal notranslate"><span class="pre">시군구</span></code>값을 저장하기 (예: <code class="docutils literal notranslate"><span class="pre">2017</span> <span class="pre">강남구</span></code>)</p></li>
@@ -3027,24 +3022,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="dataframe-intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.1. </span>데이터프레임의 정의와 구성요소</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="dataframe-summary.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.3. </span>데이터프레임의 요약</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>

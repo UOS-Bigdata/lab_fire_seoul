@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.6. 데이터프레임의 결합 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+    <title>3.5. 데이터프레임의 결합 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day2/dataframe-merge';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.7. 데이터프레임 실습 2: 그룹 요약 및 결합" href="../day3/practice_day3.html" />
-    <link rel="prev" title="2.5. 데이터프레임의 그룹별 요약" href="dataframe-group.html" />
+    <link rel="next" title="3.6. 화재출동 현황 적용" href="../day3/practice_day3.html" />
+    <link rel="prev" title="3.4. 데이터프레임의 그룹별 요약" href="dataframe-group.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -151,26 +151,20 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../day1/intro-python.html">1. 데이터분석과 프로그래밍</a></li>
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../day1/dataframe.html">3. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">3.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">3.2. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1_summary.html">3.3. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-group.html">3.4. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.5. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">3.6. 화재출동 현황 적용</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.6. 데이터프레임의 결합</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">4. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">4.1. 화재데이터를 이용한 기초그래프</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">4.2. 공간자료 시각화</a></li>
 </ul>
 </li>
 </ul>
@@ -365,10 +359,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 예제</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">식별자의 불일치</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">요약</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">화재출동 데이터와 화재원인 데이터의 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">화재출동 데이터와 화재원인 데이터의 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">요약</a></li>
 </ul>
             </nav>
         </div>
@@ -381,10 +375,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.6. </span>데이터프레임의 결합<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>데이터를 이용하여 분석을 하는 경우 사용할 자료가 두 개 이상이 경우는 매우 흔한 일이다. 실제로 데이터 분석에서 하나의 자료만 가지고 수행하는 일은 매우 드물다.</p>
-<p>여러 개의 자료를 사용하는 경우 두 개의 자료를 서로 결합하여 새로운 자료를 만들어야 하는 경우가 많다.</p>
-<p>이 절에서는 데이터프레임을 결합하는 예시를 살펴볼 것이다.</p>
+<h1><span class="section-number">3.5. </span>데이터프레임의 결합<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>데이터를 이용하여 분석을 하는 경우 사용할 자료가 두 개 이상이 경우는 매우 흔한 일이다. 실제로 데이터 분석에서 하나의 자료만 가지고 수행하는 일은 매우 드물다. 이 절에서는 여러 개의 자료를 사용하는 경우 두 개의 자료를 서로 결합하여 새로운 자료를 만드는 것을 실습한다. 살펴 볼 내용은 다음과 같다.</p>
+<ul class="simple">
+<li><p>데이터의 결합</p></li>
+<li><p>식별자의 불일치</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -395,7 +391,7 @@ document.write(`
 </div>
 </div>
 <section id="id2">
-<h2>간단한 결합<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2>간단한 예제<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>두 개의 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 가 다음과 같이 주어졌다고 하자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -570,7 +566,7 @@ document.write(`
 <section id="id3">
 <h2>식별자의 불일치<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>만약 두 개의 데이터프레임에 있는 식별자에 포함된 자료가 다르면 어떻게 될까?</p>
-<p>다음과 같이 <code class="docutils literal notranslate"><span class="pre">john</span></code> 의 자료가 빠져 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df3</span></code>을  <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 결합해 보자.</p>
+<p>다음과 같이 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 자료가 빠져 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df3</span></code>을  <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 결합해 보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -621,7 +617,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df3</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -646,7 +642,7 @@ document.write(`
       <th></th>
       <th>name</th>
       <th>age</th>
-      <th>sex</th>
+      <th>weight</th>
     </tr>
   </thead>
   <tbody>
@@ -654,19 +650,13 @@ document.write(`
       <th>0</th>
       <td>철수</td>
       <td>23</td>
-      <td>M</td>
+      <td>55</td>
     </tr>
     <tr>
       <th>1</th>
       <td>영이</td>
       <td>34</td>
-      <td>F</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>John</td>
-      <td>19</td>
-      <td>M</td>
+      <td>44</td>
     </tr>
   </tbody>
 </table>
@@ -674,9 +664,17 @@ document.write(`
 </div>
 <p>위의 결과에서 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 자료가 사라져 버렸다. 물론 몸무게 값이 없는 <code class="docutils literal notranslate"><span class="pre">John</span></code> 의 자료가 필요없을 수도 있지만 많은 경우 자료를 유지해야 한다.</p>
 <p>이렇게 식별자의 항목이 다른 경우, 결합의 기준이 되는 식별자를 데이터프레임의 위치로 지정할 수 있다. 위에서 함수 <code class="docutils literal notranslate"><span class="pre">merge()</span></code>를 설명할 때 사용되는 데이터프레임의 위치에 따라서 <strong>왼쪽</strong> (첫 번째 인자) 과  <strong>오른쪽</strong> (두 번째 인자)으로 나타냈다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="o">....</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">how='left'</span></code> : 식별자는 왼쪽 데이터프레임에만 있는 것으로 선택</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='right'</span></code> : 식별자는 오른쪽 데이터프레임에만 있는 것으로 선택</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='inner'</span></code> : 식별자는 두 데이터프레임에 공통인 것으로 선택</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='outer'</span></code> : 식별자는 두 데이터프레임에 나타난 모든 것으로 선택</p></li>
+</ul>
+<p>식별자를 선택하는 선택명령문 <code class="docutils literal notranslate"><span class="pre">how=</span></code> 을 지정하지 않으면 자동으로 <code class="docutils literal notranslate"><span class="pre">how='inner'</span></code> 이 지정된다.</p>
+<p><img alt="merge" src="../../_images/merge.png" /></p>
 <p>이제 결합시 기준이 되는 식별자가 왼쪽에 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 에 있다는 것을 선택명령문 <code class="docutils literal notranslate"><span class="pre">how='left'</span></code> 로 알려주자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1001,26 +999,11 @@ document.write(`
 </div>
 </section>
 <section id="id4">
-<h2>요약<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>두 개의 데이터프라임을 결합하는 경우 pandas 라이브러리의 함수 <code class="docutils literal notranslate"><span class="pre">merge()</span></code> 를 사용하며 식별자가 포함된 공통의 열은 <code class="docutils literal notranslate"><span class="pre">on=</span></code> 으로 지정한다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>이제 두 개의 데이터 프레임을 결합할 때 식별자를 선택하는 방법을 요약해 보자.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">how='left'</span></code> : 식별자는 왼쪽 데이터프레임에만 있는 것으로 선택</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">how='right'</span></code> : 식별자는 오른쪽 데이터프레임에만 있는 것으로 선택</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">how='inner'</span></code> : 식별자는 두 데이터프레임에 공통인 것으로 선택</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">how='outer'</span></code> : 식별자는 두 데이터프레임에 나타난 모든 것으로 선택</p></li>
-</ul>
-<p>식별자를 선택하는 선택명령문 <code class="docutils literal notranslate"><span class="pre">how=</span></code> 을 지정하지 않으면 디폴트는 방법은 <code class="docutils literal notranslate"><span class="pre">how='inner</span></code> 이다.</p>
-</section>
-<section id="id5">
-<h2>화재출동 데이터와 화재원인 데이터의 결합<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2>화재출동 데이터와 화재원인 데이터의 결합<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>이번에는 화재출동 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)와 화재원인 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_reason_summary.csv</span></code>) 을 결합하는 작업을 해보려고 한다. 2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 관악구) 정보가 있습니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df1</span>
 </pre></div>
 </div>
@@ -1258,7 +1241,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_reason_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_reason_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df2</span>
 </pre></div>
 </div>
@@ -1798,7 +1781,7 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 에는 같은 이름을 가지는 열 <code class="docutils literal notranslate"><span class="pre">연도</span></code> 와 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code> 이 있다. 우리는 두 개의 데이터프레임을 합쳐 출동현황과 화재원인이 모두 포함된 새로운 데이터프레임을 만들것이다.</p>
+<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 과 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 에는 같은 이름을 가지는 열 <code class="docutils literal notranslate"><span class="pre">연도</span></code> 와 <code class="docutils literal notranslate"><span class="pre">시군구명</span></code> 이 있다. 우리는 두 개의 데이터프레임을 합쳐 출동현황과 화재원인이 모두 포함된 새로운 데이터프레임을 만들 것이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">])</span>
@@ -2672,13 +2655,8 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>위의 결과에서 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 자료가 사라져 버렸다. 물론 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code>의 자료가 필요없을 수도 있지만 많은 경우 자료를 유지해야 한다.</p>
-<p>이제 <code class="docutils literal notranslate"><span class="pre">how</span></code> 옵션을 바꾸어 결합 시 기준이 되는 식별자에 조건을 바꾸어보자.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">how</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><img alt="merge" src="../../_images/merge.png" /></p>
-<p>먼저 결합시 기준이 되는 식별자가 오른쪽에 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 에 있다는 것을 선택명령문 <code class="docutils literal notranslate"><span class="pre">how='right'</span></code> 로 알려주자.</p>
+<p>위의 결과에서 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 자료가 사라져 버린 것을 확인할 수 있다. 물론 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code>의 자료가 필요없을 수도 있지만 많은 경우 자료를 유지해야 한다.</p>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">how</span></code> 옵션을 바꾸어 결합 시 기준이 되는 식별자에 조건을 바꾸어보자. 먼저 결합시 기준이 되는 식별자가 오른쪽에 있는 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 에 있다는 것을 선택명령문 <code class="docutils literal notranslate"><span class="pre">how='right'</span></code> 로 알려주자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1_no2017</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;연도&quot;</span><span class="p">,</span><span class="s2">&quot;시군구명&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
@@ -3049,8 +3027,8 @@ document.write(`
 <p>이제 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 자료가 나타나고 <code class="docutils literal notranslate"><span class="pre">2017년도</span></code> 의 화재 원인 부분이 결측값(<code class="docutils literal notranslate"><span class="pre">NaN</span></code>) 으로 표시된다.</p>
 <p>만약 두 개의 식별자에 서로 다른 내용이 나타나면 어떻게 될까? 다음과 같이 서로 다른 연도를 가진 데이터를 결합해보자.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">2018~2021년도</span></code>의 자료를 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df4</span></code>를 새로 만든다.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">2017~2020년도</span></code>의 자료를 가진 데이터프레임<code class="docutils literal notranslate"><span class="pre">df1</span></code>과 결합한다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2017~2020년도</span></code>의 자료를 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df2_no2021</span></code>를 새로 만든다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2018~2021년도</span></code>의 자료를 가진 데이터프레임<code class="docutils literal notranslate"><span class="pre">df1_no2017</span></code>과 결합한다.</p></li>
 </ul>
 <p>아래 코드에서 선택명령문 <code class="docutils literal notranslate"><span class="pre">how=</span></code> 에 지정된 문자열에 따라서 결합의 결과가 어떻게 다른지 확인한다.</p>
 <div class="cell docutils container">
@@ -4501,6 +4479,10 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+</section>
+<section id="id5">
+<h2>요약<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>두 개의 데이터프레임을 결합하는 경우 pandas 라이브러리의 함수 <code class="docutils literal notranslate"><span class="pre">merge()</span></code> 를 사용하며 식별자가 포함된 공통의 열은 <code class="docutils literal notranslate"><span class="pre">on=</span></code> 으로 지정한다. 결합의 방향을 <code class="docutils literal notranslate"><span class="pre">how=</span></code>로 지정한다.</p>
 <p><strong>함께해봅시다</strong></p>
 <ul class="simple">
 <li><p>화재출동 데이터 (<code class="docutils literal notranslate"><span class="pre">fire_call.csv</span></code>)로 사망자수, 부상자수, 재산피해금액에 대한 연도와 시군구별 평균 데이터 <code class="docutils literal notranslate"><span class="pre">call_summ</span></code>를 만들어주세요.</p></li>
@@ -4510,8 +4492,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
-<span class="c1"># fire = pd.read_csv(&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling.csv&quot;, encoding = &#39;cp949&#39;)</span>
-<span class="c1"># reason = pd.read_csv(&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_reason.csv&quot;)</span>
+<span class="c1"># fire = pd.read_csv(&quot;../../data/fire_calling.csv&quot;, encoding = &#39;cp949&#39;)</span>
+<span class="c1"># reason = pd.read_csv(&quot;../../data/fire_reason.csv&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -4556,7 +4538,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.5. </span>데이터프레임의 그룹별 요약</p>
+        <p class="prev-next-title"><span class="section-number">3.4. </span>데이터프레임의 그룹별 요약</p>
       </div>
     </a>
     <a class="right-next"
@@ -4564,7 +4546,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.7. </span>데이터프레임 실습 2: 그룹 요약 및 결합</p>
+        <p class="prev-next-title"><span class="section-number">3.6. </span>화재출동 현황 적용</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -4586,10 +4568,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 예제</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">식별자의 불일치</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">요약</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">화재출동 데이터와 화재원인 데이터의 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">화재출동 데이터와 화재원인 데이터의 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">요약</a></li>
 </ul>
   </nav></div>
 

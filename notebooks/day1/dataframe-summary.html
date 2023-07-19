@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.3. 데이터프레임의 요약 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+    <title>3.2. 데이터프레임의 요약 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day1/dataframe-summary';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.4. 데이터프레임 실습 1: 정리와 요약" href="../day2/day1_summary.html" />
-    <link rel="prev" title="2.2. 데이터프레임의 정리" href="dataframe-change.html" />
+    <link rel="next" title="3.3. 데이터프레임 실습 1: 정리와 요약" href="../day2/day1_summary.html" />
+    <link rel="prev" title="3.1. 데이터프레임의 정의와 구성요소" href="dataframe-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -151,26 +151,20 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html">1.2. 자료의 형식</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numbers.html">1.3. 숫자</a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html">1.4. 문자열</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-python.html">1. 데이터분석과 프로그래밍</a></li>
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="dataframe.html">3. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataframe-intro.html">3.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">3.3. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">3.4. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">3.5. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">3.6. 화재출동 현황 적용</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.3. 데이터프레임의 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">4. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">4.1. 화재데이터를 이용한 기초그래프</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">4.2. 공간자료 시각화</a></li>
 </ul>
 </li>
 </ul>
@@ -365,13 +359,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">데이터의 요약</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">열의 요약 통계</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">화재출동 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">열의 요약 통계</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">해당 연도 요약 통계</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">해당 시군구 통계</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">데이터 내보내기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">외부 파일로 저장</a></li>
 </ul>
             </nav>
         </div>
@@ -384,17 +378,19 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.3. </span>데이터프레임의 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">3.2. </span>데이터프레임의 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>이 절에서는 데이터프레임으로 저장된 데이터로부터 나열된 값을 요약하여 새로운 정보를 생성하는 방법을 배운다. 살펴볼 내용은 다음과 같다.</p>
 <ul class="simple">
-<li><p>데이터 불러오기</p></li>
-<li><p>열에 대한 요약 통계</p></li>
+<li><p>열에 대한 요약 통계</p>
+<ul>
 <li><p>해당 연도 요약 통계</p></li>
 <li><p>해당 시군구 요약 통계</p></li>
-<li><p>데이터 내보내기</p></li>
 </ul>
-<p>먼저 자료의 형태에 대해 알아야 한다. 자료는 크게 두 가지의 형태로 나타낼 수 있다.</p>
-<p><img alt="aa" src="../../_images/datatypes.png" /></p>
+</li>
+<li><p>외부 파일로 저장</p></li>
+</ul>
+<p>먼저 자료의 형태에 대해 알아야 한다. 자료는 크게 ‘범주형 자료’와 ‘수치형 자료’로 분류할 수 있다.</p>
+<p><img alt="datatype" src="../../_images/datatypes.png" /></p>
 <p>화재출동 데이터를 위의 기준에 따라 분류해보면 어떻게 될까?</p>
 <details>
 <summary>접기/펼치기</summary>
@@ -412,9 +408,8 @@ document.write(`
 </div></blockquote>
 </details>
 <section id="id2">
-<h2>데이터의 요약<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>데이터 프레임은 행(row)과 열(column)로 이루어져 있다. 행은 관측치라고도 부르며, 각 관측치의 측정된 정보가 해당 열 위치에 기술되어 있다. 따라서 데이터는 각 열을 기준으로 요약하며, 이 절에서도 열(column)의  <code class="docutils literal notranslate"><span class="pre">평균,</span> <span class="pre">표준편차,</span> <span class="pre">최댓값/최솟값,</span> <span class="pre">분위수</span></code> 등 요약된 수치들을 출력한다. 이러한 요약된 수치들을 <code class="docutils literal notranslate"><span class="pre">통계량</span></code>이라고도 부른다.</p>
-<p>실습할 데이터는 화재출동 데이터(<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)이다. 화재출동 데이터는 2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 금천구) 자료를 담고 있다.</p>
+<h2>화재출동 데이터<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>먼저 실습할 데이터를 불러오자. 실습 데이터는 화재출동 데이터(<code class="docutils literal notranslate"><span class="pre">fire_calling_summary.csv</span></code>)이다. 화재출동 데이터는 2017년부터 2021년의 5년간 서울시 5개 구별 (강동구, 강서구, 강남구, 강북구, 관악구) 자료를 담고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -424,7 +419,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling_summary.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -660,8 +655,10 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+</section>
 <section id="id3">
-<h3>열의 요약 통계<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h2>열의 요약 통계<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>데이터 프레임은 행(row)과 열(column)로 이루어져 있다. 행은 관측치라고도 부르며, 각 관측치의 측정된 정보가 해당 열 위치에 기술되어 있다. 따라서 데이터는 각 열을 기준으로 요약하며, 이 절에서도 열(column)의  <code class="docutils literal notranslate"><span class="pre">평균,</span> <span class="pre">표준편차,</span> <span class="pre">최댓값/최솟값,</span> <span class="pre">분위수</span></code> 등 요약된 수치들을 출력한다. 이러한 요약된 수치들을 <code class="docutils literal notranslate"><span class="pre">통계량</span></code>이라고도 부른다.</p>
 <p>전체 데이터를 요약하는 메소드는 <code class="docutils literal notranslate"><span class="pre">describe</span></code>이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1269,7 +1266,6 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-</section>
 <section id="id4">
 <h3>해당 연도 요약 통계<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>위에서는 전체 데이터를 요약해보았다. 이번에는 범주별로 나누어 <code class="docutils literal notranslate"><span class="pre">연도</span></code> 혹은 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>의 자료를 각각 요약해보자.</p>
@@ -1858,13 +1854,13 @@ document.write(`
 </section>
 </section>
 <section id="id6">
-<h2>데이터 내보내기<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<p>처음에 만든 2017년 요약데이터를 csv 내보내려면 to_csv를 입력하고 괄호() 안에는 저장링크를 넣고 마지막 부분에는 저장할 파일 이름을 지정하면 된다.</p>
+<h2>외부 파일로 저장<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>처음에 만든 2021년 요약데이터를 csv 내보내려면 to_csv를 입력하고 괄호() 안에는 저장링크를 넣고 마지막 부분에는 저장할 파일 이름을 지정하면 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span> <span class="o">=</span> <span class="n">df_2021</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 
-<span class="n">summary2017</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/2021년요약.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<span class="n">summary2017</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;2021년요약.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1872,14 +1868,14 @@ document.write(`
 <p>엑셀 .xlsx로 내보낼수도 있다. 만약 시트 이름을 바꾸고 싶다면 <code class="docutils literal notranslate"><span class="pre">sheet_name</span></code>을 추가하자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/2021년요약.xlsx&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;2021년요약.xlsx&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/2021년요약.xlsx&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_1&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;2021년요약.xlsx&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1887,7 +1883,7 @@ document.write(`
 <p>만약 여러 개 시트에 저장하고 싶다면 다음과 같이 지정해주면 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>  
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s2">&quot;요약표 작업.xlsx&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>  
     <span class="n">summary2017</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;2021년도 요약표&#39;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
     <span class="n">df_강남구</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;강남구 요약표&#39;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 </pre></div>
@@ -1897,7 +1893,7 @@ document.write(`
 <p>저장했던 데이터를 다시 불러와보자. 특정 시트를 지정해주지 않으면 기본적으로 첫 번째 시트를 불러온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;요약표 작업.xlsx&quot;</span><span class="p">)</span>
 <span class="n">excel1</span>
 </pre></div>
 </div>
@@ -2000,7 +1996,7 @@ document.write(`
 <p>특정 시트를 불러오고 싶다면 <code class="docutils literal notranslate"><span class="pre">sheet_name</span></code>로 시트명이나 시트번호를 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;2021년도 요약표&#39;</span><span class="p">)</span> <span class="c1"># 시트명으로 불러오기.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;요약표 작업.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;2021년도 요약표&#39;</span><span class="p">)</span> <span class="c1"># 시트명으로 불러오기.</span>
 <span class="n">excel2</span> 
 </pre></div>
 </div>
@@ -2102,7 +2098,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;C:/Users/jieun/Desktop/요약표 작업.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># 번호로 불러오기. 번호는 0부터 시작</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excel3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;요약표 작업.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># 번호로 불러오기. 번호는 0부터 시작</span>
 <span class="n">excel3</span>
 </pre></div>
 </div>
@@ -2242,12 +2238,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dataframe-change.html"
+       href="dataframe-intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.2. </span>데이터프레임의 정리</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>데이터프레임의 정의와 구성요소</p>
       </div>
     </a>
     <a class="right-next"
@@ -2255,7 +2251,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.4. </span>데이터프레임 실습 1: 정리와 요약</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>데이터프레임 실습 1: 정리와 요약</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2277,13 +2273,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">데이터의 요약</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">열의 요약 통계</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">화재출동 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">열의 요약 통계</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">해당 연도 요약 통계</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">해당 시군구 통계</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">데이터 내보내기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">외부 파일로 저장</a></li>
 </ul>
   </nav></div>
 

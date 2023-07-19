@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3.2. 공간자료 시각화 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+    <title>4.2. 공간자료 시각화 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
   
   
   
@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day3/map_visualization';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="3.1. 시각화 분석의 기초" href="visualization_basic.html" />
+    <link rel="prev" title="4.1. 화재데이터를 이용한 기초그래프" href="visualization_basic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,26 +150,20 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../day1/intro-python.html">1. 데이터분석과 프로그래밍</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/dataframe.html">3. 데이터프레임</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">3.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">3.2. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">3.3. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">3.4. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">3.5. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_day3.html">3.6. 화재출동 현황 적용</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.5. 데이터프레임의 그룹별 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="map_visual.html">3. 공간 분석과 시각화</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2. 공간자료 시각화</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="map_visual.html">4. 공간 분석과 시각화</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="visualization_basic.html">4.1. 화재데이터를 이용한 기초그래프</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.2. 공간자료 시각화</a></li>
 </ul>
 </li>
 </ul>
@@ -388,14 +382,14 @@ document.write(`
 </div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.2. </span>공간자료 시각화<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">4.2. </span>공간자료 시각화<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>공간데이터<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>공간 자료(공간 데이터)란 각 곽측치마다 공간에 대한 정보를 가지고 있는 데이터 이며, 공간 정보(위치 정보)는 위도(lattitude)와 경도(longitude)로 표현한다.</p></li>
 <li><p>위경도는 지리 좌표계(Geographic coordinate system)을 기반으로 생성된다. Ex) TM 좌표계(EPSG:2097), WGS84좌표계(EPSG:4326), UTM-K좌표계(EPSG:5179)등 이 존재한다.</p></li>
 </ol>
-<p><img alt="위경도" src="../../_images/long_lat_image.jpeg" /></p>
+<p><img alt="위경도" src="notebooks/day3/long_lat_image.jpeg" /></p>
 <ol class="arabic simple" start="3">
 <li><p>같은 위경도 좌표더라도, 각 좌표계에 따라 다른 값을 가진다. 그러므로, 공간데이터를 다루는데 있어 가장 중요한 것이 이 좌표계이다.</p></li>
 <li><p>예를들어, 서울 롯데타워의 위치의 좌표는 각 좌표계에 따라 다음과 같이 나타난다.</p>
@@ -407,7 +401,7 @@ document.write(`
 </li>
 <li><p>공간 정보는 지도에 위치를 표현할때, 기본적으로 점(point)로 표현을 한다. 또한, 이 점들을 연결하여 선(line), 이 선들을 연결한 다각형(polygon)형태로 저장된다. 이 개념은 다음의 그림으로 표현할 수 있다.</p></li>
 </ol>
-<p><img alt="기본" src="../../_images/basic_element.png" /></p>
+<p><img alt="기본" src="notebooks/day3/basic_element.png" /></p>
 <p>파이썬에서는 이런 공간데이터를 다루기 위해 geopandas 패키지가 구현되어 있고, 좌표계를 다루기 위해 pyproj 패키지가 구현되어 있다.</p>
 </section>
 <section id="id3">
@@ -429,11 +423,37 @@ document.write(`
 <p>화재출동 현황 데이터를 이용하여 좌표를 입력하고, 이를 지도에 표현해 보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire.csv&quot;</span><span class="p">)</span>
+<span class="n">fire_dat</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;wrinvstg_no&#39;, &#39;fire_type_nm&#39;, &#39;buld_srtfrm&#39;, &#39;buld_strctr&#39;,
+       &#39;buld_srtrf&#39;, &#39;buld_strct_dong_cnt&#39;, &#39;ground_nof&#39;, &#39;bstory_cnt&#39;,
+       &#39;totar&#39;, &#39;bottom_area&#39;, &#39;buld_sttus_nm&#39;, &#39;dth_cnt&#39;, &#39;injpsn_cnt&#39;,
+       &#39;dth_hnl_dmge_cnt&#39;, &#39;prprty_dmge_amt&#39;, &#39;fire_ocrn_yr&#39;, &#39;season_se_nm&#39;,
+       &#39;qtr_se&#39;, &#39;fire_ocrn_ymd&#39;, &#39;fire_ocrn_tm&#39;, &#39;fire_ocrn_mnth&#39;,
+       &#39;fire_ocrn_day&#39;, &#39;fire_ocrn_hour&#39;, &#39;fire_ocrn_min&#39;, &#39;daywk&#39;, &#39;frstt_nm&#39;,
+       &#39;ward_nm&#39;, &#39;lfdau_nm&#39;, &#39;dsp_reqre_time&#39;, &#39;fire_supesn_time&#39;, &#39;sido_nm&#39;,
+       &#39;sigungu_nm&#39;, &#39;emd_nm&#39;, &#39;cty_frmvl_se_nm&#39;, &#39;emd_se_nm&#39;, &#39;gis_x_axis&#39;,
+       &#39;gis_y_axis&#39;, &#39;longitude&#39;, &#39;la&#39;, &#39;spt_frstt_dist&#39;,
+       &#39;spt_safe_cnter_dist&#39;, &#39;spt_lfdau_dist&#39;, &#39;ign_htsrc_nm&#39;,
+       &#39;ign_htsrc_sclas_nm&#39;, &#39;ign_fctr_lclas_nm&#39;, &#39;ign_fctr_sclas_nm&#39;,
+       &#39;frst_igobj_lclas_nm&#39;, &#39;frst_igobj_sclas_nm&#39;, &#39;ign_mhrls_lclas_nm&#39;,
+       &#39;ign_mhrls_sclas_nm&#39;, &#39;cmbs_expobj_lclas_nm&#39;, &#39;cmbs_expobj_sclas_nm&#39;,
+       &#39;fclty_place_lclas_nm&#39;, &#39;fclty_place_mclas_nm&#39;, &#39;fclty_place_sclas_nm&#39;,
+       &#39;ign_floor_nm&#39;, &#39;soot_area&#39;, &#39;fio_join_trgt_yn&#39;, &#39;frmng_trgt_yn&#39;,
+       &#39;mub_yn&#39;, &#39;emrg_crg_oper_yn&#39;, &#39;vhcle_place&#39;, &#39;vhcle_ign_bhf&#39;,
+       &#39;fld_fire_se&#39;, &#39;fld_fire_ign_bhf&#39;, &#39;time_unit_tmprt&#39;,
+       &#39;time_unit_rainqty&#39;, &#39;time_unit_ws&#39;, &#39;time_unit_wd&#39;,
+       &#39;time_unit_humidity&#39;, &#39;time_unit_msnf&#39;, &#39;time_unit&#39;],
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
 </div>
+<p>화재출동 현황 데이터를 보면, <code class="docutils literal notranslate"><span class="pre">longitude</span></code>변수, <code class="docutils literal notranslate"><span class="pre">la</span></code>변수가 각각 경도, 위도를 의미하는 변수이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fire_dat</span><span class="o">.</span><span class="n">crs</span>
@@ -443,10 +463,10 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">crs</span>
 
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/core/generic.py:5902,</span> in <span class="ni">NDFrame.__getattr__</span><span class="nt">(self, name)</span>
+<span class="nn">File D:\anaconda3\lib\site-packages\pandas\core\generic.py:5902,</span> in <span class="ni">NDFrame.__getattr__</span><span class="nt">(self, name)</span>
 <span class="g g-Whitespace">   </span><span class="mi">5895</span> <span class="k">if</span> <span class="p">(</span>
 <span class="g g-Whitespace">   </span><span class="mi">5896</span>     <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_internal_names_set</span>
 <span class="g g-Whitespace">   </span><span class="mi">5897</span>     <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span>
@@ -498,110 +518,41 @@ Datum: World Geodetic System 1984 ensemble
 </section>
 <section id="id5">
 <h2>전국 법정동 좌표 정보 데이터<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>예시로 사용하기위한 전국 법정동 좌표 데이터는 shp파일과 xlsx파일로 구분되어 있다.</p>
+<p>예시로 사용하기위한 서울특별시 법정동 좌표 데이터는 shp파일로 저장되어 있다.</p>
 <ul class="simple">
-<li><p>shp 파일 : csv, xlsx과 다르게 위치 정보(geometry)를 포함하고 있는 파일로, 확장자가 dbf, prj, shp, shx 4가지 파일이 모두 있어야 사용 가능하다. (prj는 없어도 가능)</p></li>
-<li><p>xlsx 파일 : 한국어를 값으로 가지고 있는 변수들을 xlsx이다.</p></li>
-<li><p>이때, shp와 xlsx를 연결시켜주는 key 변수는 법정동코드 이다.</p></li>
+<li><p>shp 파일 : csv, xlsx과 다르게 위치 정보(geometry)를 포함하고 있는 파일로, 확장자가 dbf, prj, shp, shx 4가지 파일이 모두 있어야 사용 가능하다. (prj는 없어도 가능, 이유는 prj파일이 좌표계 정보를 가지고 있는 파일이기 때문이다.)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bjd_dat</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../../data/bjd_shp_file.shp&quot;</span><span class="p">)</span>
-<span class="n">loc_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../data/bjd_file.xlsx&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">bjd_dat</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../../data/bjd_shp_file.shp&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">loc_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;data/bjd_file.xlsx&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/util/_decorators.py:211,</span> in <span class="ni">deprecate_kwarg.&lt;locals&gt;._deprecate_kwarg.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span>         <span class="n">kwargs</span><span class="p">[</span><span class="n">new_arg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_arg_value</span>
-<span class="ne">--&gt; </span><span class="mi">211</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/util/_decorators.py:331,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">_format_argument_list</span><span class="p">(</span><span class="n">allow_args</span><span class="p">)),</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">331</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/excel/_base.py:482,</span> in <span class="ni">read_excel</span><span class="nt">(io, sheet_name, header, names, index_col, usecols, squeeze, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, thousands, decimal, comment, skipfooter, convert_float, mangle_dupe_cols, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">ExcelFile</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="n">should_close</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="ne">--&gt; </span><span class="mi">482</span>     <span class="n">io</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span> <span class="k">elif</span> <span class="n">engine</span> <span class="ow">and</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">484</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="s2">&quot;Engine should not be specified when passing &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">486</span>         <span class="s2">&quot;an ExcelFile - ExcelFile already has the engine set&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">487</span>     <span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/excel/_base.py:1652,</span> in <span class="ni">ExcelFile.__init__</span><span class="nt">(self, path_or_buffer, engine, storage_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1650</span>     <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;xls&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1651</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1652</span>     <span class="n">ext</span> <span class="o">=</span> <span class="n">inspect_excel_format</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1653</span>         <span class="n">content_or_path</span><span class="o">=</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span>
-<span class="g g-Whitespace">   </span><span class="mi">1654</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1655</span>     <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1656</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1657</span>             <span class="s2">&quot;Excel file format cannot be determined, you must specify &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1658</span>             <span class="s2">&quot;an engine manually.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1659</span>         <span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/excel/_base.py:1525,</span> in <span class="ni">inspect_excel_format</span><span class="nt">(content_or_path, storage_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span>     <span class="n">content_or_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1525</span> <span class="k">with</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>     <span class="n">content_or_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">is_text</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">   </span><span class="mi">1527</span> <span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1528</span>     <span class="n">stream</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">handle</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span>     <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/onlinebook/lib/python3.10/site-packages/pandas/io/common.py:865,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">856</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">857</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>         <span class="c1"># Binary mode</span>
-<span class="ne">--&gt; </span><span class="mi">865</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="c1"># Convert BytesIO or file objects passed with an encoding</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/bjd_file.xlsx&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seoul_map</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../../data/seoul_shp.shp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>각 데이터의 정보는 각각 다음과 같다.</p>
+<p>seoul_map 데이터의 정보는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bjd_dat</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bjd_dat</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="n">bjd_dat</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seoul_map</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">seoul_map</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
-RangeIndex: 20316 entries, 0 to 20315
-Data columns (total 3 columns):
+RangeIndex: 467 entries, 0 to 466
+Data columns (total 8 columns):
  #   Column      Non-Null Count  Dtype   
 ---  ------      --------------  -----   
- 0   bjd_code    20316 non-null  float64 
- 1   shape_area  20272 non-null  float64 
- 2   geometry    20272 non-null  geometry
-dtypes: float64(2), geometry(1)
-memory usage: 476.3 KB
-EPSG:5179
+ 0   fid         467 non-null    float64 
+ 1   bjd_code    467 non-null    float64 
+ 2   shape_area  467 non-null    float64 
+ 3   sido        467 non-null    object  
+ 4   si          467 non-null    object  
+ 5   sgg         467 non-null    object  
+ 6   bjd         467 non-null    object  
+ 7   geometry    467 non-null    geometry
+dtypes: float64(3), geometry(1), object(4)
+memory usage: 29.3+ KB
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -622,179 +573,142 @@ EPSG:5179
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>fid</th>
       <th>bjd_code</th>
       <th>shape_area</th>
+      <th>sido</th>
+      <th>si</th>
+      <th>sgg</th>
+      <th>bjd</th>
       <th>geometry</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>1.0</td>
       <td>1.111010e+09</td>
-      <td>792617.902967</td>
-      <td>POLYGON ((953700.022 1954605.065, 953693.871 1...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1.111010e+09</td>
-      <td>98821.715201</td>
-      <td>POLYGON ((953233.465 1953996.984, 953235.183 1...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1.111010e+09</td>
-      <td>73271.654659</td>
-      <td>POLYGON ((953560.228 1954257.466, 953561.190 1...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.111010e+09</td>
-      <td>59403.652076</td>
-      <td>POLYGON ((953519.843 1953890.785, 953518.489 1...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.111010e+09</td>
-      <td>59399.285366</td>
-      <td>POLYGON ((953516.123 1953734.362, 953516.526 1...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc_dat</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="n">loc_dat</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 20316 entries, 0 to 20315
-Data columns (total 5 columns):
- #   Column    Non-Null Count  Dtype 
----  ------    --------------  ----- 
- 0   sido      20316 non-null  object
- 1   si        20316 non-null  object
- 2   sgg       20316 non-null  object
- 3   bjd       20316 non-null  object
- 4   bjd_code  20316 non-null  int64 
-dtypes: int64(1), object(4)
-memory usage: 793.7+ KB
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>sido</th>
-      <th>si</th>
-      <th>sgg</th>
-      <th>bjd</th>
-      <th>bjd_code</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
+      <td>7.926179e+05</td>
       <td>서울특별시</td>
       <td>종로구</td>
       <td>종로구</td>
       <td>청운동</td>
-      <td>1111010100</td>
+      <td>POLYGON ((953700.022 1954605.065, 953693.871 1...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>2.0</td>
+      <td>1.111010e+09</td>
+      <td>9.882172e+04</td>
       <td>서울특별시</td>
       <td>종로구</td>
       <td>종로구</td>
       <td>신교동</td>
-      <td>1111010200</td>
+      <td>POLYGON ((953233.465 1953996.984, 953235.183 1...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>3.0</td>
+      <td>1.111010e+09</td>
+      <td>7.327165e+04</td>
       <td>서울특별시</td>
       <td>종로구</td>
       <td>종로구</td>
       <td>궁정동</td>
-      <td>1111010300</td>
+      <td>POLYGON ((953560.228 1954257.466, 953561.190 1...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>4.0</td>
+      <td>1.111010e+09</td>
+      <td>5.940365e+04</td>
       <td>서울특별시</td>
       <td>종로구</td>
       <td>종로구</td>
       <td>효자동</td>
-      <td>1111010400</td>
+      <td>POLYGON ((953519.843 1953890.785, 953518.489 1...</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>5.0</td>
+      <td>1.111010e+09</td>
+      <td>5.939929e+04</td>
       <td>서울특별시</td>
       <td>종로구</td>
       <td>종로구</td>
       <td>창성동</td>
-      <td>1111010500</td>
+      <td>POLYGON ((953516.123 1953734.362, 953516.526 1...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>462</th>
+      <td>463.0</td>
+      <td>1.174011e+09</td>
+      <td>4.690167e+06</td>
+      <td>서울특별시</td>
+      <td>강동구</td>
+      <td>강동구</td>
+      <td>암사동</td>
+      <td>POLYGON ((968514.203 1950677.234, 968505.336 1...</td>
+    </tr>
+    <tr>
+      <th>463</th>
+      <td>464.0</td>
+      <td>1.174011e+09</td>
+      <td>3.057341e+06</td>
+      <td>서울특별시</td>
+      <td>강동구</td>
+      <td>강동구</td>
+      <td>천호동</td>
+      <td>POLYGON ((968336.280 1950222.697, 968337.437 1...</td>
+    </tr>
+    <tr>
+      <th>464</th>
+      <td>465.0</td>
+      <td>1.174011e+09</td>
+      <td>1.956188e+06</td>
+      <td>서울특별시</td>
+      <td>강동구</td>
+      <td>강동구</td>
+      <td>성내동</td>
+      <td>POLYGON ((967686.073 1948534.011, 967685.029 1...</td>
+    </tr>
+    <tr>
+      <th>465</th>
+      <td>466.0</td>
+      <td>1.174010e+09</td>
+      <td>1.611551e+06</td>
+      <td>서울특별시</td>
+      <td>강동구</td>
+      <td>강동구</td>
+      <td>길동</td>
+      <td>POLYGON ((969147.362 1949613.535, 969164.491 1...</td>
+    </tr>
+    <tr>
+      <th>466</th>
+      <td>467.0</td>
+      <td>1.174011e+09</td>
+      <td>2.457828e+06</td>
+      <td>서울특별시</td>
+      <td>강동구</td>
+      <td>강동구</td>
+      <td>둔촌동</td>
+      <td>POLYGON ((969669.593 1948748.489, 969656.716 1...</td>
     </tr>
   </tbody>
 </table>
+<p>467 rows × 8 columns</p>
 </div></div></div>
-</div>
-<p>두 데이터셋에서 bjd_code를 기준으로 inner join을 시키고 저장하고, 서울특별시에 대해서만 가져오자.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">join_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">bjd_dat</span><span class="p">,</span> <span class="n">loc_dat</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;bjd_code&quot;</span><span class="p">)</span>
-
-<span class="n">tmp_ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">join_dat</span><span class="p">[</span><span class="s2">&quot;sido&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;서울특별시&quot;</span><span class="p">)</span>
-<span class="n">seoul_dat</span> <span class="o">=</span> <span class="n">join_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>생성한 seoul_dat의 데이터 셋의 정보 및 그래프는 다음과 같이 나타난다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seoul_dat</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="n">seoul_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
-Int64Index: 467 entries, 0 to 466
-Data columns (total 7 columns):
- #   Column      Non-Null Count  Dtype   
----  ------      --------------  -----   
- 0   bjd_code    467 non-null    float64 
- 1   shape_area  467 non-null    float64 
- 2   geometry    467 non-null    geometry
- 3   sido        467 non-null    object  
- 4   si          467 non-null    object  
- 5   sgg         467 non-null    object  
- 6   bjd         467 non-null    object  
-dtypes: float64(2), geometry(1), object(4)
-memory usage: 29.2+ KB
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../../_images/11d9797b0026cd2b841c1439fc464c38ce0d0395a54bbc2cc20d00d772acf930.png" src="../../_images/11d9797b0026cd2b841c1439fc464c38ce0d0395a54bbc2cc20d00d772acf930.png" />
-</div>
 </div>
 </section>
 <section id="id6">
@@ -828,8 +742,8 @@ Datum: World Geodetic System 1984 ensemble
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">seoul_dat</span><span class="p">[</span><span class="s2">&quot;sgg&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;은평구&quot;</span>
-<span class="n">jg_map_dat</span> <span class="o">=</span> <span class="n">seoul_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_ind</span> <span class="o">=</span> <span class="n">seoul_map</span><span class="p">[</span><span class="s2">&quot;sgg&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;은평구&quot;</span>
+<span class="n">jg_map_dat</span> <span class="o">=</span> <span class="n">seoul_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
 
 <span class="n">jg_map_dat</span><span class="o">.</span><span class="n">crs</span>
 </pre></div>
@@ -908,7 +822,7 @@ Datum: Geocentric datum of Korea
 <span class="n">sub_fire_dat</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tmp_ind</span><span class="p">,</span> <span class="p">:]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">seoul_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">seoul_map</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
 <span class="n">sub_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -930,7 +844,7 @@ Datum: Geocentric datum of Korea
 <span class="n">win_fire_dat</span> <span class="o">=</span> <span class="n">sub_fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">win_ind</span><span class="p">,</span> <span class="p">:]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">seoul_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">seoul_map</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
 <span class="n">win_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">sum_fire_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -948,6 +862,23 @@ Datum: Geocentric datum of Korea
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year_ind</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="p">[</span><span class="s1">&#39;fire_ocrn_yr&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2021</span>
 <span class="n">year_dat</span> <span class="o">=</span> <span class="n">fire_dat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">year_ind</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year_dat</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\hgkang\AppData\Roaming\Python\Python310\site-packages\geopandas\geodataframe.py:1538: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  super().__setitem__(key, value)
 </pre></div>
 </div>
 </div>
@@ -1078,7 +1009,7 @@ Datum: Geocentric datum of Korea
 <p><code class="docutils literal notranslate"><span class="pre">merge</span></code>함수를 이용하여 두 데이터(법정동 지도 데이터, 법정동별 출동건수 데이터)를 merge하는데, 기준이 되는 변수는 각각 <code class="docutils literal notranslate"><span class="pre">sido,</span> <span class="pre">sgg,</span> <span class="pre">bjd</span></code>, <code class="docutils literal notranslate"><span class="pre">sido_nm</span></code>, <code class="docutils literal notranslate"><span class="pre">sigungu_nm</span></code>, <code class="docutils literal notranslate"><span class="pre">emd_nm</span></code>이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merge_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">seoul_dat</span><span class="p">,</span> <span class="n">count_dat</span><span class="p">,</span> <span class="n">left_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sido&quot;</span><span class="p">,</span> <span class="s2">&quot;sgg&quot;</span><span class="p">,</span> <span class="s2">&quot;bjd&quot;</span><span class="p">],</span> <span class="n">right_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sido_nm&quot;</span><span class="p">,</span> <span class="s2">&quot;sigungu_nm&quot;</span><span class="p">,</span> <span class="s2">&quot;emd_nm&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merge_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">seoul_map</span><span class="p">,</span> <span class="n">count_dat</span><span class="p">,</span> <span class="n">left_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sido&quot;</span><span class="p">,</span> <span class="s2">&quot;sgg&quot;</span><span class="p">,</span> <span class="s2">&quot;bjd&quot;</span><span class="p">],</span> <span class="n">right_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sido_nm&quot;</span><span class="p">,</span> <span class="s2">&quot;sigungu_nm&quot;</span><span class="p">,</span> <span class="s2">&quot;emd_nm&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1137,7 +1068,7 @@ Datum: Geocentric datum of Korea
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3.1. </span>시각화 분석의 기초</p>
+        <p class="prev-next-title"><span class="section-number">4.1. </span>화재데이터를 이용한 기초그래프</p>
       </div>
     </a>
 </div></div>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.5. 데이터프레임의 그룹별 요약 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+    <title>3.4. 데이터프레임의 그룹별 요약 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/day2/dataframe-group';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.6. 데이터프레임의 결합" href="dataframe-merge.html" />
-    <link rel="prev" title="2.4. 데이터프레임 실습 1: 정리와 요약" href="day1_summary.html" />
+    <link rel="next" title="3.5. 데이터프레임의 결합" href="dataframe-merge.html" />
+    <link rel="prev" title="3.3. 데이터프레임 실습 1: 정리와 요약" href="day1_summary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -151,26 +151,20 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day1/intro-python.html">1. 파이썬 언어 소개</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day1/basic-expression.html">1.1. 파이썬 표현식의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/types.html">1.2. 자료의 형식</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/numbers.html">1.3. 숫자</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/string.html">1.4. 문자열</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../day1/intro-python.html">1. 데이터분석과 프로그래밍</a></li>
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../day1/dataframe.html">3. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">3.1. 데이터프레임의 정의와 구성요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">3.2. 데이터프레임의 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1_summary.html">3.3. 데이터프레임 실습 1: 정리와 요약</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4. 데이터프레임의 그룹별 요약</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe-merge.html">3.5. 데이터프레임의 결합</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">3.6. 화재출동 현황 적용</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../day1/dataframe.html">2. 데이터프레임</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-intro.html">2.1. 데이터프레임의 정의와 구성요소</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-change.html">2.2. 데이터프레임의 정리</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day1/dataframe-summary.html">2.3. 데이터프레임의 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1_summary.html">2.4. 데이터프레임 실습 1: 정리와 요약</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.5. 데이터프레임의 그룹별 요약</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframe-merge.html">2.6. 데이터프레임의 결합</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/practice_day3.html">2.7. 데이터프레임 실습 2: 그룹 요약 및 결합</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">3.1. 시각화 분석의 기초</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">3.2. 공간자료 시각화</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../day3/map_visual.html">4. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../day3/visualization_basic.html">4.1. 화재데이터를 이용한 기초그래프</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../day3/map_visualization.html">4.2. 공간자료 시각화</a></li>
 </ul>
 </li>
 </ul>
@@ -366,13 +360,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 예제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">그룹별 요약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">그룹별 요약</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">새로운 정보</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">여러 개의 그룹</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">다양한 집계들</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">여러 개의 그룹</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">다양한 집계들</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">요약</a></li>
 </ul>
             </nav>
@@ -386,9 +380,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.5. </span>데이터프레임의 그룹별 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>앞서 <strong>데이터프레임의 요약</strong>에서는 전체 데이터를 요약(count, mean, 분위수 등)했었다. 예를 들어, 2017년의 강남구 데이터의 데이터를 요약하려면 전체 데이터에서 해당 데이터를 추출하여 사용했다. 이 절에서는 그룹별로 한번에 요약하는 방법에 대해 알아보고자 한다.</p>
-<p>데이터프레임을 그룹으로 나눌 때 여러 개의 기준을 조합해서 나눌 수도 있다.</p>
+<h1><span class="section-number">3.4. </span>데이터프레임의 그룹별 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>앞서 <strong>데이터프레임의 요약</strong>에서는 전체 데이터를 요약(count, mean, 분위수 등)했었다. 예를 들어, 2021년의 강남구 데이터의 데이터를 요약하려면 전체 데이터에서 해당 데이터를 추출하여 사용했다. 이 절에서는 그룹별로 한번에 요약하는 방법에 대해 알아보고자 한다. 살펴볼 내용은 다음과 같다.</p>
+<ul class="simple">
+<li><p>그룹별 요약</p></li>
+<li><p>여러 개의 그룹</p></li>
+<li><p>다양한 집계들</p></li>
+</ul>
 <section id="id2">
 <h2>간단한 예제<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>먼저 예제 데이터로 실습해보자.</p>
@@ -758,7 +756,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://uos-bigdata.github.io/lab_data/docs/assets/data_lab_fire/fire_calling.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../data/fire_calling.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp949&#39;</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -1128,8 +1126,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="id4">
-<h3>그룹별 요약<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h2>그룹별 요약<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>이제 아래의 코드가 어떤 결과를 내는지 보자.</p>
 <p>결과는 그룹으로 지정된 연도별로 모든 출동횟수를 더해서 연도별 출동횟수를 계산해준다.</p>
 <ul class="simple">
@@ -1425,7 +1424,6 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-</section>
 <section id="id5">
 <h3>새로운 정보<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>이제 연도별로 나타난 정보에 대한 모든 열을 더하면 전체 값이 나온다. 전체 값을 새로운 변수 <code class="docutils literal notranslate"><span class="pre">total</span></code> 로 데이터프레임 <code class="docutils literal notranslate"><span class="pre">fire_year</span></code>에 추가하자.</p>
@@ -1525,12 +1523,14 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p><strong>잠깐!</strong></p>
+<blockquote>
+<div><p><strong>!잠깐</strong></p>
 <p>위에서 사용한 메소드 <code class="docutils literal notranslate"><span class="pre">sum(axis=1)</span></code> 는 모든 열 들을 더해주는 작업을 수행하는데 년도를 나타내는 열 <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code> 도 같이 결과에 더해졌다.
 그리고 필요하지 않은 데이터까지 더해진 것을 볼 수 있다.</p>
 <p>앞에서 본 것 처럼 <code class="docutils literal notranslate"><span class="pre">sum(axis=1)</span></code> 는 자동적으로 문자열을 포함한 열을 제외해주는데 이러한 자동 기능을 자주 이용하면 위와 같은 실수를 범할 수 있다.
 왜냐하면 오류가 나오지 않기 떄문이다.</p>
 <p><strong>안전한 프로그래밍</strong>을 위하여 합을 구할 모든 열의 이름을 가진 리스트로 슬라이싱을 먼저 하고 메소드 <code class="docutils literal notranslate"><span class="pre">sum(axis=1)</span></code> 를 적용하자.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_year</span><span class="p">[</span><span class="s2">&quot;여름겨울출동횟수&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_year</span><span class="p">[</span> <span class="p">[</span><span class="s2">&quot;출동횟수_겨울&quot;</span><span class="p">,</span> <span class="s2">&quot;출동횟수_여름&quot;</span><span class="p">]</span> <span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1749,8 +1749,9 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">df_year</span></code></p>
 </details>
 </section>
+</section>
 <section id="id6">
-<h3>여러 개의 그룹<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h2>여러 개의 그룹<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>화재출동 데이터의 그룹화 기준을 <code class="docutils literal notranslate"><span class="pre">시군구</span></code>, <code class="docutils literal notranslate"><span class="pre">화재발생연도</span></code>로 적용해보자.</p>
 <p>먼저 데이터를 나누어보자. 그룹화에 사용할 5개 구를 선택해서 <code class="docutils literal notranslate"><span class="pre">df5</span></code>으로 저장한다. 이 경우 은평구를 기준으로 나머지 구들을 추출하였다.</p>
 <div class="cell docutils container">
@@ -3119,7 +3120,7 @@ document.write(`
 </div>
 </section>
 <section id="id7">
-<h3>다양한 집계들<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h2>다양한 집계들<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>셈 척도</strong>: 갯수 (count), 합산 (sum)</p></li>
 <li><p><strong>중심척도</strong>: 평균 (mean), 중위수 (median)</p></li>
@@ -3719,7 +3720,6 @@ document.write(`
 </div></div></div>
 </div>
 </section>
-</section>
 <section id="id8">
 <h2>요약<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -3774,7 +3774,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.4. </span>데이터프레임 실습 1: 정리와 요약</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>데이터프레임 실습 1: 정리와 요약</p>
       </div>
     </a>
     <a class="right-next"
@@ -3782,7 +3782,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.6. </span>데이터프레임의 결합</p>
+        <p class="prev-next-title"><span class="section-number">3.5. </span>데이터프레임의 결합</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -3805,13 +3805,13 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">간단한 예제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">그룹별 요약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">화재출동 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">그룹별 요약</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">새로운 정보</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">여러 개의 그룹</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">다양한 집계들</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">여러 개의 그룹</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">다양한 집계들</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">요약</a></li>
 </ul>
   </nav></div>
