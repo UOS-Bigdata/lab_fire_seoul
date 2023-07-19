@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.6. 화재출동 현황 적용 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
+    <title>2.6. 데이터프레임 실습 2: 그룹화와 결합 &#8212; 파이썬 프로그래밍의 기초와 데이터 활용 방법</title>
   
   
   
@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../day2/day1_summary.html">2.3. 데이터프레임 실습 1: 정리와 요약</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-group.html">2.4. 데이터프레임의 그룹별 요약</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../day2/dataframe-merge.html">2.5. 데이터프레임의 결합</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.6. 화재출동 현황 적용</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.6. 데이터프레임 실습 2: 그룹화와 결합</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="map_visual.html">3. 공간 분석과 시각화</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -354,7 +354,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>화재출동 현황 적용</h1>
+    <h1>데이터프레임 실습 2: 그룹화와 결합</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -381,7 +381,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.6. </span>화재출동 현황 적용<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2.6. </span>데이터프레임 실습 2: 그룹화와 결합<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>2일차에서 <code class="docutils literal notranslate"><span class="pre">pandas</span></code>패키지의 dataframe형태의 데이터에 대해 <code class="docutils literal notranslate"><span class="pre">merge</span></code> 및 <code class="docutils literal notranslate"><span class="pre">group</span></code>함수를 이용하여 데이터를 조작하는 법을 설명했다. 이때, 실제 데이터가 아닌 완성된 데이터의 일부를 이용하여 진행했는데, 이번 시간에는 raw data(아무것도 하지 않은 데이터)를 이용하여 원하는 결과를 확인하는 과정을 가지고자 한다.</p>
 <p>이번 시간의 목표는 2일차때 사용한 데이터를 화재출동 현황 데이터를 이용하여 생성하는 것이다. 목표는 다음과 같다.</p>
 <ol class="arabic simple">
