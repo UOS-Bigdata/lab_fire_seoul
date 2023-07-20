@@ -400,14 +400,35 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.1. </span>화재데이터를 이용한 기초그래프<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>앞에서 연도, 시군구별, 사망자수, 부상자수에 대해 가장 높은 지역, 혹은 여름, 겨울의 출동횟수 차이를 비교를 하였다. 또한 이를 수치로 비교하였기에 하나의 값, 혹은 관측값에 대해서만 확인을 하였다.</p>
-<p>이러한 내용을 한꺼번에 비교를 하고 싶을때도 있다. 이럴때 가장 많이 사용하는 방법이 시각화이다. 즉, 시각화는 많은 정보를 그림으로 나타내어 한번에 그 정보들을 확인할 수 있게 만들어준다.</p>
-<p>파이썬에서는 그래프를 그리기 위해 <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>패키지를 이용한다. 하지만 기본적으로 한국어를 지원하지 않기 때문에, 나눔글꼴, 본고딕, 은 폰트 등 폰트를 설치를 해줘야 한다. 이를 설치하기 위해 <code class="docutils literal notranslate"><span class="pre">plt.rcParams</span></code>를 이용한다.</p>
+<p>이러한 내용을 한꺼번에 비교를 하고 싶을때도 있다. 이럴때 가장 많이 사용하는 방법이 시각화이다. 즉, 시각화는 많은 정보를 그림으로 나타내어 한번에 그 정보들을 확인할 수 있게 만들어준다. 파이썬에서는 그래프를 그리기 위해 <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>패키지를 이용한다.</p>
+<p>하지만 코랩에서는 기본적으로 한국어를 지원하지 않기 때문에 한국어 폰트를 설치를 해줘야 한다. 이를 설치하기 위해 아래의 코드를 실행시킨다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum
+<span class="o">!</span>sudo<span class="w"> </span>fc-cache<span class="w"> </span>-fv
+<span class="o">!</span>rm<span class="w"> </span>~/.cache/matplotlib<span class="w"> </span>-rf
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;sudo&#39;은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+&#39;sudo&#39;은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+&#39;rm&#39;은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+</pre></div>
+</div>
+</div>
+</div>
+<p>위 코드는 코랩에 나눔폰트를 설치해주는 코드이다. 이를 실행하고, 상단에 <code class="docutils literal notranslate"><span class="pre">런타임</span> <span class="pre">&gt;</span> <span class="pre">런타임</span> <span class="pre">다시</span> <span class="pre">시작</span></code> 을 클릭한다.</p>
+<p>그 후, 파이썬에서 나눔폰트를 사용한다는 의미로 <code class="docutils literal notranslate"><span class="pre">plt.rcParams</span></code>를 이용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Malgun Gothic&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;NanumBarunGothic&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -637,7 +658,205 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/99eacfc07eff31f1bf4ffafeb8baf4f9f459f821f0a78a6171a892b4c8e0376d.png" src="../../_images/99eacfc07eff31f1bf4ffafeb8baf4f9f459f821f0a78a6171a892b4c8e0376d.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49324 (\N{HANGUL SYLLABLE SA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 47581 (\N{HANGUL SYLLABLE MANG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51088 (\N{HANGUL SYLLABLE JA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 45380 (\N{HANGUL SYLLABLE NYEON}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49884 (\N{HANGUL SYLLABLE SI}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44400 (\N{HANGUL SYLLABLE GUN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 48324 (\N{HANGUL SYLLABLE BYEOL}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44053 (\N{HANGUL SYLLABLE GANG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 45224 (\N{HANGUL SYLLABLE NAM}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 48513 (\N{HANGUL SYLLABLE BUG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49436 (\N{HANGUL SYLLABLE SEO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 50501 (\N{HANGUL SYLLABLE AG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44305 (\N{HANGUL SYLLABLE GWANG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51652 (\N{HANGUL SYLLABLE JIN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 47196 (\N{HANGUL SYLLABLE RO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44552 (\N{HANGUL SYLLABLE GEUM}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 52380 (\N{HANGUL SYLLABLE CEON}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 50896 (\N{HANGUL SYLLABLE WEON}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 48393 (\N{HANGUL SYLLABLE BONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 45824 (\N{HANGUL SYLLABLE DAE}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 47928 (\N{HANGUL SYLLABLE MUN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51089 (\N{HANGUL SYLLABLE JAG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 47560 (\N{HANGUL SYLLABLE MA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 54252 (\N{HANGUL SYLLABLE PO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49457 (\N{HANGUL SYLLABLE SEONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49569 (\N{HANGUL SYLLABLE SONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 54028 (\N{HANGUL SYLLABLE PA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 50577 (\N{HANGUL SYLLABLE YANG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 50689 (\N{HANGUL SYLLABLE YEONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 46321 (\N{HANGUL SYLLABLE DEUNG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 50857 (\N{HANGUL SYLLABLE YONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 49328 (\N{HANGUL SYLLABLE SAN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51008 (\N{HANGUL SYLLABLE EUN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 54217 (\N{HANGUL SYLLABLE PYEONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51333 (\N{HANGUL SYLLABLE JONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+D:\anaconda3\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 46993 (\N{HANGUL SYLLABLE RANG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+findfont: Font family &#39;NanumBarunGothic&#39; not found.
+</pre></div>
+</div>
+<img alt="../../_images/d62497ec16f3ee69923ef861f34faa714eaf9718728cb80303924d68288e7188.png" src="../../_images/d62497ec16f3ee69923ef861f34faa714eaf9718728cb80303924d68288e7188.png" />
 </div>
 </div>
 <p>앞서 확인한 결과처럼 강북구에서 가장 사망자수가 가장 높다는 것을 알수 있다. 추가적으로 성북구가 4명으로 두 번째, 은평구, 동대문구, 동작구들이 3명으로 3번째로 높다는 것을 확인 할 수 있다.</p>
