@@ -4235,33 +4235,30 @@ document.write(`
 </div></div></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">describe</span></code>메소드로 자료를 요약한다. 이 때 표현방식을 바꾸고싶다면 위의 과정을 동일하게 거치면 된다. (실습)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df2021_summ = df_2021.describe()</span>
-<span class="c1"># df2021_summ[&#39;samang_n&#39;] = df2021_summ[&#39;samang_n&#39;].round(2)</span>
-<span class="c1"># df2021_summ[&#39;busang_n&#39;] = df2021_summ[&#39;busang_n&#39;].round(2)</span>
-<span class="c1"># df2021_summ[&#39;winter&#39;] = df2021_summ[&#39;winter&#39;].round(2)</span>
-<span class="c1"># df2021_summ[&#39;summer&#39;] = df2021_summ[&#39;summer&#39;].round(2)</span>
-<span class="c1"># df2021_summ[&#39;money&#39;] = df2021_summ[&#39;money&#39;] / 10000</span>
-<span class="c1"># df2021_summ[&#39;money&#39;] = df2021_summ[&#39;money&#39;].round(4)</span>
-<span class="c1"># df2021_summ.columns = [&#39;화재발생연도&#39;, &#39;사망자수&#39;, &#39;부상자수&#39;, &#39;재산피해금액(만원)&#39;, &#39;출동횟수(겨울)&#39;, &#39;출동횟수(여름)&#39;]</span>
-<span class="c1"># df2021_summ = df2021_summ.drop(columns = &#39;화재발생연도&#39;)</span>
-<span class="c1"># df2021_summ</span>
-</pre></div>
-</div>
-</div>
-</div>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><p>df2021_summ = df_2021.describe()</p>
+<p>df2021_summ[‘samang_n’] = df2021_summ[‘samang_n’].round(2)</p>
+<p>df2021_summ[‘busang_n’] = df2021_summ[‘busang_n’].round(2)</p>
+<p>df2021_summ[‘winter’] = df2021_summ[‘winter’].round(2)</p>
+<p>df2021_summ[‘summer’] = df2021_summ[‘summer’].round(2)</p>
+<p>df2021_summ[‘money’] = df2021_summ[‘money’] / 10000</p>
+<p>df2021_summ[‘money’] = df2021_summ[‘money’].round(4)</p>
+<p>df2021_summ.columns = [‘화재발생연도’, ‘사망자수’, ‘부상자수’, ‘재산피해금액(만원)’, ‘출동횟수(겨울)’, ‘출동횟수(여름)’]</p>
+<p>df2021_summ = df2021_summ.drop(columns = ‘화재발생연도’)</p>
+<p>df2021_summ</p>
+</div></blockquote>
+</details>
 <p>추가적으로, <code class="docutils literal notranslate"><span class="pre">재산피해금액(만원)</span></code>을 반올림하면서 <code class="docutils literal notranslate"><span class="pre">count</span></code>값도 같이 변형되었다. 해당 셀을 수정하고자 한다.</p>
 <p>인덱싱을 수행하는 또 다른 메소드 <code class="docutils literal notranslate"><span class="pre">iloc</span></code>으로 해당 셀(cell)만 값 변경이 가능하다. 아래 코드의 <code class="docutils literal notranslate"><span class="pre">iloc[0,2]</span></code>는 0행 2열을 의미한다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df2021_summ.iloc[0,2] = 24 </span>
-<span class="c1"># df2021_summ</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>2021년 중에 여름과 겨울의 <code class="docutils literal notranslate"><span class="pre">출동</span> <span class="pre">횟수</span></code>가 많은 지역구대로 정렬 해보자.</p>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><p>df2021_summ.iloc[0,2] = 24</p>
+<p>df2021_summ</p>
+</div></blockquote>
+</details><p>2021년 중에 여름과 겨울의 <code class="docutils literal notranslate"><span class="pre">출동</span> <span class="pre">횟수</span></code>가 많은 지역구대로 정렬 해보자.</p>
 <p>정렬하기 위해서는 <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code>메소드를 사용한다. 괄호 안에 정렬할 열을 지정한다. 내림차순으로 정렬도 해보자 (실습)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5024,29 +5021,27 @@ document.write(`
 </div></div></div>
 </div>
 <p>강남구에서 <code class="docutils literal notranslate"><span class="pre">여름과</span> <span class="pre">겨울의</span> <span class="pre">총</span> <span class="pre">출동</span></code>이 많았던 연도 순으로 정렬해보자. (실습)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_강남구[&#39;총 출동&#39;] = df_강남구[&#39;winter&#39;] + df_강남구[&#39;summer&#39;]</span>
-<span class="c1"># df_강남구.sort_values(by = &#39;총 출동&#39;, ascending=False)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><p>df_강남구[‘총 출동’] = df_강남구[‘winter’] + df_강남구[‘summer’]</p>
+<p>df_강남구.sort_values(by = ‘총 출동’, ascending=False)</p>
+</div></blockquote>
+</details>
 <p><code class="docutils literal notranslate"><span class="pre">df_강남구</span></code> 데이터에 대해 추가적으로 다음의 작업을 해보자 (실습)</p>
 <ul class="simple">
-<li><p>인덱싱 재정립</p></li>
-<li><p>열 이름 변경</p></li>
+<li><p>인덱싱 재정리 (<code class="docutils literal notranslate"><span class="pre">reset_index</span></code>)</p></li>
+<li><p>열 이름 변경: <code class="docutils literal notranslate"><span class="pre">['연도',</span> <span class="pre">'시군구',</span> <span class="pre">'사망자수',</span> <span class="pre">'부상자수',</span> <span class="pre">'피해금액',</span> <span class="pre">'겨울출동건수',</span> <span class="pre">'여름출동건수',</span> <span class="pre">'총출동']</span></code></p></li>
 <li><p>csv 파일로 저장</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_강남구.columns = [&#39;연도&#39;, &#39;시군구&#39;, &#39;사망자수&#39;, &#39;부상자수&#39;, &#39;피해금액&#39;, &#39;겨울출동건수&#39;, &#39;여름출동건수&#39;, &#39;총출동&#39;]</span>
-<span class="c1"># df_강남구.reset_index(drop = True, inplace = True)</span>
-<span class="c1"># df_강남구.to_csv(&quot;강남구요약.csv&quot;, encoding = &#39;cp949&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<details>
+<summary>접기/펼치기</summary>
+<blockquote>
+<div><p>df_강남구.columns = [‘연도’, ‘시군구’, ‘사망자수’, ‘부상자수’, ‘피해금액’, ‘겨울출동건수’, ‘여름출동건수’, ‘총출동’]</p>
+<p>df_강남구.reset_index(drop = True, inplace = True)</p>
+<p>df_강남구.to_csv(“강남구요약.csv”, encoding = ‘cp949’)</p>
+</div></blockquote>
+</details>
 </section>
 </section>
 
